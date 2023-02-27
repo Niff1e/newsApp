@@ -9,9 +9,9 @@ import Foundation
 
 final class DataElement {
 
-    private(set) let title: String = ""
-    private(set) let description: String = ""
-    private(set) let content: String = ""
-    private(set) let stringURL: String = ""
+    private(set) var title: String = ""
+    private(set) var description: String = ""
+    private(set) var content: String = ""
+    private(set) var stringURL: String = ""
     
 }
