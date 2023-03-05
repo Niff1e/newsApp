@@ -8,22 +8,27 @@
 import Foundation
 import UIKit
 
-final class NewsListView: UIView, UITableViewDataSource {
+final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
 
     // MARK: Private Properties
 
     private var newsTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        // tableView.backgroundColor = .blue
         return tableView
     }()
+
+    // MARK: - Internal Properties
+
+    var creationOfNewVC: (() -> Void)?
 
     // MARK: - Init
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupTableView()
+        newsTableView.dataSource = self
+        newsTableView.delegate = self
     }
 
     required init?(coder: NSCoder) {
@@ -33,20 +38,31 @@ final class NewsListView: UIView, UITableViewDataSource {
     // MARK: - Table View Data Source
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 100
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = newsTableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath)
+        let cell = newsTableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsTableViewCell
+        cell.accessoryType = .disclosureIndicator
         return cell
+    }
+
+    // MARK: - Table View Delegate
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        creationOfNewVC?()
+        newsTableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - Private Functions
 
     private func setupTableView() {
         self.addSubview(newsTableView)
-        newsTableView.dataSource = self
-        newsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "newsCell")
+        newsTableView.register(NewsTableViewCell.self, forCellReuseIdentifier: "newsCell")
 
         NSLayoutConstraint.activate([
             newsTableView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
