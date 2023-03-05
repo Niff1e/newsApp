@@ -10,8 +10,12 @@ import UIKit
 
 final class NewsListViewController: UITableViewController {
 
+    // MARK: - Private Properties
+
     private let model: NewsListModel
     private let newsListView = NewsListView()
+
+    // MARK: - Init
 
     init(model: NewsListModel) {
         self.model = model
@@ -22,16 +26,26 @@ final class NewsListViewController: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Private Functions
+
     func setupNavigation() {
         navigationItem.title = "NEWS"
         guard let nav = navigationController?.navigationBar else { return }
         nav.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
     }
 
+    // MARK: - View Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupNavigation()
+
+        newsListView.creationOfNewVC = {[weak self] in
+            guard let strongSelf = self else { return }
+            let newsVC = NewsViewController()
+            strongSelf.navigationController?.pushViewController(newsVC, animated: true)
+        }
     }
 
     override func loadView() {
