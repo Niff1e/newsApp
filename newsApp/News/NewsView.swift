@@ -90,9 +90,9 @@ final class NewsView: UIView {
             stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-//            pictureView.heightAnchor.constraint(equalToConstant: 100.0),
-//            labelContent.heightAnchor.constraint(equalToConstant: 100.0),
-//            labelURL.heightAnchor.constraint(equalToConstant: 100.0)
+//            pictureView.heightAnchor.constraint(equalToConstant: 400.0),
+//            labelContent.heightAnchor.constraint(equalToConstant: 400.0),
+//            labelURL.heightAnchor.constraint(equalToConstant: 400.0)
         ])
     }
 }

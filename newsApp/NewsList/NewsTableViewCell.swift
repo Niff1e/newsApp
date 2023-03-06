@@ -20,11 +20,14 @@ class NewsTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private let image: UIImageView = {
+    // MARK: - Private properties
+
+    private let pictureView: UIImageView = {
         let image = UIImageView()
+
         image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.backgroundColor = .blue
+        // image.backgroundColor = .blue
         return image
     }()
 
@@ -32,7 +35,7 @@ class NewsTableViewCell: UITableViewCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .blue
+        // label.backgroundColor = .blue
         return label
     }()
 
@@ -40,7 +43,7 @@ class NewsTableViewCell: UITableViewCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .blue
+        // label.backgroundColor = .blue
         return label
     }()
 
@@ -61,6 +64,8 @@ class NewsTableViewCell: UITableViewCell {
         return container
     }()
 
+    // MARK: - Private Functions
+
     private func setupContainerForTitleAndDescr() {
         containerForTitleAndDescr.addSubview(titleLabel)
         containerForTitleAndDescr.addSubview(descriptionLabel)
@@ -78,7 +83,7 @@ class NewsTableViewCell: UITableViewCell {
 
     private func setupContainerForImageAndText() {
         self.addSubview(containerForImageAndText)
-        containerForImageAndText.addSubview(image)
+        containerForImageAndText.addSubview(pictureView)
         containerForImageAndText.addSubview(containerForTitleAndDescr)
 
         NSLayoutConstraint.activate([
@@ -86,11 +91,19 @@ class NewsTableViewCell: UITableViewCell {
             containerForImageAndText.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10.0),
             containerForImageAndText.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10.0),
             containerForImageAndText.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10.0),
-            image.heightAnchor.constraint(equalToConstant: 50.0),
-            image.widthAnchor.constraint(equalToConstant: 50.0),
-            image.leadingAnchor.constraint(equalTo: containerForImageAndText.leadingAnchor),
-            containerForTitleAndDescr.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 20.0),
+            pictureView.heightAnchor.constraint(equalToConstant: 50.0),
+            pictureView.widthAnchor.constraint(equalToConstant: 50.0),
+            pictureView.leadingAnchor.constraint(equalTo: containerForImageAndText.leadingAnchor),
+            containerForTitleAndDescr.leadingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: 20.0),
             containerForTitleAndDescr.trailingAnchor.constraint(equalTo: containerForImageAndText.trailingAnchor, constant: -40.0)
         ])
+    }
+
+    // MARK: - Internal Functions
+
+    func setDataToCell(image: UIImage?, titleText: String, descrText: String) {
+        pictureView.image = image
+        titleLabel.text = titleText
+        descriptionLabel.text = descrText
     }
 }

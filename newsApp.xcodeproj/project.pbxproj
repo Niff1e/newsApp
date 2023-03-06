@@ -21,7 +21,7 @@
 		23942CFA29AC202B00FA851E /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23942CF929AC202B00FA851E /* NewsModel.swift */; };
 		23942CFC29AC206000FA851E /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23942CFB29AC206000FA851E /* NewsViewController.swift */; };
 		23942CFE29AC216100FA851E /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23942CFD29AC216100FA851E /* NewsView.swift */; };
-		23942D0429AC246800FA851E /* DataElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23942D0329AC246800FA851E /* DataElement.swift */; };
+		239BF90D29B5677B00436A0D /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239BF90C29B5677B00436A0D /* News.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +60,7 @@
 		23942CF929AC202B00FA851E /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		23942CFB29AC206000FA851E /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		23942CFD29AC216100FA851E /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
-		23942D0329AC246800FA851E /* DataElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataElement.swift; sourceTree = "<group>"; };
+		239BF90C29B5677B00436A0D /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,7 +142,7 @@
 		23942CF329AC1D5F00FA851E /* NewsList */ = {
 			isa = PBXGroup;
 			children = (
-				23942D0329AC246800FA851E /* DataElement.swift */,
+				239BF90C29B5677B00436A0D /* News.swift */,
 				23942CF729AC1FF000FA851E /* NewsListModel.swift */,
 				23942CC729AC16D200FA851E /* NewsListViewController.swift */,
 				23942CF529AC1F9D00FA851E /* NewsListView.swift */,
@@ -292,7 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				23942CFA29AC202B00FA851E /* NewsModel.swift in Sources */,
-				23942D0429AC246800FA851E /* DataElement.swift in Sources */,
+				239BF90D29B5677B00436A0D /* News.swift in Sources */,
 				238F570B29AD491B00CDE9AB /* NewsTableViewCell.swift in Sources */,
 				23942CFE29AC216100FA851E /* NewsView.swift in Sources */,
 				23942CC829AC16D200FA851E /* NewsListViewController.swift in Sources */,
