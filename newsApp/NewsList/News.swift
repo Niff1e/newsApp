@@ -7,24 +7,19 @@
 
 import Foundation
 
+enum Status: Codable {
+    case ok([Article])
+    case error(String, String)
+}
+
 struct News: Codable {
-    let status: String
-    let totalResults: Double
-    let articles: [Article]
+    let status: Status
 }
 
 struct Article: Codable {
-    let source: Source
-    let author: String?
     let title: String
     let description: String
     let url: URL
     let urlToImage: URL?
-    let publishedAt: String
     let content: String?
-}
-
-struct Source: Codable {
-    let id: String?
-    let name: String
 }

@@ -24,10 +24,23 @@ final class NewsViewController: UIViewController {
     private let model: NewsModel
     private let newsView = NewsView()
 
+    // MARK: - Private methods
+
+    private func updateView() {
+        newsView.setImage(image: model.picture)
+        newsView.setTextToContent(text: model.content)
+        do {
+            try newsView.setTextToURLLabel(text: String(contentsOf: model.pictureURL))
+        } catch {
+            print(error)
+        }
+    }
+
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateView()
     }
 
     override func loadView() {

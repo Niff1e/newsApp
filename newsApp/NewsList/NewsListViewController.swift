@@ -28,10 +28,17 @@ final class NewsListViewController: UITableViewController {
 
     // MARK: - Private Functions
 
-    func setupNavigation() {
+    private func setupNavigation() {
         navigationItem.title = "NEWS"
         guard let nav = navigationController?.navigationBar else { return }
         nav.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+    }
+
+    private func showAlert(with code: String, and message: String) {
+        let alert = UIAlertController(title: code, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(action)
+        present(alert, animated: true)
     }
 
     // MARK: - View Lifecycle
@@ -41,31 +48,37 @@ final class NewsListViewController: UITableViewController {
         view.backgroundColor = .white
         setupNavigation()
 
-        guard let info = model.getData() else { return }
-        newsListView.setNumberOfRows(number: info.articles.count)
+        model.showAlert = { [weak self] (code, message) -> Void in
+            self?.showAlert(with: code, and: message)
+        }
 
-        newsListView.creationOfNewVC = {[weak self] (number) -> () in
+        guard let articles = model.getData(from: model.stringURL) else { return }
+        newsListView.setNumberOfRows(number: articles.count)
+
+        newsListView.creationOfNewsVC = {[weak self] (number) -> Void in
             guard let strongSelf = self else { return }
-            guard let content = info.articles[number].content else { return }
-            guard let pictureURL = info.articles[number].urlToImage else { return }
-            let image = strongSelf.model.downloadImage(with: pictureURL)
+            guard let content = articles[number].content else { return }
+            guard let pictureURL = articles[number].urlToImage else { return }
+            strongSelf.model.downloadImage(with: pictureURL)
+            guard let image = strongSelf.model.picture else { return }
             let model = NewsModel(image: image, content: content, pictureURL: pictureURL)
             let newsVC = NewsViewController(model: model)
             strongSelf.navigationController?.pushViewController(newsVC, animated: true)
         }
 
         newsListView.pictureToCell = {[weak self] (number) -> UIImage? in
-            guard let urlPicture = info.articles[number].urlToImage else { return nil }
-            let image = self?.model.downloadImage(with: urlPicture)
+            guard let urlPicture = articles[number].urlToImage else { return }
+            self?.model.downloadImage(with: urlPicture)
+            guard let image = self?.model.picture else { return }
             return image
         }
 
         newsListView.textForTitleLabel = {[weak self] (number) -> String in
-            return info.articles[number].title
+            return articles[number].title
         }
 
         newsListView.textForDescriptionLabel = {[weak self] (number) -> String in
-            return info.articles[number].description
+            return articles[number].description
         }
 
     }
