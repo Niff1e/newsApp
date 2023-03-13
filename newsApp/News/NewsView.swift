@@ -95,4 +95,18 @@ final class NewsView: UIView {
 //            labelURL.heightAnchor.constraint(equalToConstant: 400.0)
         ])
     }
+
+    // MARK: - Internal Functions
+
+    func setImage(image: UIImage) {
+        self.pictureView.image = image
+    }
+
+    func setTextToContent(text: String) {
+        self.labelContent.text = text
+    }
+
+    func setTextToURLLabel(text: String) {
+        self.labelURL.text = text
+    }
 }

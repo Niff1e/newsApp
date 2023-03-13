@@ -22,7 +22,7 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: - Internal Properties
     
-    var creationOfNewVC: ((_ number: Int) -> Void)?
+    var creationOfNewsVC: ((_ number: Int) -> Void)?
     var pictureToCell: ((_ number: Int) -> UIImage?)?
     var textForTitleLabel: ((_ number: Int) -> String)?
     var textForDescriptionLabel: ((_ number: Int) -> String)?
@@ -60,7 +60,7 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        creationOfNewVC?(indexPath.row)
+        creationOfNewsVC?(indexPath.row)
         newsTableView.deselectRow(at: indexPath, animated: true)
     }
     
