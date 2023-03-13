@@ -18,7 +18,7 @@ final class NewsListModel {
 
     var picture: UIImage?
     private let decoder = JSONDecoder()
-    let stringURL: String = "https://newsapi.org/v2/everything?q=volleyball&from=2023-03-05&apiKey=37834ecfa8884a25a8bad22c4dc6d114"
+    let stringURL: String = "https://newsapi.org/v2/everything?q=volleyball&from=2023-03-12&apiKey=37834ecfa8884a25a8bad22c4dc6d114"
 
     // MARK: - Internal properties
     
@@ -33,16 +33,16 @@ final class NewsListModel {
         return url
     }
 
-    func getData(from stringURL: String) -> [Article]? {
+    func getData(from stringURL: String) -> [Articles]? {
         do {
             let url = try getURL(from: stringURL)
             let jsonData = try Data(contentsOf: url)
             let news = try decoder.decode(News.self, from: jsonData)
             switch news.status {
-            case .ok(let article):
-                return article
-            case .error(let code, let message):
-                showAlert?(code, message)
+            case .ok(let articles):
+                return articles
+            case .error(let errorResponce):
+                showAlert?(errorResponce.code, errorResponce.message)
                 return nil
             }
         } catch NewsListErrors.getUrlsError {
@@ -50,6 +50,7 @@ final class NewsListModel {
             return nil
         } catch {
             showAlert?("Whoops...", "Wrong")
+            print(error)
             return nil
         }
     }

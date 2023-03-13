@@ -25,7 +25,7 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
     var creationOfNewsVC: ((_ number: Int) -> Void)?
     var pictureToCell: ((_ number: Int) -> UIImage?)?
     var textForTitleLabel: ((_ number: Int) -> String)?
-    var textForDescriptionLabel: ((_ number: Int) -> String)?
+    var textForDescriptionLabel: ((_ number: Int) -> String?)?
     
     // MARK: - Init
     
@@ -49,7 +49,7 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = newsTableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsTableViewCell
         cell.accessoryType = .disclosureIndicator
-        cell.setDataToCell(image: pictureToCell?(indexPath.row), titleText: textForTitleLabel!(indexPath.row), descrText: textForDescriptionLabel!(indexPath.row))
+        cell.setDataToCell(image: pictureToCell?(indexPath.row), titleText: textForTitleLabel!(indexPath.row), descrText: textForDescriptionLabel!(indexPath.row)!)
         return cell
     }
     

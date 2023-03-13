@@ -67,20 +67,20 @@ final class NewsListViewController: UITableViewController {
         }
 
         newsListView.pictureToCell = {[weak self] (number) -> UIImage? in
-            guard let urlPicture = articles[number].urlToImage else { return }
+            guard let urlPicture = articles[number].urlToImage else { return nil}
             self?.model.downloadImage(with: urlPicture)
-            guard let image = self?.model.picture else { return }
+            guard let image = self?.model.picture else { return nil }
             return image
         }
 
-        newsListView.textForTitleLabel = {[weak self] (number) -> String in
+        newsListView.textForTitleLabel = { (number) -> String in
             return articles[number].title
         }
 
-        newsListView.textForDescriptionLabel = {[weak self] (number) -> String in
-            return articles[number].description
+        newsListView.textForDescriptionLabel = { (number) -> String? in
+            guard let descr = articles[number].description else { return nil }
+            return descr
         }
-
     }
 
     override func loadView() {
