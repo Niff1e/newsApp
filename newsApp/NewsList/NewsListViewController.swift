@@ -52,34 +52,66 @@ final class NewsListViewController: UITableViewController {
             self?.showAlert(with: code, and: message)
         }
 
-        guard let articles = model.getData(from: model.stringURL) else { return }
-        newsListView.setNumberOfRows(number: articles.count)
+        model.getData(from: model.stringURL)
+        do {
+            try newsListView.setNumberOfRows(number: model.getArticlesCount())
+        } catch NewsListError.emptyArrayOfArticles {
+            showAlert(with: "Whoops...", and: "Empty Array Of Articles")
+        } catch {
 
-        newsListView.creationOfNewsVC = {[weak self] (number) -> Void in
+        }
+
+        newsListView.creationOfNewsVC = { [weak self] (number) -> Void in
             guard let strongSelf = self else { return }
-            guard let content = articles[number].content else { return }
-            guard let pictureURL = articles[number].urlToImage else { return }
-            strongSelf.model.downloadImage(with: pictureURL)
-            guard let image = strongSelf.model.picture else { return }
-            let model = NewsModel(image: image, content: content, pictureURL: pictureURL)
-            let newsVC = NewsViewController(model: model)
-            strongSelf.navigationController?.pushViewController(newsVC, animated: true)
+            do {
+                let articleForNumber = try strongSelf.model.getArticle(forRowNumber: number)
+                strongSelf.model.downloadImage(with: articleForNumber.urlToImage) { img in
+                    let model = NewsModel(image: img, content: articleForNumber.content, pictureURL: articleForNumber.urlToImage)
+                    let newsVC = NewsViewController(model: model)
+                    strongSelf.navigationController?.pushViewController(newsVC, animated: true)
+                }
+            } catch NewsListError.emptyArrayOfArticles {
+                strongSelf.showAlert(with: "Whoops...", and: "Emty Array Of Articles")
+            } catch {
+                strongSelf.showAlert(with: "Whoops...", and: "Unexpected Error Of Creation New VC")
+            }
         }
 
-        newsListView.pictureToCell = {[weak self] (number) -> UIImage? in
-            guard let urlPicture = articles[number].urlToImage else { return nil}
-            self?.model.downloadImage(with: urlPicture)
-            guard let image = self?.model.picture else { return nil }
-            return image
+        newsListView.pictureToCell = { [weak self] (number, completion) in
+            guard let strongSelf = self else { return }
+            do {
+                let articleForNumber = try strongSelf.model.getArticle(forRowNumber: number)
+                guard let urlPicture = articleForNumber.urlToImage else { return }
+                self?.model.downloadImage(with: urlPicture) { [weak self] img in
+                    completion(img)
+                }
+            } catch NewsListError.emptyArrayOfArticles {
+                strongSelf.showAlert(with: "Whoops...", and: "Emty Array Of Articles")
+            } catch {
+                strongSelf.showAlert(with: "Whoops...", and: "Unexpected Error Of Setting Picture To Cell")
+            }
         }
 
-        newsListView.textForTitleLabel = { (number) -> String in
-            return articles[number].title
+        newsListView.textForTitleLabel = { [weak self] (number) -> String? in
+            guard let strongSelf = self else { return }
+            do { let articleForNumber = strongSelf.model.getArticle(forRowNumber: number)
+                return articleForNumber.title
+            } catch NewsListError.emptyArrayOfArticles {
+                strongSelf.showAlert(with: "Whoops...", and: "Emty Array Of Articles")
+            } catch {
+                strongSelf.showAlert(with: "Whoops...", and: "Unexpected Error Of Setting Picture To Cell")
+            }
         }
 
-        newsListView.textForDescriptionLabel = { (number) -> String? in
-            guard let descr = articles[number].description else { return nil }
-            return descr
+        newsListView.textForDescriptionLabel = { [weak self] (number) -> String? in
+            guard let strongSelf = self else { return }
+            do { let articleForNumber = strongSelf.model.getArticle(forRowNumber: number)
+                return articleForNumber.description
+            } catch NewsListError.emptyArrayOfArticles {
+                strongSelf.showAlert(with: "Whoops...", and: "Emty Array Of Articles")
+            } catch {
+                strongSelf.showAlert(with: "Whoops...", and: "Unexpected Error Of Setting Picture To Cell")
+            }
         }
     }
 

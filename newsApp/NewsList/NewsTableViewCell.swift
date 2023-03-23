@@ -101,9 +101,12 @@ class NewsTableViewCell: UITableViewCell {
 
     // MARK: - Internal Functions
 
-    func setDataToCell(image: UIImage?, titleText: String, descrText: String) {
-        pictureView.image = image
+    func setDataToCell(titleText: String?, descrText: String?) {
         titleLabel.text = titleText
         descriptionLabel.text = descrText
+    }
+
+    func setImageToCell(image: UIImage?) {
+        pictureView.image = image
     }
 }

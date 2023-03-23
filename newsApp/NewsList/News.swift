@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum Status: Decodable {
-    case ok([Articles])
+enum News: Decodable {
+    case ok([Article])
     case error(ErrorResponse)
 
     enum CodingKeys: String, CodingKey {
-        case status
+        case status, articles, code, message
     }
 
     init(from decoder: Decoder) throws {
@@ -20,23 +20,41 @@ enum Status: Decodable {
         let status = try container.decode(ResponceType.self, forKey: .status)
         switch status {
         case .error:
-            self = .error(try container.decode(ErrorResponse.self, forKey: .status))
+            let code = try container.decode(String.self, forKey: .code)
+            let message = try container.decode(String.self, forKey: .message)
+            self = .error(ErrorResponse.init(code: code, message: message))
         case .ok:
-            self = .ok(try container.decode([Articles].self, forKey: .status))
+            let articles = try container.decode([Article].self, forKey: .articles)
+            self = .ok(articles)
         }
     }
 }
 
-struct News: Decodable {
-    let status: Status
-}
-
-struct Articles: Decodable {
-    let title: String
+struct Article: Decodable {
+    let title: String?
     let description: String?
-    let url: URL
+    let url: URL?
     let urlToImage: URL?
     let content: String?
+
+    enum CodingKeys: CodingKey {
+        case title
+        case description
+        case url
+        case urlToImage
+        case content
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.title = try container.decodeIfPresent(String.self, forKey: .title)
+        self.description = try container.decodeIfPresent(String.self, forKey: .description)
+        let url = try container.decodeIfPresent(String.self, forKey: .url)
+        self.url = URL(string: url ?? "")
+        let urlToImage = try container.decodeIfPresent(String.self, forKey: .urlToImage)
+        self.urlToImage = URL(string: urlToImage ?? "")
+        self.content = try container.decodeIfPresent(String.self, forKey: .content)
+    }
 }
 
 struct ErrorResponse: Decodable {
