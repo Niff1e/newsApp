@@ -58,7 +58,7 @@ final class NewsListViewController: UITableViewController {
         } catch NewsListError.emptyArrayOfArticles {
             showAlert(with: "Whoops...", and: "Empty Array Of Articles")
         } catch {
-
+            showAlert(with: "Whoops...", and: "Unexpected Error Of Setting Number Of Rows")
         }
 
         newsListView.creationOfNewsVC = { [weak self] (number) -> Void in
@@ -99,7 +99,7 @@ final class NewsListViewController: UITableViewController {
             } catch NewsListError.emptyArrayOfArticles {
                 strongSelf.showAlert(with: "Whoops...", and: "Emty Array Of Articles")
             } catch {
-                strongSelf.showAlert(with: "Whoops...", and: "Unexpected Error Of Setting Picture To Cell")
+                strongSelf.showAlert(with: "Whoops...", and: "Unexpected Error Of Setting Text To Label")
             }
         }
 
@@ -110,7 +110,7 @@ final class NewsListViewController: UITableViewController {
             } catch NewsListError.emptyArrayOfArticles {
                 strongSelf.showAlert(with: "Whoops...", and: "Emty Array Of Articles")
             } catch {
-                strongSelf.showAlert(with: "Whoops...", and: "Unexpected Error Of Setting Picture To Cell")
+                strongSelf.showAlert(with: "Whoops...", and: "Unexpected Error Of Setting Text To Description")
             }
         }
     }
