@@ -8,62 +8,101 @@
 import Foundation
 import UIKit
 
-enum NewsListErrors: Error {
-    case getUrlsError
+enum NewsListError: Error {
+    case invalidURL
+    case clientsError
+    case emptyArrayOfArticles
 }
 
 final class NewsListModel {
 
     // MARK: - Private(set) properties
 
-    var picture: UIImage?
-    private let decoder = JSONDecoder()
+    private(set) var picture: UIImage?
+
     let stringURL: String = "https://newsapi.org/v2/everything?q=volleyball&from=2023-03-12&apiKey=37834ecfa8884a25a8bad22c4dc6d114"
+
+    // MARK: - Private(set) properties
+
+    private let decoder = JSONDecoder()
+    private var articles: [Article]?
 
     // MARK: - Internal properties
     
     var showAlert: ((_ code: String, _ message: String) -> Void)?
 
-    // MARK: - Internal Funtions
+    // MARK: - Private Funtions
 
-    func getURL(from string: String) throws -> URL {
+    private func getURL(from string: String) throws -> URL {
         guard let url = URL(string: string) else {
-            throw NewsListErrors.getUrlsError
+            throw NewsListError.invalidURL
         }
         return url
     }
 
-    func getData(from stringURL: String) -> [Articles]? {
+    // MARK: - Internal Funtions
+
+    func getData(from stringURL: String) {
         do {
             let url = try getURL(from: stringURL)
-            let jsonData = try Data(contentsOf: url)
-            let news = try decoder.decode(News.self, from: jsonData)
-            switch news.status {
-            case .ok(let articles):
-                return articles
-            case .error(let errorResponce):
-                showAlert?(errorResponce.code, errorResponce.message)
-                return nil
+            let task = URLSession.shared.dataTask(with: url) { data, _, error in
+                guard error == nil else {
+                    self.showAlert?("Whoops...", error.debugDescription)
+                    return
+                }
+                guard let jsonData = data else {
+                    self.showAlert?("Whoops...", "Data Problems")
+                    return
+                }
+                do {
+                    let news = try self.decoder.decode(News.self, from: jsonData)
+                    switch news {
+                    case .ok(let articles):
+                        self.articles = articles
+                    case .error(let errorResponce):
+                        self.showAlert?(errorResponce.code, errorResponce.message)
+                        return
+                    }
+                } catch {
+                    self.showAlert?("Whoops...", "Decode Problems")
+                }
             }
-        } catch NewsListErrors.getUrlsError {
+            task.resume()
+        } catch NewsListError.invalidURL {
             showAlert?("Whoops...", "URL Troubles")
-            return nil
+            return
         } catch {
             showAlert?("Whoops...", "Wrong")
             print(error)
-            return nil
+            return
         }
     }
 
-    func downloadImage(with url: URL) {
+    func downloadImage(with url: URL?, completion: @escaping (UIImage?) -> Void) {
+        guard let url = url else {
+            self.picture = nil
+            completion(nil)
+            return
+        }
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard error == nil else { return }
             guard let data = data else { return }
             guard let image = UIImage(data: data) else { return }
             DispatchQueue.main.async {
                 self.picture = image
+                completion(image)
             }
         }
         task.resume()
+    }
+
+    func getArticle(forRowNumber rowNumber: Int) throws -> Article {
+        guard let articles = articles else { throw NewsListError.emptyArrayOfArticles }
+        return articles[rowNumber]
+    }
+
+    func getArticlesCount() throws -> Int {
+        guard let articles = articles else { throw NewsListError.emptyArrayOfArticles }
+        return articles.count
     }
 }

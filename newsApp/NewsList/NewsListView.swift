@@ -23,8 +23,8 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
     // MARK: - Internal Properties
     
     var creationOfNewsVC: ((_ number: Int) -> Void)?
-    var pictureToCell: ((_ number: Int) -> UIImage?)?
-    var textForTitleLabel: ((_ number: Int) -> String)?
+    var pictureToCell: ((_ number: Int, _ completion: (UIImage?) -> Void) -> Void)?
+    var textForTitleLabel: ((_ number: Int) -> String?)?
     var textForDescriptionLabel: ((_ number: Int) -> String?)?
     
     // MARK: - Init
@@ -49,7 +49,10 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = newsTableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsTableViewCell
         cell.accessoryType = .disclosureIndicator
-        cell.setDataToCell(image: pictureToCell?(indexPath.row), titleText: textForTitleLabel!(indexPath.row), descrText: textForDescriptionLabel!(indexPath.row)!)
+        cell.setDataToCell(titleText: textForTitleLabel?(indexPath.row), descrText: textForDescriptionLabel?(indexPath.row))
+        pictureToCell?(indexPath.row, { [weak cell] img in
+            cell?.setImageToCell(image: img)
+        })
         return cell
     }
     
