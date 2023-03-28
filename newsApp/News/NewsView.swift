@@ -98,15 +98,24 @@ final class NewsView: UIView {
 
     // MARK: - Internal Functions
 
-    func setImage(image: UIImage) {
+    func setImage(image: UIImage?) {
         self.pictureView.image = image
     }
 
-    func setTextToContent(text: String) {
+    func setTextToContent(text: String?) {
         self.labelContent.text = text
     }
 
-    func setTextToURLLabel(text: String) {
-        self.labelURL.text = text
+    func setTextToURLLabel(with url: URL?) {
+        guard let url = url else {
+            self.labelURL.text = ""
+            return
+        }
+        do {
+            let text = try String(contentsOf: url)
+            self.labelURL.text = text
+        } catch {
+            print(error)
+        }
     }
 }
