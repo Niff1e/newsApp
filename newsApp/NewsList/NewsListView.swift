@@ -18,12 +18,12 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
         return tableView
     }()
     
-    private var numberOfRows: Int = 0
+    private var numberOfRows: Int = 5
     
     // MARK: - Internal Properties
     
     var creationOfNewsVC: ((_ number: Int) -> Void)?
-    var pictureToCell: ((_ number: Int, _ completion: (UIImage?) -> Void) -> Void)?
+    var pictureToCell: ((_ number: Int, _ completion: @escaping (UIImage?) -> Void) -> Void)?
     var textForTitleLabel: ((_ number: Int) -> String?)?
     var textForDescriptionLabel: ((_ number: Int) -> String?)?
     

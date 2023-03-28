@@ -14,6 +14,7 @@ final class NewsListViewController: UITableViewController {
 
     private let model: NewsListModel
     private let newsListView = NewsListView()
+    private var int = 0
 
     // MARK: - Init
 
@@ -52,65 +53,36 @@ final class NewsListViewController: UITableViewController {
             self?.showAlert(with: code, and: message)
         }
 
-        model.getData(from: model.stringURL)
-        do {
-            try newsListView.setNumberOfRows(number: model.getArticlesCount())
-        } catch NewsListError.emptyArrayOfArticles {
-            showAlert(with: "Whoops...", and: "Empty Array Of Articles")
-        } catch {
-            showAlert(with: "Whoops...", and: "Unexpected Error Of Setting Number Of Rows")
-        }
+        model.getData(from: model.stringURL) { [weak self] articles in
+            self?.newsListView.setNumberOfRows(number: articles.count)
 
-        newsListView.creationOfNewsVC = { [weak self] (number) -> Void in
-            guard let strongSelf = self else { return }
-            do {
-                let articleForNumber = try strongSelf.model.getArticle(forRowNumber: number)
+            self?.newsListView.creationOfNewsVC = { [weak self] (number) -> Void in
+                guard let strongSelf = self else { return }
+                let articleForNumber = articles[number]
                 strongSelf.model.downloadImage(with: articleForNumber.urlToImage) { img in
-                    let model = NewsModel(image: img, content: articleForNumber.content, pictureURL: articleForNumber.urlToImage)
-                    let newsVC = NewsViewController(model: model)
-                    strongSelf.navigationController?.pushViewController(newsVC, animated: true)
+                        let model = NewsModel(image: img, content: articleForNumber.content, pictureURL: articleForNumber.urlToImage)
+                        let newsVC = NewsViewController(model: model)
+                        strongSelf.navigationController?.pushViewController(newsVC, animated: true)
                 }
-            } catch NewsListError.emptyArrayOfArticles {
-                strongSelf.showAlert(with: "Whoops...", and: "Emty Array Of Articles")
-            } catch {
-                strongSelf.showAlert(with: "Whoops...", and: "Unexpected Error Of Creation New VC")
             }
-        }
 
-        newsListView.pictureToCell = { [weak self] (number, completion) in
-            guard let strongSelf = self else { return }
-            do {
-                let articleForNumber = try strongSelf.model.getArticle(forRowNumber: number)
+            self?.newsListView.pictureToCell = { [weak self] (number, completion) in
+                guard let strongSelf = self else { return }
+                let articleForNumber = articles[number]
                 guard let urlPicture = articleForNumber.urlToImage else { return }
-                self?.model.downloadImage(with: urlPicture) { [weak self] img in
+                strongSelf.model.downloadImage(with: urlPicture) { img in
                     completion(img)
                 }
-            } catch NewsListError.emptyArrayOfArticles {
-                strongSelf.showAlert(with: "Whoops...", and: "Emty Array Of Articles")
-            } catch {
-                strongSelf.showAlert(with: "Whoops...", and: "Unexpected Error Of Setting Picture To Cell")
             }
-        }
 
-        newsListView.textForTitleLabel = { [weak self] (number) -> String? in
-            guard let strongSelf = self else { return }
-            do { let articleForNumber = strongSelf.model.getArticle(forRowNumber: number)
+            self?.newsListView.textForTitleLabel = { (number) -> String? in
+                let articleForNumber = articles[number]
                 return articleForNumber.title
-            } catch NewsListError.emptyArrayOfArticles {
-                strongSelf.showAlert(with: "Whoops...", and: "Emty Array Of Articles")
-            } catch {
-                strongSelf.showAlert(with: "Whoops...", and: "Unexpected Error Of Setting Text To Label")
             }
-        }
 
-        newsListView.textForDescriptionLabel = { [weak self] (number) -> String? in
-            guard let strongSelf = self else { return }
-            do { let articleForNumber = strongSelf.model.getArticle(forRowNumber: number)
+            self?.newsListView.textForDescriptionLabel = { (number) -> String? in
+                let articleForNumber = articles[number]
                 return articleForNumber.description
-            } catch NewsListError.emptyArrayOfArticles {
-                strongSelf.showAlert(with: "Whoops...", and: "Emty Array Of Articles")
-            } catch {
-                strongSelf.showAlert(with: "Whoops...", and: "Unexpected Error Of Setting Text To Description")
             }
         }
     }

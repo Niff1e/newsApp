@@ -20,7 +20,7 @@ final class NewsListModel {
 
     private(set) var picture: UIImage?
 
-    let stringURL: String = "https://newsapi.org/v2/everything?q=volleyball&from=2023-03-12&apiKey=37834ecfa8884a25a8bad22c4dc6d114"
+    let stringURL: String = "https://newsapi.org/v2/everything?q=volleyball&from=2023-03-27&apiKey=37834ecfa8884a25a8bad22c4dc6d114"
 
     // MARK: - Private(set) properties
 
@@ -42,7 +42,7 @@ final class NewsListModel {
 
     // MARK: - Internal Funtions
 
-    func getData(from stringURL: String) {
+    func getData(from stringURL: String, completion: @escaping ([Article]) -> Void) {
         do {
             let url = try getURL(from: stringURL)
             let task = URLSession.shared.dataTask(with: url) { data, _, error in
@@ -59,6 +59,7 @@ final class NewsListModel {
                     switch news {
                     case .ok(let articles):
                         self.articles = articles
+                        completion(articles)
                     case .error(let errorResponce):
                         self.showAlert?(errorResponce.code, errorResponce.message)
                         return

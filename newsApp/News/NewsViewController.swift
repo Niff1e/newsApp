@@ -29,11 +29,7 @@ final class NewsViewController: UIViewController {
     private func updateView() {
         newsView.setImage(image: model.picture)
         newsView.setTextToContent(text: model.content)
-        do {
-            try newsView.setTextToURLLabel(text: String(contentsOf: model.pictureURL))
-        } catch {
-            print(error)
-        }
+        newsView.setTextToURLLabel(with: model.pictureURL)
     }
 
     // MARK: - View Lifecycle
