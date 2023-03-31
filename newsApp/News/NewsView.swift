@@ -36,7 +36,6 @@ final class NewsView: UIView {
         stackView.alignment = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 30
-        // stackView.backgroundColor = .blue
         return stackView
     }()
 
@@ -44,15 +43,12 @@ final class NewsView: UIView {
         let pictureView = UIImageView()
         pictureView.contentMode = .scaleAspectFit
         pictureView.translatesAutoresizingMaskIntoConstraints = false
-        pictureView.backgroundColor = .blue
         return pictureView
     }()
 
     private var labelContent: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        // label.font = UIFont.systemFont(ofSize: 75.0)
-        label.backgroundColor = .red
         label.numberOfLines = 0
         return label
     }()
@@ -60,8 +56,6 @@ final class NewsView: UIView {
     private var labelURL: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        //label.font = UIFont.systemFont(ofSize: 30.0)
-        label.backgroundColor = .green
         label.numberOfLines = 0
         return label
     }()
@@ -89,10 +83,7 @@ final class NewsView: UIView {
             stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-//            pictureView.heightAnchor.constraint(equalToConstant: 400.0),
-//            labelContent.heightAnchor.constraint(equalToConstant: 400.0),
-            labelURL.heightAnchor.constraint(equalToConstant: 400.0)
+            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         ])
     }
 
@@ -111,11 +102,6 @@ final class NewsView: UIView {
             self.labelURL.text = ""
             return
         }
-        do {
-            let text = try String(contentsOf: url, encoding: .utf16)
-            self.labelURL.text = text
-        } catch {
-            print(error)
-        }
+        self.labelURL.text = url.absoluteString
     }
 }

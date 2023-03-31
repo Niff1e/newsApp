@@ -17,8 +17,8 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
-    
-    private var numberOfRows: Int = 5
+
+    private var numberOfRows: Int = 0
     
     // MARK: - Internal Properties
     
