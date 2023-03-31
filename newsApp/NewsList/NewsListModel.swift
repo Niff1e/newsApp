@@ -20,7 +20,7 @@ final class NewsListModel {
 
     private(set) var picture: UIImage?
 
-    let stringURL: String = "https://newsapi.org/v2/everything?q=volleyball&from=2023-03-27&apiKey=37834ecfa8884a25a8bad22c4dc6d114"
+    let stringURL: String = "https://newsapi.org/v2/everything?q=volleyball&from=2023-03-29&apiKey=37834ecfa8884a25a8bad22c4dc6d114"
 
     // MARK: - Private(set) properties
 
@@ -71,11 +71,9 @@ final class NewsListModel {
             task.resume()
         } catch NewsListError.invalidURL {
             showAlert?("Whoops...", "URL Troubles")
-            return
         } catch {
             showAlert?("Whoops...", "Wrong")
             print(error)
-            return
         }
     }
 
@@ -89,8 +87,7 @@ final class NewsListModel {
             guard error == nil else { return }
             guard let data = data else { return }
             guard let image = UIImage(data: data) else { return }
-            DispatchQueue.main.async {
-                self.picture = image
+            DispatchQueue.main.async { 
                 completion(image)
             }
         }

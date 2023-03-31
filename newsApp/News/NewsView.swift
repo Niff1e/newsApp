@@ -60,7 +60,7 @@ final class NewsView: UIView {
     private var labelURL: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        // label.font = UIFont.systemFont(ofSize: 75.0)
+        //label.font = UIFont.systemFont(ofSize: 30.0)
         label.backgroundColor = .green
         label.numberOfLines = 0
         return label
@@ -92,7 +92,7 @@ final class NewsView: UIView {
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
 //            pictureView.heightAnchor.constraint(equalToConstant: 400.0),
 //            labelContent.heightAnchor.constraint(equalToConstant: 400.0),
-//            labelURL.heightAnchor.constraint(equalToConstant: 400.0)
+            labelURL.heightAnchor.constraint(equalToConstant: 400.0)
         ])
     }
 
@@ -112,7 +112,7 @@ final class NewsView: UIView {
             return
         }
         do {
-            let text = try String(contentsOf: url)
+            let text = try String(contentsOf: url, encoding: .utf16)
             self.labelURL.text = text
         } catch {
             print(error)
