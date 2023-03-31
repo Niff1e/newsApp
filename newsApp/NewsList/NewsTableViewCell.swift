@@ -109,4 +109,11 @@ class NewsTableViewCell: UITableViewCell {
     func setImageToCell(image: UIImage?) {
         pictureView.image = image
     }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        pictureView.image = nil
+        descriptionLabel.text = nil
+        titleLabel.text = nil
+    }
 }

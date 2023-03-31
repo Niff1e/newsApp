@@ -52,7 +52,7 @@ struct Article: Decodable {
         let url = try container.decodeIfPresent(String.self, forKey: .url)
         self.url = URL(string: url ?? "")
         let urlToImage = try container.decodeIfPresent(String.self, forKey: .urlToImage)
-        self.urlToImage = URL(string: urlToImage ?? "")
+        self.urlToImage = URL(string: urlToImage?.getCString(<#T##buffer: &[CChar]##[CChar]#>, maxLength: 300, encoding: .utf8) ?? "")
         self.content = try container.decodeIfPresent(String.self, forKey: .content)
     }
 }

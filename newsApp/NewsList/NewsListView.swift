@@ -47,13 +47,18 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = newsTableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsTableViewCell
-        cell.accessoryType = .disclosureIndicator
-        cell.setDataToCell(titleText: textForTitleLabel?(indexPath.row), descrText: textForDescriptionLabel?(indexPath.row))
-        pictureToCell?(indexPath.row, { [weak cell] img in
-            cell?.setImageToCell(image: img)
-        })
-        return cell
+        if let cell = newsTableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as? NewsTableViewCell {
+            cell.accessoryType = .disclosureIndicator
+
+            cell.setDataToCell(titleText: textForTitleLabel?(indexPath.row), descrText: textForDescriptionLabel?(indexPath.row))
+            pictureToCell?(indexPath.row, { [weak self] img in
+                guard let strongSelf = self else { return }
+                let tableViewCell = strongSelf.newsTableView.cellForRow(at: indexPath)
+                (tableViewCell as? NewsTableViewCell)?.setImageToCell(image: img)
+            })
+            return cell
+        }
+        return UITableViewCell()
     }
     
     // MARK: - Table View Delegate
@@ -66,6 +71,8 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
         creationOfNewsVC?(indexPath.row)
         newsTableView.deselectRow(at: indexPath, animated: true)
     }
+
+    
     
     // MARK: - Private Functions
     
@@ -85,5 +92,9 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
     
     func setNumberOfRows(number: Int) {
         self.numberOfRows = number
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.newsTableView.reloadData()
+        }
     }
 }
