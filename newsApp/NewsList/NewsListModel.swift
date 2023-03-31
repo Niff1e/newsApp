@@ -16,19 +16,14 @@ enum NewsListError: Error {
 
 final class NewsListModel {
 
-    // MARK: - Private(set) properties
-
-    private(set) var picture: UIImage?
-
-    let stringURL: String = "https://newsapi.org/v2/everything?q=volleyball&from=2023-03-29&apiKey=37834ecfa8884a25a8bad22c4dc6d114"
-
-    // MARK: - Private(set) properties
+    // MARK:  Private properties
 
     private let decoder = JSONDecoder()
     private var articles: [Article]?
 
     // MARK: - Internal properties
-    
+
+    let stringURL: String = "https://newsapi.org/v2/everything?q=volleyball&from=2023-03-29&apiKey=37834ecfa8884a25a8bad22c4dc6d114"
     var showAlert: ((_ code: String, _ message: String) -> Void)?
 
     // MARK: - Private Funtions
@@ -79,7 +74,6 @@ final class NewsListModel {
 
     func downloadImage(with url: URL?, completion: @escaping (UIImage?) -> Void) {
         guard let url = url else {
-            self.picture = nil
             completion(nil)
             return
         }

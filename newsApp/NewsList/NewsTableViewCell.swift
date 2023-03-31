@@ -24,10 +24,8 @@ class NewsTableViewCell: UITableViewCell {
 
     private let pictureView: UIImageView = {
         let image = UIImageView()
-
         image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
-        // image.backgroundColor = .blue
         return image
     }()
 
@@ -35,7 +33,6 @@ class NewsTableViewCell: UITableViewCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
-        // label.backgroundColor = .blue
         return label
     }()
 
@@ -43,7 +40,6 @@ class NewsTableViewCell: UITableViewCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
-        // label.backgroundColor = .blue
         return label
     }()
 
@@ -52,7 +48,6 @@ class NewsTableViewCell: UITableViewCell {
         container.axis = .vertical
         container.alignment = .center
         container.translatesAutoresizingMaskIntoConstraints = false
-        // container.backgroundColor = .red
         return container
     }()
 
