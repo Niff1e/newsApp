@@ -27,15 +27,20 @@ final class NewsViewController: UIViewController {
     // MARK: - Private methods
 
     private func updateView() {
-        newsView.setImage(image: model.picture)
-        newsView.setTextToContent(text: model.content)
-        newsView.setTextToURLLabel(with: model.pictureURL)
+        newsView.setTextToContent(text: model.article?.content)
+        newsView.setTextToURLLabel(with: model.article?.urlToImage)
     }
 
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        model.updatePicture = { [weak self] img in
+            self?.newsView.setImage(image: img)
+        }
+
+        model.dowloadImage()
         updateView()
     }
 

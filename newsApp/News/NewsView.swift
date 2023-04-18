@@ -14,6 +14,7 @@ final class NewsView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = .white
         setupScrollView()
         setupStackView()
     }
@@ -43,6 +44,8 @@ final class NewsView: UIView {
         let pictureView = UIImageView()
         pictureView.contentMode = .scaleAspectFit
         pictureView.translatesAutoresizingMaskIntoConstraints = false
+        pictureView.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        pictureView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         return pictureView
     }()
 
@@ -53,10 +56,11 @@ final class NewsView: UIView {
         return label
     }()
 
-    private var labelURL: UILabel = {
-        let label = UILabel()
+    private var labelURL: UITextView = {
+        let label = UITextView()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 16.0)
+        label.isScrollEnabled = false
         return label
     }()
 
@@ -70,16 +74,8 @@ final class NewsView: UIView {
             scrollView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor)
-        ])
-    }
+            scrollView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
 
-    private func setupStackView() {
-        stackView.addArrangedSubview(pictureView)
-        stackView.addArrangedSubview(labelContent)
-        stackView.addArrangedSubview(labelURL)
-
-        NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
@@ -87,9 +83,27 @@ final class NewsView: UIView {
         ])
     }
 
+    private func setupStackView() {
+        stackView.addArrangedSubview(pictureView)
+        stackView.addArrangedSubview(labelContent)
+        stackView.addArrangedSubview(labelURL)
+    }
+
     // MARK: - Internal Functions
 
     func setImage(image: UIImage?) {
+//        guard let pic = image else {
+//            self.pictureView.image = nil
+//            return
+//        }
+//        if self.safeAreaLayoutGuide.layoutFrame.size.width < pic.size.width {
+//            print(self.safeAreaLayoutGuide.layoutFrame.size.width)
+//            let height = (self.frame.size.width * pic.size.height) / pic.size.width
+//            print(height)
+//            NSLayoutConstraint.activate([
+//                pictureView.heightAnchor.constraint(equalToConstant: height)
+//            ])
+//        }
         self.pictureView.image = image
     }
 
@@ -103,5 +117,7 @@ final class NewsView: UIView {
             return
         }
         self.labelURL.text = url.absoluteString
+        self.labelURL.isEditable = false
+        self.labelURL.dataDetectorTypes = .link
     }
 }

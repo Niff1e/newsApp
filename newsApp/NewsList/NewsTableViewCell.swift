@@ -24,7 +24,8 @@ class NewsTableViewCell: UITableViewCell {
 
     private let pictureView: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -68,10 +69,8 @@ class NewsTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: containerForTitleAndDescr.topAnchor),
             titleLabel.widthAnchor.constraint(equalTo: containerForTitleAndDescr.widthAnchor),
-            titleLabel.heightAnchor.constraint(equalToConstant: 22.0),
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 6),
             descriptionLabel.bottomAnchor.constraint(equalTo: containerForTitleAndDescr.bottomAnchor),
-            descriptionLabel.heightAnchor.constraint(equalToConstant: 22.0),
             descriptionLabel.widthAnchor.constraint(equalTo: containerForTitleAndDescr.widthAnchor)
         ])
     }
@@ -86,11 +85,17 @@ class NewsTableViewCell: UITableViewCell {
             containerForImageAndText.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10.0),
             containerForImageAndText.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10.0),
             containerForImageAndText.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10.0),
+
+            pictureView.topAnchor.constraint(equalTo: containerForImageAndText.topAnchor),
             pictureView.heightAnchor.constraint(equalToConstant: 50.0),
             pictureView.widthAnchor.constraint(equalToConstant: 50.0),
-            pictureView.leadingAnchor.constraint(equalTo: containerForImageAndText.leadingAnchor),
+            pictureView.leadingAnchor.constraint(equalTo: containerForImageAndText.leadingAnchor, constant: 16.0),
+            pictureView.bottomAnchor.constraint(lessThanOrEqualTo: containerForImageAndText.bottomAnchor, constant: -16.0),
+
+            containerForTitleAndDescr.topAnchor.constraint(equalTo: containerForImageAndText.topAnchor, constant: 16.0),
             containerForTitleAndDescr.leadingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: 20.0),
-            containerForTitleAndDescr.trailingAnchor.constraint(equalTo: containerForImageAndText.trailingAnchor, constant: -40.0)
+            containerForTitleAndDescr.bottomAnchor.constraint(equalTo: containerForImageAndText.bottomAnchor, constant: -16.0),
+            containerForTitleAndDescr.trailingAnchor.constraint(lessThanOrEqualTo: containerForImageAndText.trailingAnchor, constant: -40.0)
         ])
     }
 

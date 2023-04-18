@@ -31,6 +31,7 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = .white
         setupTableView()
         newsTableView.dataSource = self
         newsTableView.delegate = self
@@ -57,14 +58,15 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
                 (tableViewCell as? NewsTableViewCell)?.setImageToCell(image: img)
             })
             return cell
+        } else {
+            return UITableViewCell()
         }
-        return UITableViewCell()
     }
     
     // MARK: - Table View Delegate
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -92,9 +94,6 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
     
     func setNumberOfRows(number: Int) {
         self.numberOfRows = number
-        DispatchQueue.main.async { [weak self] in
-            guard let strongSelf = self else { return }
-            strongSelf.newsTableView.reloadData()
-        }
+        newsTableView.reloadData()
     }
 }
