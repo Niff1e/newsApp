@@ -18,13 +18,22 @@ final class NewsListModel {
 
     // MARK:  Private properties
 
-    private let decoder = JSONDecoder()
-    private var articles: [Article]?
+    private let decoder = NewsJSONDecoder()
+    private let internetManager = InternetManager()
+
+    // MARK:  Private(set) properties
+
+    private(set) var articles: [Article]?
 
     // MARK: - Internal properties
 
-    let stringURL: String = "https://newsapi.org/v2/everything?q=volleyball&from=2023-03-29&apiKey=37834ecfa8884a25a8bad22c4dc6d114"
+    let stringURL: String = "https://newsapi.org/v2/everything?q=volleyball&from=2023-04-14&apiKey=37834ecfa8884a25a8bad22c4dc6d114"
     var showAlert: ((_ code: String, _ message: String) -> Void)?
+    lazy var dowloadImage: ((_ url: URL?, _ complition: @escaping (UIImage?) -> Void) -> Void) = { [weak self] (url, complition) in
+        self?.internetManager.downloadImage(with: url, completion: { img in
+            complition(img)
+        })
+    }
 
     // MARK: - Private Funtions
 
@@ -37,64 +46,35 @@ final class NewsListModel {
 
     // MARK: - Internal Funtions
 
-    func getData(from stringURL: String, completion: @escaping ([Article]) -> Void) {
+    func getData(completion: @escaping ([Article]) -> Void) {
         do {
             let url = try getURL(from: stringURL)
-            let task = URLSession.shared.dataTask(with: url) { data, _, error in
-                guard error == nil else {
-                    self.showAlert?("Whoops...", error.debugDescription)
-                    return
-                }
+            internetManager.getData(with: url) { [weak self] data in
                 guard let jsonData = data else {
-                    self.showAlert?("Whoops...", "Data Problems")
+                    self?.showAlertOnMain(title: "Whoops...", description: "Data Problems")
                     return
                 }
-                do {
-                    let news = try self.decoder.decode(News.self, from: jsonData)
-                    switch news {
-                    case .ok(let articles):
+                self?.decoder.decodeNewsJSON(from: jsonData, completion: { [weak self] articles in
+                    guard let self = self else { return }
                         self.articles = articles
-                        completion(articles)
-                    case .error(let errorResponce):
-                        self.showAlert?(errorResponce.code, errorResponce.message)
-                        return
-                    }
-                } catch {
-                    self.showAlert?("Whoops...", "Decode Problems")
-                }
+                        DispatchQueue.main.async {
+                            completion(articles)
+                        }
+                    },
+                 complitionError: { [weak self] errorResponce in
+                    self?.showAlertOnMain(title: errorResponce.code, description: errorResponce.message)
+                })
             }
-            task.resume()
         } catch NewsListError.invalidURL {
-            showAlert?("Whoops...", "URL Troubles")
+            showAlertOnMain(title: "Whoops...", description: "URL Troubles")
         } catch {
-            showAlert?("Whoops...", "Wrong")
-            print(error)
+            showAlertOnMain(title: "Whoops...", description: "Wrong")
         }
     }
 
-    func downloadImage(with url: URL?, completion: @escaping (UIImage?) -> Void) {
-        guard let url = url else {
-            completion(nil)
-            return
+    func showAlertOnMain(title: String, description: String) {
+        DispatchQueue.main.async { [weak self] in
+            self?.showAlert?(title, description)
         }
-        let task = URLSession.shared.dataTask(with: url) { data, _, error in
-            guard error == nil else { return }
-            guard let data = data else { return }
-            guard let image = UIImage(data: data) else { return }
-            DispatchQueue.main.async { 
-                completion(image)
-            }
-        }
-        task.resume()
-    }
-
-    func getArticle(forRowNumber rowNumber: Int) throws -> Article {
-        guard let articles = articles else { throw NewsListError.emptyArrayOfArticles }
-        return articles[rowNumber]
-    }
-
-    func getArticlesCount() throws -> Int {
-        guard let articles = articles else { throw NewsListError.emptyArrayOfArticles }
-        return articles.count
     }
 }

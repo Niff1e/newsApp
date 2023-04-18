@@ -18,8 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationVC = UINavigationController()
         let model = NewsListModel()
         let firstScreenVC = NewsListViewController(model: model)
-        window?.backgroundColor = .white
-    
+        
         window?.windowScene = windowScene
         window?.rootViewController = navigationVC
         navigationVC.pushViewController(firstScreenVC, animated: false)

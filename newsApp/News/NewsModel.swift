@@ -9,13 +9,34 @@ import Foundation
 import UIKit
 
 final class NewsModel {
-    private(set) var picture: UIImage?
-    private(set) var content: String?
-    private(set) var pictureURL: URL?
 
-    init(image: UIImage?, content: String?, pictureURL: URL?) {
-        self.content = content
+    // MARK: - Private(set) Properties
+
+    private(set) var picture: UIImage?
+    private(set) var article: Article?
+
+    // MARK: - Private Properties
+
+    private let internetManager = InternetManager()
+
+    // MARK: - Internal Properties
+
+    var updatePicture: ((UIImage?) -> Void)?
+
+    // MARK: - Init
+
+    init(image: UIImage?, article: Article?) {
         self.picture = image
-        self.pictureURL = pictureURL
+        self.article = article
+    }
+
+    // MARK: - Internal Functions
+
+    func dowloadImage() {
+        internetManager.downloadImage(with: article?.urlToImage) { [weak self] img in
+            DispatchQueue.main.async { [weak self] in
+                self?.updatePicture?(img)
+            }
+        }
     }
 }

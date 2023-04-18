@@ -17,7 +17,7 @@ enum News: Decodable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let status = try container.decode(ResponceType.self, forKey: .status)
+        let status = try container.decode(ResponseType.self, forKey: .status)
         switch status {
         case .error:
             let code = try container.decode(String.self, forKey: .code)
@@ -62,6 +62,6 @@ struct ErrorResponse: Decodable {
     let message: String
 }
 
-enum ResponceType: String, Decodable {
+enum ResponseType: String, Decodable {
     case ok, error
 }
