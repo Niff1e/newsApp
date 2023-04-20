@@ -15,7 +15,7 @@ class NewsTableViewCell: UITableViewCell {
         setupContainerForImageAndText()
         setupContainerForTitleAndDescr()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
