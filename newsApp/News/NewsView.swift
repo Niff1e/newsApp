@@ -56,11 +56,32 @@ final class NewsView: UIView {
         return label
     }()
 
-    private var labelURL: UITextView = {
-        let label = UITextView()
+    private var urlField: UITextView = {
+        let field = UITextView()
+        field.translatesAutoresizingMaskIntoConstraints = false
+        field.font = .systemFont(ofSize: 16.0)
+        field.isScrollEnabled = false
+        return field
+    }()
+
+    private var labelTitle: UILabel = {
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 16.0)
-        label.isScrollEnabled = false
+        label.numberOfLines = 0
+        return label
+    }()
+
+    private var labelAuthor: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        return label
+    }()
+
+    private var labelPublishDate: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
         return label
     }()
 
@@ -86,7 +107,25 @@ final class NewsView: UIView {
     private func setupStackView() {
         stackView.addArrangedSubview(pictureView)
         stackView.addArrangedSubview(labelContent)
-        stackView.addArrangedSubview(labelURL)
+        stackView.addArrangedSubview(urlField)
+
+        pictureView.addSubview(labelTitle)
+        pictureView.addSubview(labelAuthor)
+        pictureView.addSubview(labelPublishDate)
+
+        NSLayoutConstraint.activate([
+            labelAuthor.leadingAnchor.constraint(equalTo: pictureView.leadingAnchor, constant: 16.0),
+            labelAuthor.bottomAnchor.constraint(equalTo: pictureView.bottomAnchor, constant: -8.0),
+            labelAuthor.trailingAnchor.constraint(lessThanOrEqualTo: labelPublishDate.leadingAnchor, constant: -8.0),
+            labelAuthor.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 16.0),
+
+            labelPublishDate.bottomAnchor.constraint(equalTo: pictureView.bottomAnchor, constant: -8.0),
+            labelPublishDate.trailingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: -16.0),
+            labelPublishDate.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 8.0),
+
+            labelTitle.leadingAnchor.constraint(equalTo: pictureView.leadingAnchor, constant: 16.0),
+            labelTitle.trailingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: -16.0)
+        ])
     }
 
     // MARK: - Internal Functions
@@ -111,13 +150,19 @@ final class NewsView: UIView {
         self.labelContent.text = text
     }
 
-    func setTextToURLLabel(with url: URL?) {
+    func setTextToURLField(with url: URL?) {
         guard let url = url else {
-            self.labelURL.text = ""
+            self.urlField.text = ""
             return
         }
-        self.labelURL.text = url.absoluteString
-        self.labelURL.isEditable = false
-        self.labelURL.dataDetectorTypes = .link
+        self.urlField.text = url.absoluteString
+        self.urlField.isEditable = false
+        self.urlField.dataDetectorTypes = .link
+    }
+
+    func setInfoTo(title: String?, publishDate: String?, author: String?) {
+        self.labelTitle.text = title
+        self.labelPublishDate.text = publishDate
+        self.labelAuthor.text = author
     }
 }

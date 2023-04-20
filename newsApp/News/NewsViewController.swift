@@ -28,7 +28,10 @@ final class NewsViewController: UIViewController {
 
     private func updateView() {
         newsView.setTextToContent(text: model.article?.content)
-        newsView.setTextToURLLabel(with: model.article?.urlToImage)
+        newsView.setTextToURLField(with: model.article?.urlToImage)
+        newsView.setInfoTo(title: model.article?.title,
+                           publishDate: model.article?.publishedAt,
+                           author: model.article?.author)
     }
 
     // MARK: - View Lifecycle
