@@ -16,12 +16,12 @@ enum NewsListError: Error {
 
 final class NewsListModel {
 
-    // MARK:  Private properties
+    // MARK: - Private properties
 
     private let decoder = NewsJSONDecoder()
     private let internetManager = InternetManager()
 
-    // MARK:  Private(set) properties
+    // MARK: - Private(set) properties
 
     private(set) var articles: [Article]?
 
