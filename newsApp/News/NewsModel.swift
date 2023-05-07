@@ -25,8 +25,7 @@ final class NewsModel {
 
     // MARK: - Init
 
-    init(image: UIImage?, article: Article?) {
-        self.picture = image
+    init(article: Article?) {
         self.article = article
     }
 

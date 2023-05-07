@@ -131,18 +131,16 @@ final class NewsView: UIView {
     // MARK: - Internal Functions
 
     func setImage(image: UIImage?) {
-//        guard let pic = image else {
-//            self.pictureView.image = nil
-//            return
-//        }
-//        if self.safeAreaLayoutGuide.layoutFrame.size.width < pic.size.width {
-//            print(self.safeAreaLayoutGuide.layoutFrame.size.width)
-//            let height = (self.frame.size.width * pic.size.height) / pic.size.width
-//            print(height)
-//            NSLayoutConstraint.activate([
-//                pictureView.heightAnchor.constraint(equalToConstant: height)
-//            ])
-//        }
+        guard let pic = image else {
+            self.pictureView.image = nil
+            return
+        }
+        if self.safeAreaLayoutGuide.layoutFrame.size.width < pic.size.width {
+            let height = (self.frame.size.width * pic.size.height) / pic.size.width
+            NSLayoutConstraint.activate([
+                pictureView.heightAnchor.constraint(equalToConstant: height)
+            ])
+        }
         self.pictureView.image = image
     }
 
