@@ -14,6 +14,7 @@ final class NewsListViewController: UITableViewController {
 
     private let model: NewsListModel
     private let newsListView = NewsListView()
+    private let searchController = UISearchController(searchResultsController: nil)
 
     // MARK: - Init
 
@@ -30,6 +31,8 @@ final class NewsListViewController: UITableViewController {
 
     private func setupNavigation() {
         navigationItem.title = "NEWS"
+        navigationItem.searchController = searchController
+        searchController.searchBar.delegate = self
     }
 
     private func showAlert(with code: String, and message: String) {
@@ -45,7 +48,7 @@ final class NewsListViewController: UITableViewController {
         super.viewDidLoad()
         setupNavigation()
 
-        model.getData { [weak self] articles in
+        model.getArticles(about: nil) { [weak self] articles in
             self?.newsListView.setNumberOfRows(number: articles.count)
         }
     }
@@ -59,18 +62,16 @@ final class NewsListViewController: UITableViewController {
 
         newsListView.creationOfNewsVC = { [weak self] (number) -> Void in
             guard let strongSelf = self else { return }
-            let articleForNumber = strongSelf.model.articles?[number]
-            strongSelf.model.dowloadImage(articleForNumber?.urlToImage, {img in
-                let model = NewsModel(image: img, article: articleForNumber)
-                let newsVC = NewsViewController(model: model)
-                        strongSelf.navigationController?.pushViewController(newsVC, animated: true)
-            })
+            let articleForNumber = strongSelf.model.articles[number]
+            let model = NewsModel(article: articleForNumber)
+            let newsVC = NewsViewController(model: model)
+            strongSelf.navigationController?.pushViewController(newsVC, animated: true)
         }
 
         newsListView.pictureToCell = { [weak self] (number, completion) in
             guard let strongSelf = self else { return }
-            let articleForNumber = strongSelf.model.articles?[number]
-            guard let urlPicture = articleForNumber?.urlToImage else {
+            let articleForNumber = strongSelf.model.articles[number]
+            guard let urlPicture = articleForNumber.urlToImage else {
                 completion(nil)
                 return
             }
@@ -81,14 +82,29 @@ final class NewsListViewController: UITableViewController {
 
         newsListView.textForTitleLabel = { [weak self] (number) -> String? in
             guard let strongSelf = self else { return nil }
-            let articleForNumber = strongSelf.model.articles?[number]
-            return articleForNumber?.title
+            let articleForNumber = strongSelf.model.articles[number]
+            return articleForNumber.title
         }
 
         newsListView.textForDescriptionLabel = { [weak self] (number) -> String? in
             guard let strongSelf = self else { return nil }
-            let articleForNumber = strongSelf.model.articles?[number]
-            return articleForNumber?.description
+            let articleForNumber = strongSelf.model.articles[number]
+            return articleForNumber.description
+        }
+
+        newsListView.getAnotherTenArticles = { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.model.getArticles(about: self?.searchController.searchBar.text) { [weak self] article in
+                self?.newsListView.setNumberOfRows(number: article.count)
+            }
+        }
+    }
+}
+
+extension NewsListViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        model.getArticles(about: searchBar.text) { [weak self] articles in
+            self?.newsListView.setNumberOfRows(number: articles.count)
         }
     }
 }

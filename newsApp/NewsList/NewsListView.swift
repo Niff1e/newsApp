@@ -22,6 +22,7 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
 
     // MARK: - Internal Properties
 
+    var getAnotherTenArticles: (() -> Void)?
     var creationOfNewsVC: ((_ number: Int) -> Void)?
     var pictureToCell: ((_ number: Int, _ completion: @escaping (UIImage?) -> Void) -> Void)?
     var textForTitleLabel: ((_ number: Int) -> String?)?
@@ -44,6 +45,7 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
     // MARK: - Table View Data Source
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("Число строк равно \(numberOfRows)")
         return numberOfRows
     }
 
@@ -72,6 +74,12 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         creationOfNewsVC?(indexPath.row)
         newsTableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == numberOfRows - 1 {
+            getAnotherTenArticles?()
+        }
     }
 
     // MARK: - Private Functions
