@@ -22,6 +22,7 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
 
     // MARK: - Internal Properties
 
+    var getAnotherTenArticles: (() -> Void)?
     var creationOfNewsVC: ((_ number: Int) -> Void)?
     var pictureToCell: ((_ number: Int, _ completion: @escaping (UIImage?) -> Void) -> Void)?
     var textForTitleLabel: ((_ number: Int) -> String?)?
@@ -48,15 +49,16 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = newsTableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as? NewsTableViewCell {
+        if let cell = newsTableView.dequeueReusableCell(withIdentifier: "newsCell",
+                                                        for: indexPath) as? NewsTableViewCell {
             cell.accessoryType = .disclosureIndicator
-
-            cell.setDataToCell(titleText: textForTitleLabel?(indexPath.row), descrText: textForDescriptionLabel?(indexPath.row))
-            pictureToCell?(indexPath.row, { [weak self] img in
+            cell.setDataToCell(titleText: textForTitleLabel?(indexPath.row),
+                               descrText: textForDescriptionLabel?(indexPath.row))
+            pictureToCell?(indexPath.row) { [weak self] img in
                 guard let strongSelf = self else { return }
                 let tableViewCell = strongSelf.newsTableView.cellForRow(at: indexPath)
                 (tableViewCell as? NewsTableViewCell)?.setImageToCell(image: img)
-            })
+            }
             return cell
         } else {
             return UITableViewCell()
@@ -72,6 +74,12 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         creationOfNewsVC?(indexPath.row)
         newsTableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == numberOfRows - 1 {
+            getAnotherTenArticles?()
+        }
     }
 
     // MARK: - Private Functions
