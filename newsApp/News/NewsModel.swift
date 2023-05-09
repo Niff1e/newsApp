@@ -12,7 +12,6 @@ final class NewsModel {
 
     // MARK: - Private(set) Properties
 
-    private(set) var picture: UIImage?
     private(set) var article: Article?
 
     // MARK: - Private Properties
@@ -25,8 +24,7 @@ final class NewsModel {
 
     // MARK: - Init
 
-    init(image: UIImage?, article: Article?) {
-        self.picture = image
+    init(article: Article?) {
         self.article = article
     }
 

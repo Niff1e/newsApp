@@ -10,19 +10,18 @@ import UIKit
 
 final class NewsJSONDecoder: JSONDecoder {
 
-    func decodeNewsJSON(from jsonData: Data, completion: @escaping (([Article]) -> Void), complitionError: @escaping (ErrorResponse) -> Void) {
+    func decodeNewsJSON(from jsonData: Data,
+                        completionHandler: @escaping (Result<[Article], ErrorResponse>) -> Void) {
         do {
             let news = try self.decode(News.self, from: jsonData)
             switch news {
             case .ok(let articles):
-                DispatchQueue.main.async {
-                    completion(articles)
-                }
+                completionHandler(.success(articles))
             case .error(let errorResponse):
-                complitionError(errorResponse)
+                completionHandler(.failure(errorResponse))
             }
         } catch {
-            complitionError(ErrorResponse(code: "Whoops...", message: "Decode Problems"))
+            completionHandler(.failure(ErrorResponse(code: "Whoops...", message: "Decode Problems")))
         }
     }
 }
