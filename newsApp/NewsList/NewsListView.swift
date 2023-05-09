@@ -45,20 +45,20 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
     // MARK: - Table View Data Source
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("Число строк равно \(numberOfRows)")
         return numberOfRows
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = newsTableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as? NewsTableViewCell {
+        if let cell = newsTableView.dequeueReusableCell(withIdentifier: "newsCell",
+                                                        for: indexPath) as? NewsTableViewCell {
             cell.accessoryType = .disclosureIndicator
-
-            cell.setDataToCell(titleText: textForTitleLabel?(indexPath.row), descrText: textForDescriptionLabel?(indexPath.row))
-            pictureToCell?(indexPath.row, { [weak self] img in
+            cell.setDataToCell(titleText: textForTitleLabel?(indexPath.row),
+                               descrText: textForDescriptionLabel?(indexPath.row))
+            pictureToCell?(indexPath.row) { [weak self] img in
                 guard let strongSelf = self else { return }
                 let tableViewCell = strongSelf.newsTableView.cellForRow(at: indexPath)
                 (tableViewCell as? NewsTableViewCell)?.setImageToCell(image: img)
-            })
+            }
             return cell
         } else {
             return UITableViewCell()

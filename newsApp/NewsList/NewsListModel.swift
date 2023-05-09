@@ -10,7 +10,6 @@ import UIKit
 
 enum NewsListError: Error {
     case invalidURL
-    case clientsError
     case emptyArrayOfArticles
 }
 
@@ -29,15 +28,15 @@ final class NewsListModel {
     // MARK: - Internal properties
 
     var showAlert: ((_ code: String, _ message: String) -> Void)?
-    lazy var dowloadImage: ((_ url: URL?, _ complition: @escaping (UIImage?) -> Void) -> Void) = { [weak self] (url, complition) in
-        self?.internetManager.downloadImage(with: url, completion: { img in
-            complition(img)
-        })
-    }
 
     // MARK: - Internal Funtions
 
-    func getArticles(about: String?, completion: @escaping ([Article]) -> Void) {
+    func dowloadImage(_ url: URL?, _ complition: @escaping (UIImage?) -> Void) {
+        self.internetManager.downloadImage(with: url) { img in complition(img)
+        }
+    }
+
+    func getArticles(about: String?, ifSucces: @escaping ([Article]) -> Void) {
         var partOfArticles = (articles.count)/10
         guard let about = about else { return }
         if actualTheme != about {
@@ -51,17 +50,19 @@ final class NewsListModel {
                     self?.showAlertOnMain(title: "Whoops...", description: "Data Problems")
                     return
                 }
-                self?.decoder.decodeNewsJSON(from: jsonData, completion: { [weak self] newArticles in
-                    guard let self = self else { return }
+                self?.decoder.decodeNewsJSON(from: jsonData, completionHandler: { [weak self] result in
+                    switch result {
+                    case .failure(let errorResponse):
+                        self?.showAlertOnMain(title: errorResponse.code, description: errorResponse.message)
+                    case .success(let articles):
+                        guard let self = self else { return }
                         DispatchQueue.main.async {
-                            for article in newArticles {
+                            for article in articles {
                                 self.articles.append(article)
                             }
-                            completion(self.articles)
+                            ifSucces(self.articles)
                         }
-                    },
-                 complitionError: { [weak self] errorResponce in
-                    self?.showAlertOnMain(title: errorResponce.code, description: errorResponce.message)
+                    }
                 })
             }
         } catch NewsListError.invalidURL {

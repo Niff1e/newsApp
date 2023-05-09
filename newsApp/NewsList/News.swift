@@ -8,6 +8,7 @@
 import Foundation
 
 enum News: Decodable {
+    // swiftlint:disable:next identifier_name
     case ok([Article])
     case error(ErrorResponse)
 
@@ -22,7 +23,7 @@ enum News: Decodable {
         case .error:
             let code = try container.decode(String.self, forKey: .code)
             let message = try container.decode(String.self, forKey: .message)
-            self = .error(ErrorResponse.init(code: code, message: message))
+            self = .error(ErrorResponse(code: code, message: message))
         case .ok:
             let articles = try container.decode([Article].self, forKey: .articles)
             self = .ok(articles)
@@ -63,11 +64,12 @@ struct Article: Decodable {
     }
 }
 
-struct ErrorResponse: Decodable {
+struct ErrorResponse: Decodable, Error {
     let code: String
     let message: String
 }
 
 enum ResponseType: String, Decodable {
+    // swiftlint:disable:next identifier_name
     case ok, error
 }

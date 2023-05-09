@@ -49,14 +49,14 @@ final class NewsView: UIView {
         return pictureView
     }()
 
-    private var labelContent: UILabel = {
+    private var contentLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         return label
     }()
 
-    private var urlField: UITextView = {
+    private var urlView: UITextView = {
         let field = UITextView()
         field.translatesAutoresizingMaskIntoConstraints = false
         field.font = .systemFont(ofSize: 16.0)
@@ -64,24 +64,24 @@ final class NewsView: UIView {
         return field
     }()
 
-    private var labelTitle: UILabel = {
+    private var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         return label
     }()
 
-    private var labelAuthor: UILabel = {
+    private var authorLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         return label
     }()
 
-    private var labelPublishDate: UILabel = {
+    private var publishDateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         return label
     }()
 
@@ -106,25 +106,25 @@ final class NewsView: UIView {
 
     private func setupStackView() {
         stackView.addArrangedSubview(pictureView)
-        stackView.addArrangedSubview(labelContent)
-        stackView.addArrangedSubview(urlField)
+        stackView.addArrangedSubview(contentLabel)
+        stackView.addArrangedSubview(urlView)
 
-        pictureView.addSubview(labelTitle)
-        pictureView.addSubview(labelAuthor)
-        pictureView.addSubview(labelPublishDate)
+        pictureView.addSubview(titleLabel)
+        pictureView.addSubview(authorLabel)
+        pictureView.addSubview(publishDateLabel)
 
         NSLayoutConstraint.activate([
-            labelAuthor.leadingAnchor.constraint(equalTo: pictureView.leadingAnchor, constant: 16.0),
-            labelAuthor.bottomAnchor.constraint(equalTo: pictureView.bottomAnchor, constant: -8.0),
-            labelAuthor.trailingAnchor.constraint(lessThanOrEqualTo: labelPublishDate.leadingAnchor, constant: -8.0),
-            labelAuthor.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 16.0),
+            authorLabel.leadingAnchor.constraint(equalTo: pictureView.leadingAnchor, constant: 16.0),
+            authorLabel.bottomAnchor.constraint(equalTo: pictureView.bottomAnchor, constant: -8.0),
+            authorLabel.trailingAnchor.constraint(lessThanOrEqualTo: publishDateLabel.leadingAnchor, constant: -8.0),
+            authorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16.0),
 
-            labelPublishDate.bottomAnchor.constraint(equalTo: pictureView.bottomAnchor, constant: -8.0),
-            labelPublishDate.trailingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: -16.0),
-            labelPublishDate.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 8.0),
+            publishDateLabel.bottomAnchor.constraint(equalTo: pictureView.bottomAnchor, constant: -8.0),
+            publishDateLabel.trailingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: -16.0),
+            publishDateLabel.topAnchor.constraint(greaterThanOrEqualTo: titleLabel.bottomAnchor),
 
-            labelTitle.leadingAnchor.constraint(equalTo: pictureView.leadingAnchor, constant: 16.0),
-            labelTitle.trailingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: -16.0)
+            titleLabel.leadingAnchor.constraint(equalTo: pictureView.leadingAnchor, constant: 16.0),
+            titleLabel.trailingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: -16.0)
         ])
     }
 
@@ -145,22 +145,23 @@ final class NewsView: UIView {
     }
 
     func setTextToContent(text: String?) {
-        self.labelContent.text = text
+        self.contentLabel.text = text
     }
 
-    func setTextToURLField(with url: URL?) {
+    func setTextToURLView(with url: URL?) {
         guard let url = url else {
-            self.urlField.text = ""
+            self.urlView.text = ""
+            self.urlView.isUserInteractionEnabled = false
             return
         }
-        self.urlField.text = url.absoluteString
-        self.urlField.isEditable = false
-        self.urlField.dataDetectorTypes = .link
+        self.urlView.text = url.absoluteString
+        self.urlView.isEditable = false
+        self.urlView.dataDetectorTypes = .link
     }
 
     func setInfoTo(title: String?, publishDate: String?, author: String?) {
-        self.labelTitle.text = title
-        self.labelPublishDate.text = publishDate
-        self.labelAuthor.text = author
+        self.titleLabel.text = title
+        self.publishDateLabel.text = publishDate
+        self.authorLabel.text = author
     }
 }
