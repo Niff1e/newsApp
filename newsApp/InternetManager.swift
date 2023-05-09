@@ -13,6 +13,7 @@ final class InternetManager {
     // MARK: - Private Properties
 
     private var stringURL: (Int, String) -> String = { (number, about) in
+        // swiftlint:disable:next line_length
         return String("https://newsapi.org/v2/everything?q=\(about)&pageSize=10&page=\(number)&from=2023-04-14&apiKey=37834ecfa8884a25a8bad22c4dc6d114")
     }
 

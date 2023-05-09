@@ -28,7 +28,7 @@ final class NewsViewController: UIViewController {
 
     private func updateView() {
         newsView.setTextToContent(text: model.article?.content)
-        newsView.setTextToURLField(with: model.article?.urlToImage)
+        newsView.setTextToURLView(with: model.article?.url)
         newsView.setInfoTo(title: model.article?.title,
                            publishDate: model.article?.publishedAt,
                            author: model.article?.author)
@@ -38,6 +38,8 @@ final class NewsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationItem.title = model.article?.title
 
         model.updatePicture = { [weak self] img in
             self?.newsView.setImage(image: img)

@@ -12,7 +12,6 @@ final class NewsModel {
 
     // MARK: - Private(set) Properties
 
-    private(set) var picture: UIImage?
     private(set) var article: Article?
 
     // MARK: - Private Properties
