@@ -12,7 +12,7 @@ final class NewsModel {
 
     // MARK: - Private(set) Properties
 
-    private(set) var article: Article?
+    private(set) var article: Article
 
     // MARK: - Private Properties
 
@@ -24,14 +24,20 @@ final class NewsModel {
 
     // MARK: - Init
 
-    init(article: Article?) {
+    init(article: Article) {
         self.article = article
     }
 
     // MARK: - Internal Functions
 
     func dowloadImage() {
-        internetManager.downloadImage(with: article?.urlToImage) { [weak self] img in
+        guard let urlToImage = article.urlToImage else {
+            DispatchQueue.main.async { [weak self] in
+                self?.updatePicture?(nil)
+            }
+            return
+        }
+        internetManager.downloadImage(with: urlToImage) { [weak self] img in
             DispatchQueue.main.async { [weak self] in
                 self?.updatePicture?(img)
             }
