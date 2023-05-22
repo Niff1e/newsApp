@@ -27,11 +27,11 @@ final class NewsViewController: UIViewController {
     // MARK: - Private methods
 
     private func updateView() {
-        newsView.setTextToContent(text: model.article?.content)
-        newsView.setTextToURLView(with: model.article?.url)
-        newsView.setInfoTo(title: model.article?.title,
-                           publishDate: model.article?.publishedAt,
-                           author: model.article?.author)
+        newsView.setTextToContent(text: model.article.content)
+        newsView.setTextToURLView(with: model.article.url)
+        newsView.setInfoTo(title: model.article.title,
+                           publishDate: model.article.publishedAt,
+                           author: model.article.author)
     }
 
     // MARK: - View Lifecycle
@@ -39,7 +39,7 @@ final class NewsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = model.article?.title
+        navigationItem.title = model.article.title
 
         model.updatePicture = { [weak self] img in
             self?.newsView.setImage(image: img)

@@ -33,6 +33,7 @@ final class NewsListViewController: UITableViewController {
         navigationItem.title = "NEWS"
         navigationItem.searchController = searchController
         searchController.searchBar.delegate = self
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
 
     private func showAlert(with code: String, and message: String) {
@@ -92,9 +93,9 @@ final class NewsListViewController: UITableViewController {
             return articleForNumber.description
         }
 
-        newsListView.getAnotherTenArticles = { [weak self] in
+        newsListView.getMoreArticles = { [weak self] in
             guard let strongSelf = self else { return }
-            strongSelf.model.getArticles(about: self?.searchController.searchBar.text) { [weak self] article in
+            strongSelf.model.getArticles(about: nil) { [weak self] article in
                 self?.newsListView.setNumberOfRows(number: article.count)
             }
         }

@@ -49,6 +49,8 @@ final class NewsView: UIView {
         return pictureView
     }()
 
+    private var pictureHeightConstraintConstant = CGFloat()
+
     private var contentLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -136,9 +138,9 @@ final class NewsView: UIView {
             return
         }
         if self.safeAreaLayoutGuide.layoutFrame.size.width < pic.size.width {
-            let height = (self.frame.size.width * pic.size.height) / pic.size.width
+            pictureHeightConstraintConstant = (self.frame.size.width * pic.size.height) / pic.size.width
             NSLayoutConstraint.activate([
-                pictureView.heightAnchor.constraint(equalToConstant: height)
+                pictureView.heightAnchor.constraint(equalToConstant: pictureHeightConstraintConstant)
             ])
         }
         self.pictureView.image = image

@@ -9,11 +9,11 @@ import Foundation
 
 enum News: Decodable {
     // swiftlint:disable:next identifier_name
-    case ok([Article])
+    case ok(SuccessResponse)
     case error(ErrorResponse)
 
     enum CodingKeys: String, CodingKey {
-        case status, articles, code, message
+        case status, articles, totalResults, code, message
     }
 
     init(from decoder: Decoder) throws {
@@ -25,8 +25,9 @@ enum News: Decodable {
             let message = try container.decode(String.self, forKey: .message)
             self = .error(ErrorResponse(code: code, message: message))
         case .ok:
+            let totalResults = try container.decode(Int.self, forKey: .totalResults)
             let articles = try container.decode([Article].self, forKey: .articles)
-            self = .ok(articles)
+            self = .ok(SuccessResponse(totalResults: totalResults, articles: articles))
         }
     }
 }
@@ -67,6 +68,11 @@ struct Article: Decodable {
 struct ErrorResponse: Decodable, Error {
     let code: String
     let message: String
+}
+
+struct SuccessResponse: Decodable {
+    let totalResults: Int
+    let articles: [Article]
 }
 
 enum ResponseType: String, Decodable {

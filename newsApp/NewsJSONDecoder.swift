@@ -11,12 +11,12 @@ import UIKit
 final class NewsJSONDecoder: JSONDecoder {
 
     func decodeNewsJSON(from jsonData: Data,
-                        completionHandler: @escaping (Result<[Article], ErrorResponse>) -> Void) {
+                        completionHandler: @escaping (Result<SuccessResponse, ErrorResponse>) -> Void) {
         do {
             let news = try self.decode(News.self, from: jsonData)
             switch news {
-            case .ok(let articles):
-                completionHandler(.success(articles))
+            case .ok(let successResponce):
+                completionHandler(.success(successResponce))
             case .error(let errorResponse):
                 completionHandler(.failure(errorResponse))
             }
