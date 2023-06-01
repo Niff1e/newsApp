@@ -18,6 +18,16 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
         return tableView
     }()
 
+    private var noResultLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = NSLocalizedString("no_results_label", comment: "")
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 30.0)
+        label.alpha = 0
+        return label
+    }()
+
     private var numberOfRows: Int = 0
 
     // MARK: - Internal Properties
@@ -87,13 +97,19 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
 
     private func setupTableView() {
         self.addSubview(newsTableView)
+        self.addSubview(noResultLabel)
         newsTableView.register(NewsTableViewCell.self, forCellReuseIdentifier: "newsCell")
 
         NSLayoutConstraint.activate([
             newsTableView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             newsTableView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             newsTableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
-            newsTableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor)
+            newsTableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+
+           noResultLabel.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            noResultLabel.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor),
+            noResultLabel.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor),
+            noResultLabel.heightAnchor.constraint(equalToConstant: 50.0)
         ])
     }
 
@@ -102,5 +118,13 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
     func setNumberOfRows(number: Int) {
         self.numberOfRows = number
         newsTableView.reloadData()
+    }
+
+    func makeLabelVisible() {
+        noResultLabel.alpha = 1
+    }
+
+    func makeLabelInvisible() {
+        noResultLabel.alpha = 0
     }
 }

@@ -1,0 +1,17 @@
+//
+//  Localizable.strings
+//  newsApp
+//
+//  Created by Niff1e on 1.06.23.
+//  
+//
+
+"alert_button" = "Хорошо!";
+"navigation_bar_name" = "НОВОСТИ";
+"no_results_label" = "НЕТ РЕЗУЛЬТАТОВ";
+"whoops" = "Упс...";
+"url_troubles_error" = "Неверный Адрес!";
+"bad_encoding_url" = "Ошибка Декодирования Адреса!";
+"unexpected_error" = "Неожиданная Ошибка!";
+"data_fetching_error" = "Ошибка Получения Данных!";
+"data_decoding_error" = "Ошибка Декодирования Данных!";
