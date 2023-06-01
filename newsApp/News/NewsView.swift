@@ -31,25 +31,39 @@ final class NewsView: UIView {
         return scrollView
     }()
 
-    private var stackView: UIStackView = {
+    private var mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = 30
+        stackView.spacing = 16
         return stackView
+    }()
+
+    private var titleStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 8
+        return stackView
+    }()
+
+    private var authorAndPublishDateView: UIView = {
+        let authorAndPublishDateView = UIView()
+        authorAndPublishDateView.translatesAutoresizingMaskIntoConstraints = false
+        return authorAndPublishDateView
     }()
 
     private var pictureView: UIImageView = {
         let pictureView = UIImageView()
         pictureView.contentMode = .scaleAspectFit
         pictureView.translatesAutoresizingMaskIntoConstraints = false
-        pictureView.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        pictureView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         return pictureView
     }()
 
     private var pictureHeightConstraintConstant = CGFloat()
+    private var pictureWidthConstraintConstant = CGFloat()
 
     private var contentLabel: UILabel = {
         let label = UILabel()
@@ -70,6 +84,9 @@ final class NewsView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
+        label.textColor = .white
+        label.shadowColor = .black
+        label.shadowOffset = CGSize(width: 2, height: 2)
         return label
     }()
 
@@ -77,6 +94,10 @@ final class NewsView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
+        label.setContentCompressionResistancePriority(.init(250.0), for: .horizontal)
+        label.textColor = .white
+        label.shadowColor = .black
+        label.shadowOffset = CGSize(width: 2, height: 2)
         return label
     }()
 
@@ -84,6 +105,9 @@ final class NewsView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
+        label.textColor = .white
+        label.shadowColor = .black
+        label.shadowOffset = CGSize(width: 2, height: 2)
         return label
     }()
 
@@ -91,7 +115,7 @@ final class NewsView: UIView {
 
     private func setupScrollView() {
         self.addSubview(scrollView)
-        scrollView.addSubview(stackView)
+        scrollView.addSubview(mainStackView)
 
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
@@ -99,35 +123,44 @@ final class NewsView: UIView {
             scrollView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
             scrollView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
 
-            stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+            mainStackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            mainStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            mainStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            mainStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         ])
     }
 
     private func setupStackView() {
-        stackView.addArrangedSubview(pictureView)
-        stackView.addArrangedSubview(contentLabel)
-        stackView.addArrangedSubview(urlView)
+        mainStackView.addArrangedSubview(pictureView)
+        mainStackView.addArrangedSubview(contentLabel)
+        mainStackView.addArrangedSubview(urlView)
 
-        pictureView.addSubview(titleLabel)
-        pictureView.addSubview(authorLabel)
-        pictureView.addSubview(publishDateLabel)
+        pictureView.addSubview(titleStackView)
+
+        titleStackView.addArrangedSubview(titleLabel)
+        titleStackView.addArrangedSubview(authorAndPublishDateView)
+
+        authorAndPublishDateView.addSubview(authorLabel)
+        authorAndPublishDateView.addSubview(publishDateLabel)
 
         NSLayoutConstraint.activate([
-            authorLabel.leadingAnchor.constraint(equalTo: pictureView.leadingAnchor, constant: 16.0),
-            authorLabel.bottomAnchor.constraint(equalTo: pictureView.bottomAnchor, constant: -8.0),
-            authorLabel.trailingAnchor.constraint(lessThanOrEqualTo: publishDateLabel.leadingAnchor, constant: -8.0),
-            authorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16.0),
+            titleStackView.leadingAnchor.constraint(equalTo: pictureView.leadingAnchor, constant: 8.0),
+            titleStackView.trailingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: -8.0),
+            titleStackView.bottomAnchor.constraint(equalTo: pictureView.bottomAnchor, constant: -8.0),
+            titleStackView.topAnchor.constraint(greaterThanOrEqualTo: pictureView.topAnchor),
 
-            publishDateLabel.bottomAnchor.constraint(equalTo: pictureView.bottomAnchor, constant: -8.0),
-            publishDateLabel.trailingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: -16.0),
-            publishDateLabel.topAnchor.constraint(greaterThanOrEqualTo: titleLabel.bottomAnchor),
+            publishDateLabel.bottomAnchor.constraint(equalTo: authorAndPublishDateView.bottomAnchor),
+            publishDateLabel.trailingAnchor.constraint(equalTo: authorAndPublishDateView.trailingAnchor),
+            publishDateLabel.topAnchor.constraint(equalTo: authorAndPublishDateView.topAnchor),
 
-            titleLabel.leadingAnchor.constraint(equalTo: pictureView.leadingAnchor, constant: 16.0),
-            titleLabel.trailingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: -16.0)
+            authorLabel.leadingAnchor.constraint(equalTo: authorAndPublishDateView.leadingAnchor),
+            authorLabel.bottomAnchor.constraint(equalTo: authorAndPublishDateView.bottomAnchor),
+            authorLabel.topAnchor.constraint(equalTo: authorAndPublishDateView.topAnchor)
         ])
+
+        let constraint = publishDateLabel.leadingAnchor.constraint(greaterThanOrEqualTo: authorLabel.trailingAnchor, constant: 8.0)
+        constraint.priority = .required
+        constraint.isActive = true
     }
 
     // MARK: - Internal Functions
@@ -135,6 +168,13 @@ final class NewsView: UIView {
     func setImage(image: UIImage?) {
         guard let pic = image else {
             self.pictureView.image = nil
+            pictureHeightConstraintConstant = titleStackView.frame.size.height
+            pictureWidthConstraintConstant = self.frame.size.width
+
+            /* NSLayoutConstraint.activate([
+                pictureView.heightAnchor.constraint(equalToConstant: pictureHeightConstraintConstant),
+                pictureView.widthAnchor.constraint(equalToConstant: pictureWidthConstraintConstant)
+            ])*/
             return
         }
         if self.safeAreaLayoutGuide.layoutFrame.size.width < pic.size.width {

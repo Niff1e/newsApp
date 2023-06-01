@@ -21,6 +21,7 @@ final class NewsListModel {
     private let internetManager = InternetManager()
     private var actualTheme: String?
     private var pageSize = 10
+    private let maxPageSize = 100
     private var isDownloadingAllowed = true
 
     // MARK: - Private(set) properties
@@ -31,17 +32,19 @@ final class NewsListModel {
     // MARK: - Internal properties
 
     var showAlert: ((_ code: String, _ message: String) -> Void)?
+    var showNoResult: (() -> Void)?
+    var hideNoResult: (() -> Void)?
 
     // MARK: - Private functions
 
     private func getURL(numberOfPage: Int, about: String?) throws -> URL {
         var stringURL = String()
-        if isFirstScreen {
+        if let about, !about.isEmpty {
             // swiftlint:disable:next line_length
-            stringURL = String("https://newsapi.org/v2/top-headlines?pageSize=\(pageSize)&page=\(numberOfPage)&country=us&apiKey=37834ecfa8884a25a8bad22c4dc6d114")
+            stringURL = String("https://newsapi.org/v2/everything?q=\(about)&pageSize=\(pageSize)&page=\(numberOfPage)&from=2023-05-10&apiKey=37834ecfa8884a25a8bad22c4dc6d114")
         } else {
             // swiftlint:disable:next line_length
-            stringURL =  String("https://newsapi.org/v2/everything?q=\(about!)&pageSize=\(pageSize)&page=\(numberOfPage)&from=2023-05-10&apiKey=37834ecfa8884a25a8bad22c4dc6d114")
+            stringURL = String("https://newsapi.org/v2/top-headlines?pageSize=\(pageSize)&page=\(numberOfPage)&country=us&apiKey=37834ecfa8884a25a8bad22c4dc6d114")
         }
         guard let encodedUrl = stringURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             throw NewsListError.badPercentEncoding
@@ -60,6 +63,7 @@ final class NewsListModel {
     }
 
     func getArticles(about: String?, ifSucces: @escaping ([Article]) -> Void) {
+        hideNoResult?()
         var partOfArticles = (articles.count)/pageSize
         about.flatMap { theme in
             isFirstScreen = false
@@ -77,7 +81,7 @@ final class NewsListModel {
                 let url = try getURL(numberOfPage: partOfArticles + 1, about: actualTheme)
                 internetManager.getData(with: url) { [weak self] data in
                     guard let jsonData = data else {
-                        self?.showAlertOnMain(title: "Whoops...", description: "Data Problems")
+                        self?.showAlertOnMain(title: "whoops", description: "data_fetching_error")
                         return
                     }
                     self?.decoder.decodeNewsJSON(from: jsonData, completionHandler: { [weak self] result in
@@ -87,15 +91,19 @@ final class NewsListModel {
                         case .success(let successResponce):
                             guard let self = self else { return }
                             print(successResponce.totalResults)
+                            if successResponce.totalResults == 0 {
+                                self.showNoResult?()
+                            }
                             DispatchQueue.main.async {
                                 for article in successResponce.articles {
                                     self.articles.append(article)
                                 }
                                 ifSucces(self.articles)
-                                if self.articles.count == 100 || self.articles.count == successResponce.totalResults {
+                                let limit = min(successResponce.totalResults, self.maxPageSize)
+                                if self.articles.count == limit {
                                     self.isDownloadingAllowed = false
-                                } else if successResponce.totalResults < self.articles.count + self.pageSize {
-                                    self.pageSize = successResponce.totalResults - self.articles.count
+                                } else if limit < self.articles.count + self.pageSize {
+                                    self.pageSize = limit - self.articles.count
                                 }
                             }
                         }
@@ -103,17 +111,17 @@ final class NewsListModel {
                 }
             }
         } catch NewsListError.invalidURL {
-            showAlertOnMain(title: "Whoops...", description: "URL Troubles")
+            showAlertOnMain(title: "whoops", description: "url_troubles_error")
         } catch NewsListError.badPercentEncoding {
-            showAlertOnMain(title: "Whoops...", description: "Bad Encoding URL")
+            showAlertOnMain(title: "whoops", description: "bad_encoding_url_error")
         } catch {
-            showAlertOnMain(title: "Whoops...", description: "Wrong")
+            showAlertOnMain(title: "whoops", description: "unexpected_error")
         }
     }
 
     func showAlertOnMain(title: String, description: String) {
         DispatchQueue.main.async { [weak self] in
-            self?.showAlert?(title, description)
+            self?.showAlert?(NSLocalizedString(title, comment: ""), NSLocalizedString(description, comment: ""))
         }
     }
 }
