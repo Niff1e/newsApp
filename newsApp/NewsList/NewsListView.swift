@@ -28,6 +28,16 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
         return label
     }()
 
+    private var indicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.color = .black
+        indicator.style = .large
+        indicator.stopAnimating()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.alpha = 0
+        return indicator
+    }()
+
     private var numberOfRows: Int = 0
 
     // MARK: - Internal Properties
@@ -98,6 +108,7 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
     private func setupTableView() {
         self.addSubview(newsTableView)
         self.addSubview(noResultLabel)
+        self.addSubview(indicator)
         newsTableView.register(NewsTableViewCell.self, forCellReuseIdentifier: "newsCell")
 
         NSLayoutConstraint.activate([
@@ -109,7 +120,12 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
            noResultLabel.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
             noResultLabel.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor),
             noResultLabel.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor),
-            noResultLabel.heightAnchor.constraint(equalToConstant: 50.0)
+            noResultLabel.heightAnchor.constraint(equalToConstant: 50.0),
+
+            indicator.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor, constant: -80.0),
+            indicator.heightAnchor.constraint(equalToConstant: 100.0),
+            indicator.widthAnchor.constraint(equalToConstant: 100.0)
         ])
     }
 
@@ -126,5 +142,17 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
 
     func makeLabelInvisible() {
         noResultLabel.alpha = 0
+    }
+
+    func startAnimatingIndicator() {
+        self.newsTableView.isUserInteractionEnabled = false
+        self.indicator.alpha = 1
+        self.indicator.startAnimating()
+    }
+
+    func stopAnimatingIndicator() {
+        self.indicator.stopAnimating()
+        self.indicator.alpha = 0
+        self.newsTableView.isUserInteractionEnabled = true
     }
 }

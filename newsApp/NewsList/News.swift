@@ -38,7 +38,7 @@ struct Article: Decodable {
     let description: String?
     let url: URL?
     let urlToImage: URL?
-    let publishedAt: String?
+    let publishedAt: Date?
     let content: String?
 
     enum CodingKeys: CodingKey {
@@ -60,7 +60,9 @@ struct Article: Decodable {
         self.url = URL(string: url ?? "")
         let urlToImage = try container.decodeIfPresent(String.self, forKey: .urlToImage)
         self.urlToImage = URL(string: urlToImage ?? "")
-        self.publishedAt = try container.decodeIfPresent(String.self, forKey: .publishedAt)
+        let publishedAt = try container.decodeIfPresent(String.self, forKey: .publishedAt)
+        let formatter = ISO8601DateFormatter()
+        self.publishedAt = formatter.date(from: publishedAt ?? "")
         self.content = try container.decodeIfPresent(String.self, forKey: .content)
     }
 }

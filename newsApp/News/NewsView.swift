@@ -158,7 +158,8 @@ final class NewsView: UIView {
             authorLabel.topAnchor.constraint(equalTo: authorAndPublishDateView.topAnchor)
         ])
 
-        let constraint = publishDateLabel.leadingAnchor.constraint(greaterThanOrEqualTo: authorLabel.trailingAnchor, constant: 8.0)
+        let constraint = publishDateLabel.leadingAnchor.constraint(greaterThanOrEqualTo: authorLabel.trailingAnchor,
+                                                                   constant: 8.0)
         constraint.priority = .required
         constraint.isActive = true
     }
@@ -170,11 +171,6 @@ final class NewsView: UIView {
             self.pictureView.image = nil
             pictureHeightConstraintConstant = titleStackView.frame.size.height
             pictureWidthConstraintConstant = self.frame.size.width
-
-            /* NSLayoutConstraint.activate([
-                pictureView.heightAnchor.constraint(equalToConstant: pictureHeightConstraintConstant),
-                pictureView.widthAnchor.constraint(equalToConstant: pictureWidthConstraintConstant)
-            ])*/
             return
         }
         if self.safeAreaLayoutGuide.layoutFrame.size.width < pic.size.width {
@@ -201,9 +197,12 @@ final class NewsView: UIView {
         self.urlView.dataDetectorTypes = .link
     }
 
-    func setInfoTo(title: String?, publishDate: String?, author: String?) {
+    func setInfoTo(title: String?, author: String?) {
         self.titleLabel.text = title
-        self.publishDateLabel.text = publishDate
         self.authorLabel.text = author
+    }
+
+    func setDateToDateLabel(publishDate: String) {
+        self.publishDateLabel.text = publishDate
     }
 }
