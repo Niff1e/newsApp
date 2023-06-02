@@ -69,6 +69,14 @@ final class NewsListViewController: UITableViewController {
             self?.newsListView.makeLabelInvisible()
         }
 
+        model.whenStartDownload = { [weak self] in
+            self?.newsListView.startAnimatingIndicator()
+        }
+
+        model.whenFinishDownload = { [weak self] in
+            self?.newsListView.stopAnimatingIndicator()
+        }
+
         newsListView.creationOfNewsVC = { [weak self] (number) -> Void in
             guard let strongSelf = self else { return }
             let articleForNumber = strongSelf.model.articles[number]

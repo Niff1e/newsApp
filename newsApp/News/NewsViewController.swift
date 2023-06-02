@@ -27,10 +27,16 @@ final class NewsViewController: UIViewController {
     // MARK: - Private methods
 
     private func updateView() {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateStyle = .medium
+        model.article.publishedAt.flatMap { date in
+            let date = formatter.string(from: date)
+            newsView.setDateToDateLabel(publishDate: date)
+        }
         newsView.setTextToContent(text: model.article.content)
         newsView.setTextToURLView(with: model.article.url)
         newsView.setInfoTo(title: model.article.title,
-                           publishDate: model.article.publishedAt,
                            author: model.article.author)
     }
 

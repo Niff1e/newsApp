@@ -34,6 +34,8 @@ final class NewsListModel {
     var showAlert: ((_ code: String, _ message: String) -> Void)?
     var showNoResult: (() -> Void)?
     var hideNoResult: (() -> Void)?
+    var whenStartDownload: (() -> Void)?
+    var whenFinishDownload: (() -> Void)?
 
     // MARK: - Private functions
 
@@ -77,6 +79,7 @@ final class NewsListModel {
         }
 
         do {
+            whenStartDownload?()
             if isDownloadingAllowed {
                 let url = try getURL(numberOfPage: partOfArticles + 1, about: actualTheme)
                 internetManager.getData(with: url) { [weak self] data in
@@ -99,6 +102,7 @@ final class NewsListModel {
                                     self.articles.append(article)
                                 }
                                 ifSucces(self.articles)
+                                self.whenFinishDownload?()
                                 let limit = min(successResponce.totalResults, self.maxPageSize)
                                 if self.articles.count == limit {
                                     self.isDownloadingAllowed = false
