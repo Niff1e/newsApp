@@ -10,6 +10,14 @@ import UIKit
 
 final class NewsModel {
 
+    // MARK: - Static Properties
+
+    static let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        return formatter
+    }()
+
     // MARK: - Private(set) Properties
 
     private(set) var article: Article
@@ -29,6 +37,14 @@ final class NewsModel {
     }
 
     // MARK: - Internal Functions
+
+    func convertDataToString() -> String {
+        var date = String()
+        article.publishedAt.flatMap { publisheDate in
+            date = NewsModel.formatter.string(from: publisheDate)
+        }
+        return date
+    }
 
     func dowloadImage() {
         guard let urlToImage = article.urlToImage else {

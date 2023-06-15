@@ -30,7 +30,7 @@ final class NewsListViewController: UITableViewController {
     // MARK: - Private Functions
 
     private func setupNavigation() {
-        navigationItem.title = NSLocalizedString("navigation_bar_name", comment: "")
+        navigationItem.title = .navigationBarName
         navigationItem.searchController = searchController
         searchController.searchBar.delegate = self
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -38,7 +38,7 @@ final class NewsListViewController: UITableViewController {
 
     private func showAlert(with code: String, and message: String) {
         let alert = UIAlertController(title: code, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: NSLocalizedString("alert_button", comment: ""), style: .default)
+        let action = UIAlertAction(title: .alertButton, style: .default)
         alert.addAction(action)
         present(alert, animated: true)
     }
@@ -56,25 +56,16 @@ final class NewsListViewController: UITableViewController {
 
     override func loadView() {
         view = newsListView
-
         model.showAlert = { [weak self] (code, message) -> Void in
             self?.showAlert(with: code, and: message)
         }
 
-        model.showNoResult = { [weak self] in
-            self?.newsListView.makeLabelVisible()
+        model.isNoResultLabelVisible = { [weak self] (isVisible) -> Void in
+            self?.newsListView.isNoResultLabelVisible(isVisible: isVisible)
         }
 
-        model.hideNoResult = { [weak self] in
-            self?.newsListView.makeLabelInvisible()
-        }
-
-        model.whenStartDownload = { [weak self] in
-            self?.newsListView.startAnimatingIndicator()
-        }
-
-        model.whenFinishDownload = { [weak self] in
-            self?.newsListView.stopAnimatingIndicator()
+        model.isSpinnerAnimated = { [weak self] (isAnimated) -> Void in
+            self?.newsListView.isSpinnerAnimated(isAnimated: isAnimated)
         }
 
         newsListView.creationOfNewsVC = { [weak self] (number) -> Void in
@@ -92,7 +83,7 @@ final class NewsListViewController: UITableViewController {
                 completion(nil)
                 return
             }
-            strongSelf.model.dowloadImage(urlPicture, { img in
+            strongSelf.model.dowloadImage(url: urlPicture, completion: { img in
                 completion(img)
             })
         }
@@ -120,12 +111,15 @@ final class NewsListViewController: UITableViewController {
 
 extension NewsListViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.model.setIsFirstScreen(to: false)
         model.getArticles(about: searchBar.text) { [weak self] articles in
             self?.newsListView.setNumberOfRows(number: articles.count)
         }
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.model.setIsFirstScreen(to: true)
+        self.model.setFirstPartOfArticles()
         model.getArticles(about: "") { [weak self] articles in
             self?.newsListView.setNumberOfRows(number: articles.count)
         }

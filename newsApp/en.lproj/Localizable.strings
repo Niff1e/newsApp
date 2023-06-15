@@ -9,7 +9,7 @@
 "navigation_bar_name" = "NEWS";
 "no_results_label" = "NO RESULTS";
 "whoops" = "Whoops...";
-"url_troubles_error" = "Invalid URL";
+"invalid_url_error" = "Invalid URL";
 "bad_encoding_url_error" = "Bad Encoding URL";
 "unexpected_error" = "Unexpected Error";
 "data_fetching_error" = "Data Fetch Error";
