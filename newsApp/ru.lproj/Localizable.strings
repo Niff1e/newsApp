@@ -10,7 +10,7 @@
 "navigation_bar_name" = "НОВОСТИ";
 "no_results_label" = "НЕТ РЕЗУЛЬТАТОВ";
 "whoops" = "Упс...";
-"url_troubles_error" = "Неверный Адрес!";
+"invalid_url_error" = "Неверный Адрес!";
 "bad_encoding_url" = "Ошибка Декодирования Адреса!";
 "unexpected_error" = "Неожиданная Ошибка!";
 "data_fetching_error" = "Ошибка Получения Данных!";

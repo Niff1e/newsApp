@@ -21,8 +21,8 @@ final class NewsJSONDecoder: JSONDecoder {
                 completionHandler(.failure(errorResponse))
             }
         } catch {
-            completionHandler(.failure(ErrorResponse(code: NSLocalizedString("whoops", comment: ""),
-                                                     message: NSLocalizedString("data_decoding_error", comment: ""))))
+            completionHandler(.failure(ErrorResponse(code: .whoops,
+                                                     message: .dataDecodingError)))
         }
     }
 }

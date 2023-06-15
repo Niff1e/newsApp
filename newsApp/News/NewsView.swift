@@ -84,9 +84,10 @@ final class NewsView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.textColor = .white
-        label.shadowColor = .black
-        label.shadowOffset = CGSize(width: 2, height: 2)
+        label.textColor = .black
+        label.layer.shadowColor = .init(red: 1, green: 1, blue: 1, alpha: 1)
+        label.layer.shadowOpacity = 1
+        label.layer.shadowOffset = .zero
         return label
     }()
 
@@ -94,10 +95,11 @@ final class NewsView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
-        label.setContentCompressionResistancePriority(.init(250.0), for: .horizontal)
-        label.textColor = .white
-        label.shadowColor = .black
-        label.shadowOffset = CGSize(width: 2, height: 2)
+        label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        label.textColor = .black
+        label.layer.shadowColor = .init(red: 1, green: 1, blue: 1, alpha: 1)
+        label.layer.shadowOpacity = 1
+        label.layer.shadowOffset = .zero
         return label
     }()
 
@@ -105,9 +107,10 @@ final class NewsView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
-        label.textColor = .white
-        label.shadowColor = .black
-        label.shadowOffset = CGSize(width: 2, height: 2)
+        label.textColor = .black
+        label.layer.shadowColor = .init(red: 1, green: 1, blue: 1, alpha: 1)
+        label.layer.shadowOpacity = 1
+        label.layer.shadowOffset = .zero
         return label
     }()
 

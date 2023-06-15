@@ -7,6 +7,10 @@
 
 import Foundation
 
+final class ISOFormatter {
+    static let formatter = ISO8601DateFormatter()
+}
+
 enum News: Decodable {
     // swiftlint:disable:next identifier_name
     case ok(SuccessResponse)
@@ -61,8 +65,7 @@ struct Article: Decodable {
         let urlToImage = try container.decodeIfPresent(String.self, forKey: .urlToImage)
         self.urlToImage = URL(string: urlToImage ?? "")
         let publishedAt = try container.decodeIfPresent(String.self, forKey: .publishedAt)
-        let formatter = ISO8601DateFormatter()
-        self.publishedAt = formatter.date(from: publishedAt ?? "")
+        self.publishedAt = ISOFormatter.formatter.date(from: publishedAt ?? "")
         self.content = try container.decodeIfPresent(String.self, forKey: .content)
     }
 }

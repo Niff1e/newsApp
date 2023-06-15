@@ -18,13 +18,14 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
         return tableView
     }()
 
+    private var bottomConstraintOfTableView = CGFloat()
     private var noResultLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = NSLocalizedString("no_results_label", comment: "")
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 30.0)
-        label.alpha = 0
+        label.isHidden = true
         return label
     }()
 
@@ -34,7 +35,7 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
         indicator.style = .large
         indicator.stopAnimating()
         indicator.translatesAutoresizingMaskIntoConstraints = false
-        indicator.alpha = 0
+        indicator.isHidden = true
         return indicator
     }()
 
@@ -54,12 +55,18 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
         super.init(frame: frame)
         self.backgroundColor = .white
         setupTableView()
+        registerNotifications()
         newsTableView.dataSource = self
         newsTableView.delegate = self
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     // MARK: - Table View Data Source
@@ -107,26 +114,29 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
 
     private func setupTableView() {
         self.addSubview(newsTableView)
-        self.addSubview(noResultLabel)
+        newsTableView.backgroundView = noResultLabel
         self.addSubview(indicator)
         newsTableView.register(NewsTableViewCell.self, forCellReuseIdentifier: "newsCell")
 
         NSLayoutConstraint.activate([
             newsTableView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             newsTableView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
-            newsTableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            newsTableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: bottomConstraintOfTableView),
             newsTableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
 
-           noResultLabel.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
-            noResultLabel.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor),
-            noResultLabel.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor),
+            noResultLabel.centerXAnchor.constraint(equalTo: newsTableView.centerXAnchor),
+            noResultLabel.centerYAnchor.constraint(equalTo: newsTableView.centerYAnchor),
+            noResultLabel.widthAnchor.constraint(equalTo: newsTableView.widthAnchor),
             noResultLabel.heightAnchor.constraint(equalToConstant: 50.0),
 
-            indicator.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
-            indicator.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor, constant: -80.0),
-            indicator.heightAnchor.constraint(equalToConstant: 100.0),
-            indicator.widthAnchor.constraint(equalToConstant: 100.0)
+            indicator.centerXAnchor.constraint(equalTo: newsTableView.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: newsTableView.centerYAnchor)
         ])
+    }
+
+    private func registerNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     // MARK: - Internal Functions
@@ -136,23 +146,34 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
         newsTableView.reloadData()
     }
 
-    func makeLabelVisible() {
-        noResultLabel.alpha = 1
+    func isNoResultLabelVisible(isVisible: Bool) {
+        if isVisible {
+            noResultLabel.isHidden = false
+        } else {
+            noResultLabel.isHidden = true
+        }
     }
 
-    func makeLabelInvisible() {
-        noResultLabel.alpha = 0
+    func isSpinnerAnimated(isAnimated: Bool) {
+        if isAnimated {
+            self.newsTableView.isUserInteractionEnabled = false
+            self.indicator.isHidden = false
+            self.indicator.startAnimating()
+        } else {
+            self.newsTableView.isUserInteractionEnabled = true
+            self.indicator.isHidden = true
+            self.indicator.stopAnimating()
+        }
     }
 
-    func startAnimatingIndicator() {
-        self.newsTableView.isUserInteractionEnabled = false
-        self.indicator.alpha = 1
-        self.indicator.startAnimating()
+    @objc private func keyboardWillShow(notification: Notification) {
+        let userInfo = notification.userInfo
+        guard let keyboardFrameSize = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue) else { return }
+        let cgRectValue = keyboardFrameSize.cgRectValue
+        self.frame.origin.y -= cgRectValue.height
     }
 
-    func stopAnimatingIndicator() {
-        self.indicator.stopAnimating()
-        self.indicator.alpha = 0
-        self.newsTableView.isUserInteractionEnabled = true
+    @objc private func keyboardWillHide() {
+        self.frame.origin.y = .zero
     }
 }
