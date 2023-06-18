@@ -121,7 +121,8 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
         NSLayoutConstraint.activate([
             newsTableView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             newsTableView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
-            newsTableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: bottomConstraintOfTableView),
+            newsTableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor,
+                                                  constant: bottomConstraintOfTableView),
             newsTableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
 
             noResultLabel.centerXAnchor.constraint(equalTo: newsTableView.centerXAnchor),
@@ -135,8 +136,12 @@ final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
     }
 
     private func registerNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     // MARK: - Internal Functions
