@@ -176,12 +176,20 @@ final class NewsListModel {
 }
 
 extension String {
-    static let whoops = NSLocalizedString("whoops", comment: "Title of alert")
-    static let invalidUrl = NSLocalizedString("invalid_url_error", comment: "Incorrect builded url")
-    static let badEncodingUrl = NSLocalizedString("bad_encoding_url_error", comment: "Incorrect encoding special symbols")
-    static let unexpectedError = NSLocalizedString("unexpected_error", comment: "Some unexpected error")
-    static let navigationBarName = NSLocalizedString("navigation_bar_name", comment: "Name of navigation bar of table view controller")
-    static let alertButton = NSLocalizedString("alert_button", comment: "Name of alert button")
-    static let dataFetchingError = NSLocalizedString("data_fetching_error", comment: "Fetching error troubles")
-    static let dataDecodingError = NSLocalizedString("data_decoding_error", comment: "Decoding json-data to string troubles")
+    static let whoops = NSLocalizedString("whoops",
+                                          comment: "Title of alert")
+    static let invalidUrl = NSLocalizedString("invalid_url_error",
+                                              comment: "Incorrect builded url")
+    static let badEncodingUrl = NSLocalizedString("bad_encoding_url_error",
+                                                  comment: "Incorrect encoding special symbols")
+    static let unexpectedError = NSLocalizedString("unexpected_error",
+                                                   comment: "Some unexpected error")
+    static let navigationBarName = NSLocalizedString("navigation_bar_name",
+                                                     comment: "Name of navigation bar of table view controller")
+    static let alertButton = NSLocalizedString("alert_button",
+                                               comment: "Name of alert button")
+    static let dataFetchingError = NSLocalizedString("data_fetching_error",
+                                                     comment: "Fetching error troubles")
+    static let dataDecodingError = NSLocalizedString("data_decoding_error",
+                                                     comment: "Decoding json-data to string troubles")
 }
