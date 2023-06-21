@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-final class NewsListViewController: UITableViewController {
+final class NewsListTableViewController: UITableViewController {
 
     // MARK: - Private Properties
 
     private let model: NewsListModel
-    private let newsListView = NewsListView()
+    private let newsListView = NewsListTableView()
     private let searchController = UISearchController(searchResultsController: nil)
 
     // MARK: - Init
@@ -48,7 +48,6 @@ final class NewsListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigation()
-
         model.getArticles(about: nil) { [weak self] articles in
             self?.newsListView.setNumberOfRows(number: articles.count)
         }
@@ -109,7 +108,7 @@ final class NewsListViewController: UITableViewController {
     }
 }
 
-extension NewsListViewController: UISearchBarDelegate {
+extension NewsListTableViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.model.setIsFirstScreen(to: false)
         model.getArticles(about: searchBar.text) { [weak self] articles in

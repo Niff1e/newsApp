@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class NewsListView: UIView, UITableViewDataSource, UITableViewDelegate {
+final class NewsListTableView: UIView, UITableViewDataSource, UITableViewDelegate {
 
     // MARK: Private Properties
 
