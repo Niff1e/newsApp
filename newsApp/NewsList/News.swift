@@ -7,12 +7,17 @@
 
 import Foundation
 
+final class ISOFormatter {
+    static let formatter = ISO8601DateFormatter()
+}
+
 enum News: Decodable {
-    case ok([Article])
+    // swiftlint:disable:next identifier_name
+    case ok(SuccessResponse)
     case error(ErrorResponse)
 
     enum CodingKeys: String, CodingKey {
-        case status, articles, code, message
+        case status, articles, totalResults, code, message
     }
 
     init(from decoder: Decoder) throws {
@@ -22,10 +27,11 @@ enum News: Decodable {
         case .error:
             let code = try container.decode(String.self, forKey: .code)
             let message = try container.decode(String.self, forKey: .message)
-            self = .error(ErrorResponse.init(code: code, message: message))
+            self = .error(ErrorResponse(code: code, message: message))
         case .ok:
+            let totalResults = try container.decode(Int.self, forKey: .totalResults)
             let articles = try container.decode([Article].self, forKey: .articles)
-            self = .ok(articles)
+            self = .ok(SuccessResponse(totalResults: totalResults, articles: articles))
         }
     }
 }
@@ -36,7 +42,7 @@ struct Article: Decodable {
     let description: String?
     let url: URL?
     let urlToImage: URL?
-    let publishedAt: String?
+    let publishedAt: Date?
     let content: String?
 
     enum CodingKeys: CodingKey {
@@ -58,16 +64,23 @@ struct Article: Decodable {
         self.url = URL(string: url ?? "")
         let urlToImage = try container.decodeIfPresent(String.self, forKey: .urlToImage)
         self.urlToImage = URL(string: urlToImage ?? "")
-        self.publishedAt = try container.decodeIfPresent(String.self, forKey: .publishedAt)
+        let publishedAt = try container.decodeIfPresent(String.self, forKey: .publishedAt)
+        self.publishedAt = ISOFormatter.formatter.date(from: publishedAt ?? "")
         self.content = try container.decodeIfPresent(String.self, forKey: .content)
     }
 }
 
-struct ErrorResponse: Decodable {
+struct ErrorResponse: Decodable, Error {
     let code: String
     let message: String
 }
 
+struct SuccessResponse: Decodable {
+    let totalResults: Int
+    let articles: [Article]
+}
+
 enum ResponseType: String, Decodable {
+    // swiftlint:disable:next identifier_name
     case ok, error
 }

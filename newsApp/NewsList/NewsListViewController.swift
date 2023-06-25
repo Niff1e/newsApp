@@ -14,6 +14,7 @@ final class NewsListViewController: UITableViewController {
 
     private let model: NewsListModel
     private let newsListView = NewsListView()
+    private let searchController = UISearchController(searchResultsController: nil)
 
     // MARK: - Init
 
@@ -29,12 +30,15 @@ final class NewsListViewController: UITableViewController {
     // MARK: - Private Functions
 
     private func setupNavigation() {
-        navigationItem.title = "NEWS"
+        navigationItem.title = .navigationBarName
+        navigationItem.searchController = searchController
+        searchController.searchBar.delegate = self
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
 
     private func showAlert(with code: String, and message: String) {
         let alert = UIAlertController(title: code, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default)
+        let action = UIAlertAction(title: .alertButton, style: .default)
         alert.addAction(action)
         present(alert, animated: true)
     }
@@ -45,50 +49,79 @@ final class NewsListViewController: UITableViewController {
         super.viewDidLoad()
         setupNavigation()
 
-        model.getData { [weak self] articles in
+        model.getArticles(about: nil) { [weak self] articles in
             self?.newsListView.setNumberOfRows(number: articles.count)
         }
     }
 
     override func loadView() {
         view = newsListView
-
         model.showAlert = { [weak self] (code, message) -> Void in
             self?.showAlert(with: code, and: message)
         }
 
+        model.isNoResultLabelVisible = { [weak self] (isVisible) -> Void in
+            self?.newsListView.isNoResultLabelVisible(isVisible: isVisible)
+        }
+
+        model.isSpinnerAnimated = { [weak self] (isAnimated) -> Void in
+            self?.newsListView.isSpinnerAnimated(isAnimated: isAnimated)
+        }
+
         newsListView.creationOfNewsVC = { [weak self] (number) -> Void in
             guard let strongSelf = self else { return }
-            let articleForNumber = strongSelf.model.articles?[number]
-            strongSelf.model.dowloadImage(articleForNumber?.urlToImage, {img in
-                let model = NewsModel(image: img, article: articleForNumber)
-                let newsVC = NewsViewController(model: model)
-                        strongSelf.navigationController?.pushViewController(newsVC, animated: true)
-            })
+            let articleForNumber = strongSelf.model.articles[number]
+            let model = NewsModel(article: articleForNumber)
+            let newsVC = NewsViewController(model: model)
+            strongSelf.navigationController?.pushViewController(newsVC, animated: true)
         }
 
         newsListView.pictureToCell = { [weak self] (number, completion) in
             guard let strongSelf = self else { return }
-            let articleForNumber = strongSelf.model.articles?[number]
-            guard let urlPicture = articleForNumber?.urlToImage else {
+            let articleForNumber = strongSelf.model.articles[number]
+            guard let urlPicture = articleForNumber.urlToImage else {
                 completion(nil)
                 return
             }
-            strongSelf.model.dowloadImage(urlPicture, { img in
+            strongSelf.model.dowloadImage(url: urlPicture, completion: { img in
                 completion(img)
             })
         }
 
         newsListView.textForTitleLabel = { [weak self] (number) -> String? in
             guard let strongSelf = self else { return nil }
-            let articleForNumber = strongSelf.model.articles?[number]
-            return articleForNumber?.title
+            let articleForNumber = strongSelf.model.articles[number]
+            return articleForNumber.title
         }
 
         newsListView.textForDescriptionLabel = { [weak self] (number) -> String? in
             guard let strongSelf = self else { return nil }
-            let articleForNumber = strongSelf.model.articles?[number]
-            return articleForNumber?.description
+            let articleForNumber = strongSelf.model.articles[number]
+            return articleForNumber.description
+        }
+
+        newsListView.getMoreArticles = { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.model.getArticles(about: nil) { [weak self] article in
+                self?.newsListView.setNumberOfRows(number: article.count)
+            }
+        }
+    }
+}
+
+extension NewsListViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.model.setIsFirstScreen(to: false)
+        model.getArticles(about: searchBar.text) { [weak self] articles in
+            self?.newsListView.setNumberOfRows(number: articles.count)
+        }
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.model.setIsFirstScreen(to: true)
+        self.model.setFirstPartOfArticles()
+        model.getArticles(about: "") { [weak self] articles in
+            self?.newsListView.setNumberOfRows(number: articles.count)
         }
     }
 }

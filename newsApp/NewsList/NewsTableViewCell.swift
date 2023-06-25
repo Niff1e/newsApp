@@ -86,15 +86,18 @@ class NewsTableViewCell: UITableViewCell {
             containerForImageAndText.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10.0),
             containerForImageAndText.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10.0),
 
-            pictureView.topAnchor.constraint(equalTo: containerForImageAndText.topAnchor),
+            pictureView.topAnchor.constraint(equalTo: containerForImageAndText.topAnchor, constant: 16.0),
             pictureView.heightAnchor.constraint(equalToConstant: 50.0),
             pictureView.widthAnchor.constraint(equalToConstant: 50.0),
             pictureView.leadingAnchor.constraint(equalTo: containerForImageAndText.leadingAnchor, constant: 16.0),
+            // swiftlint:disable:next line_length
             pictureView.bottomAnchor.constraint(lessThanOrEqualTo: containerForImageAndText.bottomAnchor, constant: -16.0),
 
             containerForTitleAndDescr.topAnchor.constraint(equalTo: containerForImageAndText.topAnchor, constant: 16.0),
             containerForTitleAndDescr.leadingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: 20.0),
+            // swiftlint:disable:next line_length
             containerForTitleAndDescr.bottomAnchor.constraint(equalTo: containerForImageAndText.bottomAnchor, constant: -16.0),
+            // swiftlint:disable:next line_length
             containerForTitleAndDescr.trailingAnchor.constraint(lessThanOrEqualTo: containerForImageAndText.trailingAnchor, constant: -40.0)
         ])
     }

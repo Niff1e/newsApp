@@ -31,32 +31,48 @@ final class NewsView: UIView {
         return scrollView
     }()
 
-    private var stackView: UIStackView = {
+    private var mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = 30
+        stackView.spacing = 16
         return stackView
+    }()
+
+    private var titleStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 8
+        return stackView
+    }()
+
+    private var authorAndPublishDateView: UIView = {
+        let authorAndPublishDateView = UIView()
+        authorAndPublishDateView.translatesAutoresizingMaskIntoConstraints = false
+        return authorAndPublishDateView
     }()
 
     private var pictureView: UIImageView = {
         let pictureView = UIImageView()
         pictureView.contentMode = .scaleAspectFit
         pictureView.translatesAutoresizingMaskIntoConstraints = false
-        pictureView.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        pictureView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         return pictureView
     }()
 
-    private var labelContent: UILabel = {
+    private var pictureHeightConstraintConstant = CGFloat()
+    private var pictureWidthConstraintConstant = CGFloat()
+
+    private var contentLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         return label
     }()
 
-    private var urlField: UITextView = {
+    private var urlView: UITextView = {
         let field = UITextView()
         field.translatesAutoresizingMaskIntoConstraints = false
         field.font = .systemFont(ofSize: 16.0)
@@ -64,24 +80,37 @@ final class NewsView: UIView {
         return field
     }()
 
-    private var labelTitle: UILabel = {
+    private var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
+        label.textColor = .black
+        label.layer.shadowColor = .init(red: 1, green: 1, blue: 1, alpha: 1)
+        label.layer.shadowOpacity = 1
+        label.layer.shadowOffset = .zero
         return label
     }()
 
-    private var labelAuthor: UILabel = {
+    private var authorLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
+        label.numberOfLines = 1
+        label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        label.textColor = .black
+        label.layer.shadowColor = .init(red: 1, green: 1, blue: 1, alpha: 1)
+        label.layer.shadowOpacity = 1
+        label.layer.shadowOffset = .zero
         return label
     }()
 
-    private var labelPublishDate: UILabel = {
+    private var publishDateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
+        label.numberOfLines = 1
+        label.textColor = .black
+        label.layer.shadowColor = .init(red: 1, green: 1, blue: 1, alpha: 1)
+        label.layer.shadowOpacity = 1
+        label.layer.shadowOffset = .zero
         return label
     }()
 
@@ -89,7 +118,7 @@ final class NewsView: UIView {
 
     private func setupScrollView() {
         self.addSubview(scrollView)
-        scrollView.addSubview(stackView)
+        scrollView.addSubview(mainStackView)
 
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
@@ -97,72 +126,86 @@ final class NewsView: UIView {
             scrollView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
             scrollView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
 
-            stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+            mainStackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            mainStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            mainStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            mainStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         ])
     }
 
     private func setupStackView() {
-        stackView.addArrangedSubview(pictureView)
-        stackView.addArrangedSubview(labelContent)
-        stackView.addArrangedSubview(urlField)
+        mainStackView.addArrangedSubview(pictureView)
+        mainStackView.addArrangedSubview(contentLabel)
+        mainStackView.addArrangedSubview(urlView)
 
-        pictureView.addSubview(labelTitle)
-        pictureView.addSubview(labelAuthor)
-        pictureView.addSubview(labelPublishDate)
+        pictureView.addSubview(titleStackView)
+
+        titleStackView.addArrangedSubview(titleLabel)
+        titleStackView.addArrangedSubview(authorAndPublishDateView)
+
+        authorAndPublishDateView.addSubview(authorLabel)
+        authorAndPublishDateView.addSubview(publishDateLabel)
 
         NSLayoutConstraint.activate([
-            labelAuthor.leadingAnchor.constraint(equalTo: pictureView.leadingAnchor, constant: 16.0),
-            labelAuthor.bottomAnchor.constraint(equalTo: pictureView.bottomAnchor, constant: -8.0),
-            labelAuthor.trailingAnchor.constraint(lessThanOrEqualTo: labelPublishDate.leadingAnchor, constant: -8.0),
-            labelAuthor.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 16.0),
+            titleStackView.leadingAnchor.constraint(equalTo: pictureView.leadingAnchor, constant: 8.0),
+            titleStackView.trailingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: -8.0),
+            titleStackView.bottomAnchor.constraint(equalTo: pictureView.bottomAnchor, constant: -8.0),
+            titleStackView.topAnchor.constraint(greaterThanOrEqualTo: pictureView.topAnchor),
 
-            labelPublishDate.bottomAnchor.constraint(equalTo: pictureView.bottomAnchor, constant: -8.0),
-            labelPublishDate.trailingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: -16.0),
-            labelPublishDate.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 8.0),
+            publishDateLabel.bottomAnchor.constraint(equalTo: authorAndPublishDateView.bottomAnchor),
+            publishDateLabel.trailingAnchor.constraint(equalTo: authorAndPublishDateView.trailingAnchor),
+            publishDateLabel.topAnchor.constraint(equalTo: authorAndPublishDateView.topAnchor),
 
-            labelTitle.leadingAnchor.constraint(equalTo: pictureView.leadingAnchor, constant: 16.0),
-            labelTitle.trailingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: -16.0)
+            authorLabel.leadingAnchor.constraint(equalTo: authorAndPublishDateView.leadingAnchor),
+            authorLabel.bottomAnchor.constraint(equalTo: authorAndPublishDateView.bottomAnchor),
+            authorLabel.topAnchor.constraint(equalTo: authorAndPublishDateView.topAnchor)
         ])
+
+        let constraint = publishDateLabel.leadingAnchor.constraint(greaterThanOrEqualTo: authorLabel.trailingAnchor,
+                                                                   constant: 8.0)
+        constraint.priority = .required
+        constraint.isActive = true
     }
 
     // MARK: - Internal Functions
 
     func setImage(image: UIImage?) {
-//        guard let pic = image else {
-//            self.pictureView.image = nil
-//            return
-//        }
-//        if self.safeAreaLayoutGuide.layoutFrame.size.width < pic.size.width {
-//            print(self.safeAreaLayoutGuide.layoutFrame.size.width)
-//            let height = (self.frame.size.width * pic.size.height) / pic.size.width
-//            print(height)
-//            NSLayoutConstraint.activate([
-//                pictureView.heightAnchor.constraint(equalToConstant: height)
-//            ])
-//        }
+        guard let pic = image else {
+            self.pictureView.image = nil
+            pictureHeightConstraintConstant = titleStackView.frame.size.height
+            pictureWidthConstraintConstant = self.frame.size.width
+            return
+        }
+        if self.safeAreaLayoutGuide.layoutFrame.size.width < pic.size.width {
+            pictureHeightConstraintConstant = (self.frame.size.width * pic.size.height) / pic.size.width
+            NSLayoutConstraint.activate([
+                pictureView.heightAnchor.constraint(equalToConstant: pictureHeightConstraintConstant)
+            ])
+        }
         self.pictureView.image = image
     }
 
     func setTextToContent(text: String?) {
-        self.labelContent.text = text
+        self.contentLabel.text = text
     }
 
-    func setTextToURLField(with url: URL?) {
+    func setTextToURLView(with url: URL?) {
         guard let url = url else {
-            self.urlField.text = ""
+            self.urlView.text = ""
+            self.urlView.isUserInteractionEnabled = false
             return
         }
-        self.urlField.text = url.absoluteString
-        self.urlField.isEditable = false
-        self.urlField.dataDetectorTypes = .link
+        self.urlView.text = url.absoluteString
+        self.urlView.isEditable = false
+        self.urlView.dataDetectorTypes = .link
     }
 
-    func setInfoTo(title: String?, publishDate: String?, author: String?) {
-        self.labelTitle.text = title
-        self.labelPublishDate.text = publishDate
-        self.labelAuthor.text = author
+    func setInfoTo(title: String?, author: String?) {
+        self.titleLabel.text = title
+        self.authorLabel.text = author
+    }
+
+    func setDateToDateLabel(publishDate: String) {
+        self.publishDateLabel.text = publishDate
     }
 }
