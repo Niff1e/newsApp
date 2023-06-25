@@ -10,11 +10,9 @@ import UIKit
 
 final class InternetManager {
 
-    func downloadImage(with url: URL?, completion: @escaping (UIImage?) -> Void) {
-        guard let url = url else {
-            completion(nil)
-            return
-        }
+    // MARK: - Internal Functions
+
+    func downloadImage(with url: URL, completion: @escaping (UIImage?) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, _, _ in
             let image = data.flatMap { UIImage(data: $0) }
             DispatchQueue.main.async {
@@ -24,12 +22,17 @@ final class InternetManager {
         task.resume()
     }
 
-    func getData(with url: URL, completion: @escaping (Data?) -> Void) {
+    func getData(with url: URL?, completion: @escaping (Data?) -> Void) {
+        guard let url = url else {
+            completion(nil)
+            return
+        }
         let task = URLSession.shared.dataTask(with: url) { data, _, _ in
             DispatchQueue.main.async {
                 completion(data)
             }
         }
         task.resume()
+
     }
 }

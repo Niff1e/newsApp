@@ -10,10 +10,17 @@ import UIKit
 
 final class NewsModel {
 
+    // MARK: - Static Properties
+
+    static let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        return formatter
+    }()
+
     // MARK: - Private(set) Properties
 
-    private(set) var picture: UIImage?
-    private(set) var article: Article?
+    private(set) var article: Article
 
     // MARK: - Private Properties
 
@@ -25,15 +32,28 @@ final class NewsModel {
 
     // MARK: - Init
 
-    init(image: UIImage?, article: Article?) {
-        self.picture = image
+    init(article: Article) {
         self.article = article
     }
 
     // MARK: - Internal Functions
 
+    func convertDataToString() -> String {
+        var date = String()
+        article.publishedAt.flatMap { publisheDate in
+            date = NewsModel.formatter.string(from: publisheDate)
+        }
+        return date
+    }
+
     func dowloadImage() {
-        internetManager.downloadImage(with: article?.urlToImage) { [weak self] img in
+        guard let urlToImage = article.urlToImage else {
+            DispatchQueue.main.async { [weak self] in
+                self?.updatePicture?(nil)
+            }
+            return
+        }
+        internetManager.downloadImage(with: urlToImage) { [weak self] img in
             DispatchQueue.main.async { [weak self] in
                 self?.updatePicture?(img)
             }
