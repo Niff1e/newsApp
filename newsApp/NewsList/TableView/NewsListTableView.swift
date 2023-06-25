@@ -18,7 +18,6 @@ final class NewsListTableView: UIView, UITableViewDataSource, UITableViewDelegat
         return tableView
     }()
 
-    private var bottomConstraintOfTableView = CGFloat()
     private var noResultLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -121,8 +120,7 @@ final class NewsListTableView: UIView, UITableViewDataSource, UITableViewDelegat
         NSLayoutConstraint.activate([
             newsTableView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             newsTableView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
-            newsTableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor,
-                                                  constant: bottomConstraintOfTableView),
+            newsTableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
             newsTableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
 
             noResultLabel.centerXAnchor.constraint(equalTo: newsTableView.centerXAnchor),
