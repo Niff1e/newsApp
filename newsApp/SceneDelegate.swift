@@ -25,6 +25,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             UINavigationController(rootViewController: $0)
         }
 
+        let fontAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20.0)]
+        UITabBarItem.appearance().setTitleTextAttributes(fontAttributes, for: .normal)
+
+        if let tableTabBarItem = tabBarVC.tabBar.items?[0] {
+            tableTabBarItem.title = "TableVC"
+        }
+        if let tableTabBarItem = tabBarVC.tabBar.items?[1] {
+            tableTabBarItem.title = "CollectionVC"
+        }
+
         window?.windowScene = scene
         window?.rootViewController = tabBarVC
         window?.makeKeyAndVisible()

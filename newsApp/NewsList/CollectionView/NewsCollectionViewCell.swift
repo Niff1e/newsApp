@@ -14,7 +14,7 @@ class NewsCollectionViewCell: UICollectionViewListCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.contentView.backgroundColor = .blue
+        // self.contentView.backgroundColor = .blue
         setupContainerForImageAndText()
         setupContainerForTitleAndDescr()
     }
@@ -30,7 +30,6 @@ class NewsCollectionViewCell: UICollectionViewListCell {
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.backgroundColor = .green
         return image
     }()
 
@@ -38,7 +37,6 @@ class NewsCollectionViewCell: UICollectionViewListCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .red
         return label
     }()
 
@@ -46,7 +44,6 @@ class NewsCollectionViewCell: UICollectionViewListCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .blue
         return label
     }()
 
@@ -67,6 +64,13 @@ class NewsCollectionViewCell: UICollectionViewListCell {
         return container
     }()
 
+    private let customAccessory: UICellAccessory.CustomViewConfiguration = {
+        let image = UIImage(systemName: "chevron.right")
+        let customAccessory = UICellAccessory.CustomViewConfiguration(customView: UIImageView(image: image),
+                                                                      placement: .trailing(displayed: .always))
+        return customAccessory
+    }()
+
     // MARK: - Private Functions
 
     private func setupContainerForTitleAndDescr() {
@@ -74,38 +78,42 @@ class NewsCollectionViewCell: UICollectionViewListCell {
         containerForTitleAndDescr.addSubview(descriptionLabel)
 
         NSLayoutConstraint.activate([
-//            titleLabel.topAnchor.constraint(equalTo: containerForTitleAndDescr.topAnchor),
-//            titleLabel.widthAnchor.constraint(equalTo: containerForTitleAndDescr.widthAnchor),
+            titleLabel.topAnchor.constraint(equalTo: containerForTitleAndDescr.topAnchor),
+            titleLabel.widthAnchor.constraint(equalTo: containerForTitleAndDescr.widthAnchor),
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 6),
-//            descriptionLabel.bottomAnchor.constraint(equalTo: containerForTitleAndDescr.bottomAnchor),
-//            descriptionLabel.widthAnchor.constraint(equalTo: containerForTitleAndDescr.widthAnchor)
+            descriptionLabel.bottomAnchor.constraint(equalTo: containerForTitleAndDescr.bottomAnchor),
+            descriptionLabel.widthAnchor.constraint(equalTo: containerForTitleAndDescr.widthAnchor)
         ])
     }
 
     private func setupContainerForImageAndText() {
         self.contentView.addSubview(containerForImageAndText)
+        self.accessories = [.customView(configuration: customAccessory)]
         containerForImageAndText.addSubview(pictureView)
         containerForImageAndText.addSubview(containerForTitleAndDescr)
 
+        let bottomConstraint = containerForImageAndText.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor,
+                                                                                constant: -26.0)
+        bottomConstraint.priority = .defaultHigh
+
         NSLayoutConstraint.activate([
-//            containerForImageAndText.topAnchor.constraint(equalTo: self.topAnchor, constant: 26.0),
-//            containerForImageAndText.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 26.0),
-//            containerForImageAndText.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -26.0),
-//            containerForImageAndText.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -26.0),
+            containerForImageAndText.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 26.0),
+            containerForImageAndText.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 26.0),
+            bottomConstraint,
+            containerForImageAndText.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor,
+                                                               constant: -26.0),
 
-//            pictureView.topAnchor.constraint(equalTo: containerForImageAndText.topAnchor),
-//            pictureView.heightAnchor.constraint(equalToConstant: 50.0),
-//            pictureView.widthAnchor.constraint(equalToConstant: 50.0),
-//            pictureView.leadingAnchor.constraint(equalTo: containerForImageAndText.leadingAnchor),
-//            // swiftlint:disable:next line_length
-//            pictureView.bottomAnchor.constraint(lessThanOrEqualTo: containerForImageAndText.bottomAnchor),
+            pictureView.topAnchor.constraint(equalTo: containerForImageAndText.topAnchor),
+            pictureView.heightAnchor.constraint(equalToConstant: 50.0),
+            pictureView.widthAnchor.constraint(equalToConstant: 50.0),
+            pictureView.leadingAnchor.constraint(equalTo: containerForImageAndText.leadingAnchor),
+            pictureView.bottomAnchor.constraint(lessThanOrEqualTo: containerForImageAndText.bottomAnchor),
 
-//            containerForTitleAndDescr.topAnchor.constraint(equalTo: containerForImageAndText.topAnchor, constant: 16.0),
+            containerForTitleAndDescr.topAnchor.constraint(equalTo: containerForImageAndText.topAnchor),
             containerForTitleAndDescr.leadingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: 20.0),
-//            // swiftlint:disable:next line_length
-//            containerForTitleAndDescr.bottomAnchor.constraint(equalTo: containerForImageAndText.bottomAnchor, constant: -16.0),
-//            // swiftlint:disable:next line_length
-//            containerForTitleAndDescr.trailingAnchor.constraint(lessThanOrEqualTo: containerForImageAndText.trailingAnchor, constant: -40.0)
+            containerForTitleAndDescr.bottomAnchor.constraint(equalTo: containerForImageAndText.bottomAnchor),
+            // swiftlint:disable:next line_length
+            containerForTitleAndDescr.trailingAnchor.constraint(lessThanOrEqualTo: containerForImageAndText.trailingAnchor)
         ])
     }
 
