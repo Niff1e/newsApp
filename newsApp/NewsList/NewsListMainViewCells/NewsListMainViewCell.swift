@@ -1,20 +1,31 @@
 //
-//  NewsTableViewCell.swift
+//  NewsListMainViewCell.swift
 //  newsApp
 //
-//  Created by Niff1e on 27.02.23.
+//  Created by Niff1e on 12.07.23.
 //
 
 import Foundation
 import UIKit
 
-class NewsCollectionViewCell: UICollectionViewListCell {
+final class NewsListMainViewCell: UIView, NewsListMainViewCellable {
 
-    static let identifier = "newsCell"
+    // MARK: - Internal Properties
+
+    var identifier = "newsCell"
+    var countInStack: Int = 0
+
+    var numberOfCell: ((@escaping (Int) -> Void) -> Void)?
 
     override init(frame: CGRect) {
-        super.init(frame: frame)
-        // self.contentView.backgroundColor = .blue
+        super.init(frame: .zero)
+        setupContainerForImageAndText()
+        setupContainerForTitleAndDescr()
+    }
+
+    init(count: Int) {
+        self.countInStack = count
+        super.init(frame: .zero)
         setupContainerForImageAndText()
         setupContainerForTitleAndDescr()
     }
@@ -51,7 +62,6 @@ class NewsCollectionViewCell: UICollectionViewListCell {
         let container = UIStackView()
         container.axis = .vertical
         container.alignment = .center
-        container.alignment = .fill
         container.translatesAutoresizingMaskIntoConstraints = false
         return container
     }()
@@ -62,13 +72,6 @@ class NewsCollectionViewCell: UICollectionViewListCell {
         container.alignment = .fill
         container.translatesAutoresizingMaskIntoConstraints = false
         return container
-    }()
-
-    private let customAccessory: UICellAccessory.CustomViewConfiguration = {
-        let image = UIImage(systemName: "chevron.right")
-        let customAccessory = UICellAccessory.CustomViewConfiguration(customView: UIImageView(image: image),
-                                                                      placement: .trailing(displayed: .always))
-        return customAccessory
     }()
 
     // MARK: - Private Functions
@@ -87,33 +90,30 @@ class NewsCollectionViewCell: UICollectionViewListCell {
     }
 
     private func setupContainerForImageAndText() {
-        self.contentView.addSubview(containerForImageAndText)
-        self.accessories = [.customView(configuration: customAccessory)]
+        self.addSubview(containerForImageAndText)
         containerForImageAndText.addSubview(pictureView)
         containerForImageAndText.addSubview(containerForTitleAndDescr)
 
-        let bottomConstraint = containerForImageAndText.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor,
-                                                                                constant: -26.0)
-        bottomConstraint.priority = .defaultHigh
-
         NSLayoutConstraint.activate([
-            containerForImageAndText.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 26.0),
-            containerForImageAndText.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 26.0),
-            bottomConstraint,
-            containerForImageAndText.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor,
-                                                               constant: -26.0),
+            containerForImageAndText.topAnchor.constraint(equalTo: self.topAnchor, constant: 10.0),
+            containerForImageAndText.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10.0),
+            containerForImageAndText.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10.0),
+            containerForImageAndText.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10.0),
 
-            pictureView.topAnchor.constraint(equalTo: containerForImageAndText.topAnchor),
+            pictureView.topAnchor.constraint(equalTo: containerForImageAndText.topAnchor, constant: 16.0),
             pictureView.heightAnchor.constraint(equalToConstant: 50.0),
             pictureView.widthAnchor.constraint(equalToConstant: 50.0),
-            pictureView.leadingAnchor.constraint(equalTo: containerForImageAndText.leadingAnchor),
-            pictureView.bottomAnchor.constraint(lessThanOrEqualTo: containerForImageAndText.bottomAnchor),
+            pictureView.leadingAnchor.constraint(equalTo: containerForImageAndText.leadingAnchor, constant: 16.0),
+            pictureView.bottomAnchor.constraint(lessThanOrEqualTo: containerForImageAndText.bottomAnchor,
+                                                constant: -16.0),
 
-            containerForTitleAndDescr.topAnchor.constraint(equalTo: containerForImageAndText.topAnchor),
+            containerForTitleAndDescr.topAnchor.constraint(equalTo: containerForImageAndText.topAnchor, constant: 16.0),
             containerForTitleAndDescr.leadingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: 20.0),
-            containerForTitleAndDescr.bottomAnchor.constraint(equalTo: containerForImageAndText.bottomAnchor),
+            containerForTitleAndDescr.bottomAnchor.constraint(equalTo: containerForImageAndText.bottomAnchor,
+                                                              constant: -16.0),
             // swiftlint:disable:next line_length
-            containerForTitleAndDescr.trailingAnchor.constraint(lessThanOrEqualTo: containerForImageAndText.trailingAnchor)
+            containerForTitleAndDescr.trailingAnchor.constraint(lessThanOrEqualTo: containerForImageAndText.trailingAnchor,
+                                                                constant: -40.0)
         ])
     }
 
@@ -128,8 +128,7 @@ class NewsCollectionViewCell: UICollectionViewListCell {
         pictureView.image = image
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
+    func clearAllInfo() {
         pictureView.image = nil
         descriptionLabel.text = nil
         titleLabel.text = nil
