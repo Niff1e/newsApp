@@ -1,30 +1,18 @@
 //
-//  NewsListMainViewCell.swift
+//  NewsViewForCell.swift
 //  newsApp
 //
-//  Created by Niff1e on 12.07.23.
+//  Created by Niff1e on 22.07.23.
 //
 
 import Foundation
 import UIKit
 
-final class NewsListMainViewCell: UIView, NewsListMainViewCellable {
+final class NewsViewForCell: UIView, NewsListMainViewCellable {
 
-    // MARK: - Internal Properties
-
-    var identifier = "newsCell"
-    var countInStack: Int = 0
-
-    var numberOfCell: ((@escaping (Int) -> Void) -> Void)?
+    // MARK: - Init
 
     override init(frame: CGRect) {
-        super.init(frame: .zero)
-        setupContainerForImageAndText()
-        setupContainerForTitleAndDescr()
-    }
-
-    init(count: Int) {
-        self.countInStack = count
         super.init(frame: .zero)
         setupContainerForImageAndText()
         setupContainerForTitleAndDescr()
@@ -74,6 +62,15 @@ final class NewsListMainViewCell: UIView, NewsListMainViewCellable {
         return container
     }()
 
+    private let accessoryView: UIImageView = {
+        let imageView = UIImageView()
+        let chevron = UIImage(systemName: "chevron.right")
+        imageView.image = chevron
+        imageView.contentMode = .center
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+
     // MARK: - Private Functions
 
     private func setupContainerForTitleAndDescr() {
@@ -91,14 +88,19 @@ final class NewsListMainViewCell: UIView, NewsListMainViewCellable {
 
     private func setupContainerForImageAndText() {
         self.addSubview(containerForImageAndText)
+        self.addSubview(accessoryView)
         containerForImageAndText.addSubview(pictureView)
         containerForImageAndText.addSubview(containerForTitleAndDescr)
 
         NSLayoutConstraint.activate([
+            accessoryView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10.0),
+            accessoryView.leadingAnchor.constraint(equalTo: containerForImageAndText.trailingAnchor),
+            accessoryView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10.0),
+            accessoryView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25.0),
+
             containerForImageAndText.topAnchor.constraint(equalTo: self.topAnchor, constant: 10.0),
             containerForImageAndText.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10.0),
             containerForImageAndText.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10.0),
-            containerForImageAndText.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10.0),
 
             pictureView.topAnchor.constraint(equalTo: containerForImageAndText.topAnchor, constant: 16.0),
             pictureView.heightAnchor.constraint(equalToConstant: 50.0),
