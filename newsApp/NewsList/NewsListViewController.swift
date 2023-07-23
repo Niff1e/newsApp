@@ -103,8 +103,8 @@ final class NewsListViewController: UIViewController {
 
         newsListView.mainView.getMoreArticles = { [weak self] in
             guard let strongSelf = self else { return }
-            strongSelf.model.getArticles(about: nil) { [weak self] article in
-                self?.newsListView.mainView.setNumberOfRows(number: article.count)
+            strongSelf.model.getArticles(about: nil) { [weak self] articles in
+                self?.newsListView.mainView.setNumberOfRows(number: articles.count)
             }
         }
     }

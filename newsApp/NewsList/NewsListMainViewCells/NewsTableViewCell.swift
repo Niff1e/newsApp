@@ -10,12 +10,12 @@ import UIKit
 
 class NewsTableViewCell: UITableViewCell, NewsListViewCellable {
 
-    static var identifier = "newsTableViewCell"
+    static let identifier = "newsTableViewCell"
 
-    var mainView: NewsListMainViewCellable
+    private(set) var mainView: NewsListMainViewCellable
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        self.mainView = NewsListMainViewCell()
+        self.mainView = NewsViewForCell()
         super.init(style: .default, reuseIdentifier: NewsTableViewCell.identifier)
         self.mainView.translatesAutoresizingMaskIntoConstraints = false
         setupView()
@@ -28,13 +28,13 @@ class NewsTableViewCell: UITableViewCell, NewsListViewCellable {
     // MARK: - Private Functions
 
     private func setupView() {
-        self.addSubview(mainView)
+        self.contentView.addSubview(mainView)
 
         NSLayoutConstraint.activate([
-            mainView.topAnchor.constraint(equalTo: self.topAnchor),
-            mainView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            mainView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            mainView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            mainView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            mainView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            mainView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+            mainView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
         ])
     }
 

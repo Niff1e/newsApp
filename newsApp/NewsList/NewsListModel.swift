@@ -46,7 +46,7 @@ final class NewsListModel {
         } else {
             if let about {
                 // swiftlint:disable:next line_length
-                stringURL = String("https://newsapi.org/v2/everything?q=\(about)&pageSize=\(pageSize)&page=\(numberOfPage)&from=2023-06-01&apiKey=43a0ca0dfa144c40b500339ab44741ea")
+                stringURL = String("https://newsapi.org/v2/everything?q=\(about)&pageSize=\(pageSize)&page=\(numberOfPage)&from=\(conversionDateToString(date: Date()))&apiKey=43a0ca0dfa144c40b500339ab44741ea")
             }
         }
         guard let encodedUrl = stringURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
@@ -102,6 +102,13 @@ final class NewsListModel {
         decoder.decodeNewsJSON(from: jsonData) { result in
             completionHandler(result)
         }
+    }
+
+    private func conversionDateToString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let stringDate = dateFormatter.string(from: date)
+        return stringDate
     }
 
     // MARK: - Internal Funtions

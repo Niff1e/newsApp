@@ -13,7 +13,6 @@ final class MainScrollView: UIScrollView, UIScrollViewDelegate, NewsListMainView
     // MARK: Private Properties
 
     private var numberOfRows: Int = 0
-    private var numberOfTappingCell: Int = 0
 
     private var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -28,7 +27,7 @@ final class MainScrollView: UIScrollView, UIScrollViewDelegate, NewsListMainView
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
-        delegate = self
+        self.delegate = self
         setupView()
     }
 
@@ -61,25 +60,22 @@ final class MainScrollView: UIScrollView, UIScrollViewDelegate, NewsListMainView
 
     private func addMultipleViews(quantity: Int) {
         for count in self.numberOfRows...(quantity - 1) {
-            let cell = NewsListMainViewCell(count: count)
-            print(count)
+            let cell = NewsScrollViewCell()
+            cell.tag = count
+            cell.numberOfCell = creationOfNewsVC
+            stackView.addArrangedSubview(cell)
             pictureToCell?(count) { [weak self] img in
-                cell.setImageToCell(image: img)
-                cell.setDataToCell(titleText: self?.textForTitleLabel?(count),
+                cell.mainView.setImageToCell(image: img)
+                cell.mainView.setDataToCell(titleText: self?.textForTitleLabel?(count),
                                    descrText: self?.textForDescriptionLabel?(count))
-                self?.setupCellGesture(cell: cell)
-                self?.stackView.addArrangedSubview(cell)
             }
         }
     }
 
-    @objc private func cellTapAction(cell: NewsListMainViewCell) {
-        creationOfNewsVC?(cell.countInStack)
-    }
-
-    private func setupCellGesture(cell: NewsListMainViewCell) {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(cellTapAction(cell:)))
-        self.addGestureRecognizer(tap)
+    private func deleteAllViewFromStackView() {
+        for view in stackView.subviews {
+            view.removeFromSuperview()
+        }
     }
 
     // MARK: - Scroll View Delegate
@@ -88,8 +84,9 @@ final class MainScrollView: UIScrollView, UIScrollViewDelegate, NewsListMainView
         let scrollViewHeight = scrollView.frame.size.height
         let scrollContentSizeHeight = scrollView.contentSize.height
         let scrollOffset = scrollView.contentOffset.y
+        let sum = scrollOffset + scrollViewHeight
 
-        if (scrollOffset + scrollViewHeight == scrollContentSizeHeight) {
+        if sum == scrollContentSizeHeight {
             getMoreArticles?()
         }
     }
@@ -97,7 +94,15 @@ final class MainScrollView: UIScrollView, UIScrollViewDelegate, NewsListMainView
     // MARK: - Internal Functions
 
     func setNumberOfRows(number: Int) {
-        if number > self.numberOfRows {
+        if number == 0 {
+            deleteAllViewFromStackView()
+            self.numberOfRows = 0
+        } else if number > self.numberOfRows {
+            addMultipleViews(quantity: number)
+            self.numberOfRows = number
+        } else if number <= self.numberOfRows {
+            deleteAllViewFromStackView()
+            self.numberOfRows = 0
             addMultipleViews(quantity: number)
             self.numberOfRows = number
         }

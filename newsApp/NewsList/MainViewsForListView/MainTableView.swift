@@ -39,14 +39,12 @@ final class MainTableView: UITableView, UITableViewDataSource, UITableViewDelega
     // MARK: - Table View Data Source
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(numberOfRows)
         return numberOfRows
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = self.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier,
                                                         for: indexPath) as? NewsTableViewCell {
-            cell.accessoryType = .disclosureIndicator
             cell.mainView.setDataToCell(titleText: textForTitleLabel?(indexPath.row),
                                descrText: textForDescriptionLabel?(indexPath.row))
             pictureToCell?(indexPath.row) { [weak self] img in
