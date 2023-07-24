@@ -105,9 +105,10 @@ final class NewsListModel {
     }
 
     private func conversionDateToString(date: Date) -> String {
+        guard let actualNewsDate = Calendar.current.date(byAdding: .month, value: -1, to: date) else { return ""}
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        let stringDate = dateFormatter.string(from: date)
+        let stringDate = dateFormatter.string(from: actualNewsDate)
         return stringDate
     }
 
