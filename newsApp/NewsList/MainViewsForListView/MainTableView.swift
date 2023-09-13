@@ -46,7 +46,7 @@ final class MainTableView: UITableView, UITableViewDataSource, UITableViewDelega
         if let cell = self.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier,
                                                         for: indexPath) as? NewsTableViewCell {
             cell.mainView.setDataToCell(titleText: textForTitleLabel?(indexPath.row),
-                               descrText: textForDescriptionLabel?(indexPath.row))
+                                        descriptionText: textForDescriptionLabel?(indexPath.row))
             pictureToCell?(indexPath.row) { [weak self] img in
                 guard let strongSelf = self else { return }
                 let tableViewCell = strongSelf.cellForRow(at: indexPath)

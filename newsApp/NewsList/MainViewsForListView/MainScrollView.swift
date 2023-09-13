@@ -67,7 +67,7 @@ final class MainScrollView: UIScrollView, UIScrollViewDelegate, NewsListMainView
             pictureToCell?(count) { [weak self] img in
                 cell.mainView.setImageToCell(image: img)
                 cell.mainView.setDataToCell(titleText: self?.textForTitleLabel?(count),
-                                   descrText: self?.textForDescriptionLabel?(count))
+                                            descriptionText: self?.textForDescriptionLabel?(count))
             }
         }
     }

@@ -121,7 +121,7 @@ final class NewsViewForCell: UIView, NewsListMainViewCellable {
 
     // MARK: - Internal Functions
 
-    func setDataToCell(titleText: String?, descrText: String?) {
+    func setDataToCell(titleText: String?, descriptionText descrText: String?) {
         titleLabel.text = titleText
         descriptionLabel.text = descrText
     }

@@ -1,5 +1,5 @@
 //
-//  SecondNewsListViewController.swift
+//  NewsListViewController.swift
 //  newsApp
 //
 //  Created by Niff1e on 18.06.23.
