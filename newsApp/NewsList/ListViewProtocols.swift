@@ -1,5 +1,5 @@
 //
-//  TableViewable.swift
+//  ListViewProtocols.swift
 //  newsApp
 //
 //  Created by Niff1e on 28.06.23.
@@ -17,6 +17,7 @@ protocol NewsListViewable {
 }
 
 protocol NewsListMainViewable: UIView {
+
     var getMoreArticles: (() -> Void)? { get set }
     var creationOfNewsVC: ((_ number: Int) -> Void)? { get set }
     var pictureToCell: ((_ number: Int, _ completion: @escaping (UIImage?) -> Void) -> Void)? { get set }
@@ -24,14 +25,4 @@ protocol NewsListMainViewable: UIView {
     var textForDescriptionLabel: ((_ number: Int) -> String?)? { get set }
 
     func setNumberOfRows(number: Int)
-}
-
-protocol NewsListViewCellable {
-    var mainView: NewsListMainViewCellable { get }
-}
-
-protocol NewsListMainViewCellable: UIView {
-    func setDataToCell(titleText: String?, descrText: String?)
-    func setImageToCell(image: UIImage?)
-    func clearAllInfo()
 }

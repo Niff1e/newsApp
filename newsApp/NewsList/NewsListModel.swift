@@ -200,4 +200,10 @@ extension String {
                                                      comment: "Fetching error troubles")
     static let dataDecodingError = NSLocalizedString("data_decoding_error",
                                                      comment: "Decoding json-data to string troubles")
+    static let tableController = NSLocalizedString("table_controller",
+                                                   comment: "Name of table controller's tab bar item")
+    static let collectionController = NSLocalizedString("collection_controller",
+                                                        comment: "Name of collection controller's tab bar item")
+    static let stackController = NSLocalizedString("stack_controller",
+                                                   comment: "Name of stack controller's tab bar item")
 }
