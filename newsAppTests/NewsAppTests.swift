@@ -8,22 +8,23 @@
 import XCTest
 @testable import newsApp
 
-final class NewsAppTests: XCTestCase {
+class NewsAppTests: XCTestCase {
 
-    override func setUpWithError() throws {
+    private var newsListModel: NewsListModel!
+
+    override func setUp() {
+        super.setUp()
+
+        newsListModel = NewsListModel()
     }
 
-    override func tearDownWithError() throws {
+    override func tearDown() {
+        newsListModel = nil
+
+        super.tearDown()
     }
 
-    func testExample() throws {
+    func testDownloadImageMethod() {
+        let model = NewsListModel(internetManager: MockInternetManager() as InternetManagerProtocol)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }
