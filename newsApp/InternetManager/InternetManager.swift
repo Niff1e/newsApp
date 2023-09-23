@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class InternetManager: InternetManagerProtocol {
+final class InternetManager {
 
     // MARK: - Internal Functions
 
@@ -33,6 +33,5 @@ final class InternetManager: InternetManagerProtocol {
             }
         }
         task.resume()
-
     }
 }

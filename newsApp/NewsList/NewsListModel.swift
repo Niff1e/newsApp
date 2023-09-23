@@ -18,7 +18,7 @@ final class NewsListModel {
     // MARK: - Private properties
 
     private let decoder = NewsJSONDecoder()
-    private let internetManager: InternetManagerProtocol
+    private let internetManager: InternetManager
     private var actualTheme: String?
     private var partOfArticles: Int = 0
     private var pageSize = 10
@@ -28,7 +28,7 @@ final class NewsListModel {
 
     // MARK: - Init
 
-    init(internetManager: InternetManagerProtocol = InternetManager()) {
+    init(internetManager: InternetManager = InternetManager()) {
         self.internetManager = internetManager
     }
 
