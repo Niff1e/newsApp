@@ -14,17 +14,25 @@ class NewsAppTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-
-        newsListModel = NewsListModel()
     }
 
     override func tearDown() {
-        newsListModel = nil
-
         super.tearDown()
     }
 
-    func testDownloadImageMethod() {
-        let model = NewsListModel(internetManager: MockInternetManager() as InternetManagerProtocol)
+    func testGetDataMethodWithNilURL() {
+
+        // given
+        let internetManager = InternetManager()
+        var finalData: Data?
+        let url = URL(string: "")
+
+        // when
+        internetManager.getData(with: url) { data in
+            finalData = data
+        }
+
+        // then
+        XCTAssertNil(finalData, "Valid URL")
     }
 }
