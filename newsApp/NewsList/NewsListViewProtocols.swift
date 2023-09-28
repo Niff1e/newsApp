@@ -1,5 +1,5 @@
 //
-//  ListViewProtocols.swift
+//  NewsListViewProtocols.swift
 //  newsApp
 //
 //  Created by Niff1e on 28.06.23.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol NewsListViewable {
+protocol NewsListViewable: UIView {
 
     var mainView: NewsListMainViewable { get }
 

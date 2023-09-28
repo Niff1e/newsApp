@@ -1,5 +1,5 @@
 //
-//  ListMainViewProtocols.swift
+//  NewsViewProtocols.swift
 //  newsApp
 //
 //  Created by Niff1e on 12.08.23.
@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-protocol NewsListViewCellable {
+protocol NewsViewable {
 
-    var mainView: NewsListMainViewCellable { get }
+    var mainView: NewsMainViewable { get }
 }
 
-protocol NewsListMainViewCellable: UIView {
+protocol NewsMainViewable: UIView {
 
     func setDataToCell(titleText: String?, descriptionText: String?)
     func setImageToCell(image: UIImage?)
