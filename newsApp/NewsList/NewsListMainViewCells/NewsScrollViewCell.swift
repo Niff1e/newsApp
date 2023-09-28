@@ -8,18 +8,18 @@
 import Foundation
 import UIKit
 
-class NewsScrollViewCell: UIView, NewsListViewCellable {
+class NewsScrollViewCell: UIView, NewsViewable {
 
     // MARK: - Internal Properties
 
-    private(set) var mainView: NewsListMainViewCellable
+    private(set) var mainView: NewsMainViewable
 
     var numberOfCell: ((Int) -> Void)?
 
     // MARK: - Init
 
     override init(frame: CGRect) {
-        self.mainView = NewsViewForCell()
+        self.mainView = NewsMainView()
         super.init(frame: .zero)
         self.mainView.translatesAutoresizingMaskIntoConstraints = false
         setupView()
@@ -47,6 +47,8 @@ class NewsScrollViewCell: UIView, NewsListViewCellable {
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapping))
         self.addGestureRecognizer(tap)
     }
+
+    // MARK: - Obj-c Functions
 
     @objc private func tapping() {
         numberOfCell?(tag)

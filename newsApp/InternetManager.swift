@@ -33,6 +33,5 @@ final class InternetManager {
             }
         }
         task.resume()
-
     }
 }

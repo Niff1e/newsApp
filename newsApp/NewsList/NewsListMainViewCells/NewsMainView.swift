@@ -1,5 +1,5 @@
 //
-//  NewsViewForCell.swift
+//  NewsMainView.swift
 //  newsApp
 //
 //  Created by Niff1e on 22.07.23.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class NewsViewForCell: UIView, NewsListMainViewCellable {
+final class NewsMainView: UIView, NewsMainViewable {
 
     // MARK: - Init
 
