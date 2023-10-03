@@ -54,7 +54,7 @@ final class MainCollectionView: UICollectionView,
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCollectionViewCell.identifier,
                                                          for: indexPath) as? NewsCollectionViewCell {
             cell.mainView.setDataToCell(titleText: textForTitleLabel?(indexPath.row),
-                               descrText: textForDescriptionLabel?(indexPath.row))
+                                        descriptionText: textForDescriptionLabel?(indexPath.row))
             pictureToCell?(indexPath.row) { [weak self] img in
                 guard let strongSelf = self else { return }
                 let collectionViewCell = strongSelf.cellForItem(at: indexPath)
