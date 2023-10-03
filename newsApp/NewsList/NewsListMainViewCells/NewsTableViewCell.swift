@@ -8,14 +8,14 @@
 import Foundation
 import UIKit
 
-class NewsTableViewCell: UITableViewCell, NewsListViewCellable {
+class NewsTableViewCell: UITableViewCell, NewsViewable {
 
     static let identifier = "newsTableViewCell"
 
-    private(set) var mainView: NewsListMainViewCellable
+    private(set) var mainView: NewsMainViewable
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        self.mainView = NewsViewForCell()
+        self.mainView = NewsMainView()
         super.init(style: .default, reuseIdentifier: NewsTableViewCell.identifier)
         self.mainView.translatesAutoresizingMaskIntoConstraints = false
         setupView()

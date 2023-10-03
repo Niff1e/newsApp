@@ -8,14 +8,14 @@
 import Foundation
 import UIKit
 
-class NewsCollectionViewCell: UICollectionViewListCell, NewsListViewCellable {
+class NewsCollectionViewCell: UICollectionViewListCell, NewsViewable {
 
     static let identifier = "newsCollectionViewCell"
 
-    private(set) var mainView: NewsListMainViewCellable
+    private(set) var mainView: NewsMainViewable
 
     override init(frame: CGRect) {
-        self.mainView = NewsViewForCell()
+        self.mainView = NewsMainView()
         super.init(frame: .zero)
         self.mainView.translatesAutoresizingMaskIntoConstraints = false
         setupView()

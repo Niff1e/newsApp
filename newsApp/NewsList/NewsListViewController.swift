@@ -1,5 +1,5 @@
 //
-//  SecondNewsListViewController.swift
+//  NewsListViewController.swift
 //  newsApp
 //
 //  Created by Niff1e on 18.06.23.
@@ -56,7 +56,7 @@ final class NewsListViewController: UIViewController {
     }
 
     override func loadView() {
-        self.view = newsListView as? UIView
+        self.view = newsListView
         model.showAlert = { [weak self] (code, message) -> Void in
             self?.showAlert(with: code, and: message)
         }

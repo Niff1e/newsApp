@@ -119,5 +119,4 @@ class NewsAppTests: XCTestCase {
         // then
         XCTAssertNotNil(finalErrorResponse, "Decode of json-data failed")
         XCTAssertEqual(finalErrorResponse!.message, .dataDecodingError)
-    }
 }

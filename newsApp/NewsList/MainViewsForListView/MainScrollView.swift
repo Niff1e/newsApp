@@ -12,8 +12,6 @@ final class MainScrollView: UIScrollView, UIScrollViewDelegate, NewsListMainView
 
     // MARK: Private Properties
 
-    private var numberOfRows: Int = 0
-
     private var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -59,7 +57,7 @@ final class MainScrollView: UIScrollView, UIScrollViewDelegate, NewsListMainView
     }
 
     private func addMultipleViews(quantity: Int) {
-        for count in self.numberOfRows...(quantity - 1) {
+        for count in self.stackView.arrangedSubviews.count...(quantity - 1) {
             let cell = NewsScrollViewCell()
             cell.tag = count
             cell.numberOfCell = creationOfNewsVC
@@ -67,13 +65,13 @@ final class MainScrollView: UIScrollView, UIScrollViewDelegate, NewsListMainView
             pictureToCell?(count) { [weak self] img in
                 cell.mainView.setImageToCell(image: img)
                 cell.mainView.setDataToCell(titleText: self?.textForTitleLabel?(count),
-                                   descrText: self?.textForDescriptionLabel?(count))
+                                            descriptionText: self?.textForDescriptionLabel?(count))
             }
         }
     }
 
     private func deleteAllViewFromStackView() {
-        for view in stackView.subviews {
+        for view in stackView.arrangedSubviews {
             view.removeFromSuperview()
         }
     }
@@ -96,15 +94,11 @@ final class MainScrollView: UIScrollView, UIScrollViewDelegate, NewsListMainView
     func setNumberOfRows(number: Int) {
         if number == 0 {
             deleteAllViewFromStackView()
-            self.numberOfRows = 0
-        } else if number > self.numberOfRows {
+        } else if number > self.stackView.arrangedSubviews.count {
             addMultipleViews(quantity: number)
-            self.numberOfRows = number
-        } else if number <= self.numberOfRows {
+        } else if number <= self.stackView.arrangedSubviews.count {
             deleteAllViewFromStackView()
-            self.numberOfRows = 0
             addMultipleViews(quantity: number)
-            self.numberOfRows = number
         }
     }
 }

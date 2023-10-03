@@ -26,6 +26,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+<<<<<<< HEAD
       shouldUseLaunchSchemeArgsEnv = "YES"
       codeCoverageEnabled = "YES"
       onlyGenerateCoverageForSpecifiedTargets = "YES">
@@ -72,6 +73,10 @@
                ReferencedContainer = "container:newsApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
+=======
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <Testables>
+>>>>>>> collectionView
       </Testables>
    </TestAction>
    <LaunchAction
