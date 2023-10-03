@@ -26,57 +26,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-<<<<<<< HEAD
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES"
-      onlyGenerateCoverageForSpecifiedTargets = "YES">
-      <CodeCoverageTargets>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "23942CBF29AC16D200FA851E"
-            BuildableName = "newsApp.app"
-            BlueprintName = "newsApp"
-            ReferencedContainer = "container:newsApp.xcodeproj">
-         </BuildableReference>
-      </CodeCoverageTargets>
-      <Testables>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "23942CD529AC16D300FA851E"
-               BuildableName = "newsAppTests.xctest"
-               BlueprintName = "newsAppTests"
-               ReferencedContainer = "container:newsApp.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "23942CDF29AC16D300FA851E"
-               BuildableName = "newsAppUITests.xctest"
-               BlueprintName = "newsAppUITests"
-               ReferencedContainer = "container:newsApp.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "232F41AC2ABF899600D831A0"
-               BuildableName = "newsAppSlowTests.xctest"
-               BlueprintName = "newsAppSlowTests"
-               ReferencedContainer = "container:newsApp.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-=======
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
->>>>>>> collectionView
       </Testables>
    </TestAction>
    <LaunchAction
