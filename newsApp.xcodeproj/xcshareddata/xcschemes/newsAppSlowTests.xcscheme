@@ -28,7 +28,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "238B7C782ACC7D24008C4FF8"
+               BlueprintIdentifier = "23942CD529AC16D300FA851E"
                BuildableName = "newsAppTests.xctest"
                BlueprintName = "newsAppTests"
                ReferencedContainer = "container:newsApp.xcodeproj">
@@ -39,7 +39,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "238B7C822ACC7D25008C4FF8"
+               BlueprintIdentifier = "23942CDF29AC16D300FA851E"
                BuildableName = "newsAppUITests.xctest"
                BlueprintName = "newsAppUITests"
                ReferencedContainer = "container:newsApp.xcodeproj">
