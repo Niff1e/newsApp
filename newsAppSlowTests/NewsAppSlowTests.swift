@@ -25,44 +25,6 @@ class NewsAppSlowTests: XCTestCase {
         try super.tearDownWithError()
     }
 
-    func testSuccessDownloadImageOfInternetManager() throws {
-        // given
-        // swiftlint:disable:next line_length
-        let stringUrl = "https://kartinkof.club/uploads/posts/2022-05/1653010381_5-kartinkof-club-p-kartinka-zastavka-schaste-5.jpg"
-        let url = URL(string: stringUrl)!
-        var finalImage: UIImage?
-        let promise = expectation(description: "Image downloaded")
-
-        // when
-        internetManager.downloadImage(with: url) { image in
-            finalImage = image
-            promise.fulfill()
-        }
-        wait(for: [promise], timeout: 5)
-
-        // then
-        XCTAssertNotNil(finalImage, "Download failed")
-    }
-
-    func testGetData() throws {
-        // given
-        // swiftlint:disable:next line_length
-        let stringUrl = "https://kartinkof.club/uploads/posts/2022-05/1653010381_5-kartinkof-club-p-kartinka-zastavka-schaste-5.jpg"
-        let url = URL(string: stringUrl)!
-        var finalData: Data?
-        let promise = expectation(description: "Data received")
-
-        // when
-        internetManager.getData(with: url) { data in
-            finalData = data
-            promise.fulfill()
-        }
-        wait(for: [promise], timeout: 5)
-
-        // then
-        XCTAssertNotNil(finalData, "Data receiving failed")
-    }
-
     func testSuccessDownloadImageOfNewsListModel() {
 
         // given
@@ -110,8 +72,7 @@ class NewsAppSlowTests: XCTestCase {
         let promise = expectation(description: "Articles downloaded")
 
         // when
-        localModel.getArticles(about: "") { _ in
-
+        localModel.getArticles(about: "Volleyball") { _ in
         }
         localModel.getArticles(about: stringAbout) { result in
             articles = result
@@ -121,6 +82,6 @@ class NewsAppSlowTests: XCTestCase {
 
         // then
         XCTAssertNotNil(articles, "Download failed")
-        XCTAssertEqual(articles!.count, 0, "No articles about this theme")
+        XCTAssertEqual(articles!.count, 10, "No articles about this theme")
     }
 }

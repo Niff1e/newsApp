@@ -10,10 +10,20 @@ import UIKit
 
 final class InternetManager {
 
+    // MARK: - Private Properties
+
+    private let session: URLSession
+
+    // MARK: - Init
+
+    init(_ session: URLSession = URLSession.shared) {
+        self.session = session
+    }
+
     // MARK: - Internal Functions
 
     func downloadImage(with url: URL, completion: @escaping (UIImage?) -> Void) {
-        let task = URLSession.shared.dataTask(with: url) { data, _, _ in
+        let task = session.dataTask(with: url) { data, _, _ in
             let image = data.flatMap { UIImage(data: $0) }
             DispatchQueue.main.async {
                 completion(image)
@@ -27,7 +37,7 @@ final class InternetManager {
             completion(nil)
             return
         }
-        let task = URLSession.shared.dataTask(with: url) { data, _, _ in
+        let task = session.dataTask(with: url) { data, _, _ in
             DispatchQueue.main.async {
                 completion(data)
             }
