@@ -12,11 +12,11 @@ final class InternetManager {
 
     // MARK: - Private Properties
 
-    private let session: URLSession
+    private let session: URLSessionProtocol
 
     // MARK: - Init
 
-    init(_ session: URLSession = URLSession.shared) {
+    init(_ session: URLSessionProtocol = URLSession.shared) {
         self.session = session
     }
 

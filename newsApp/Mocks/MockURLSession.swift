@@ -7,9 +7,8 @@
 
 import Foundation
 import UIKit
-@testable import newsApp
 
-class MockURLSession: URLSession {
+class MockURLSession: URLSessionProtocol {
 
     enum DataType {
         case validData
@@ -17,6 +16,7 @@ class MockURLSession: URLSession {
         case invalid
     }
 
+    var dataTask = MockURLSessionDataTask()
     var dataType: DataType?
     let stringData =
         """
@@ -32,7 +32,8 @@ class MockURLSession: URLSession {
             }
         """
 
-    override func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+    func dataTask(with url: URL,
+                  completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
 
         switch dataType {
         case .validData:
@@ -45,7 +46,16 @@ class MockURLSession: URLSession {
         default:
             completionHandler(nil, nil, nil)
         }
-
-        return URLSessionDataTask()
+        return dataTask
     }
 }
+
+extension URLSession: URLSessionProtocol {
+    func dataTask(with url: URL,
+                  completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
+        return (dataTask(with: url,
+                         completionHandler: completionHandler) as URLSessionDataTask) as URLSessionDataTaskProtocol
+    }
+}
+
+extension URLSessionDataTask: URLSessionDataTaskProtocol {}

@@ -52,12 +52,16 @@ final class NewsAppInternetManagerSlowTests: XCTestCase {
         let stringUrl = "https://kartinkof.club/uploads/posts/2022-05/1653010381_5-kartinkof-club-p-kartinka-zastavka-schaste-5.jpg"
         let url = URL(string: stringUrl)!
         var finalData: Data?
+        session.dataType = .validData
         let promise = expectation(description: "Data received")
 
         // when
         internetManager.getData(with: url) { data in
-            finalData = data
-            promise.fulfill()
+            let item = DispatchWorkItem {
+                finalData = data
+                promise.fulfill()
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: item)
         }
         wait(for: [promise], timeout: 5)
 

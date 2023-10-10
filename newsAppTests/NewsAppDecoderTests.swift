@@ -22,7 +22,6 @@ final class NewsAppDecoderTests: XCTestCase {
         super.tearDown()
     }
 
-
     func testDecodeNewsJSONMethodWithSuccessCompletion() {
 
         // given

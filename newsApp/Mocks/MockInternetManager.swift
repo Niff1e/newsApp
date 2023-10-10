@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-@testable import newsApp
 
 class MockInternetManager: InternetManagerProtocol {
 
