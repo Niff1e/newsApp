@@ -10,17 +10,14 @@ import XCTest
 
 class NewsAppSlowTests: XCTestCase {
 
-    var internetManager: InternetManager!
     var newsListModel: NewsListModel!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        internetManager = InternetManager()
         newsListModel = NewsListModel()
     }
 
     override func tearDownWithError() throws {
-        internetManager = nil
         newsListModel = nil
         try super.tearDownWithError()
     }
@@ -66,15 +63,14 @@ class NewsAppSlowTests: XCTestCase {
 
     func testSuccessGetArticlesOfNewsListModelWithInvalidTheme() {
         // given
-        let localModel = NewsListModel()
         let stringAbout = "fgrtbvujnvk"
         var articles: [Article]?
         let promise = expectation(description: "Articles downloaded")
 
         // when
-        localModel.getArticles(about: "Volleyball") { _ in
+        newsListModel.getArticles(about: "Volleyball") { _ in
         }
-        localModel.getArticles(about: stringAbout) { result in
+        newsListModel.getArticles(about: stringAbout) { result in
             articles = result
             promise.fulfill()
         }
