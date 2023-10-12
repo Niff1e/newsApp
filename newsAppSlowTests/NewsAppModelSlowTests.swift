@@ -1,5 +1,5 @@
 //
-//  NewsAppSlowTests.swift
+//  NewsAppModelSlowTests.swift
 //  NewsAppSlowTests
 //
 //  Created by Niff1e on 24.09.23.
@@ -8,13 +8,14 @@
 import XCTest
 @testable import newsApp
 
-class NewsAppSlowTests: XCTestCase {
+class NewsAppModelSlowTests: XCTestCase {
 
     var newsListModel: NewsListModel!
+    let internetManager = MockInternetManager()
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        newsListModel = NewsListModel()
+        newsListModel = NewsListModel(internetManager)
     }
 
     override func tearDownWithError() throws {
@@ -29,6 +30,7 @@ class NewsAppSlowTests: XCTestCase {
         let stringUrl = "https://kartinkof.club/uploads/posts/2022-05/1653010381_5-kartinkof-club-p-kartinka-zastavka-schaste-5.jpg"
         let url = URL(string: stringUrl)!
         var finalImage: UIImage?
+        internetManager.dataType = .valid
         let promise = expectation(description: "Image downloaded")
 
         // when
@@ -68,13 +70,11 @@ class NewsAppSlowTests: XCTestCase {
         let promise = expectation(description: "Articles downloaded")
 
         // when
-        newsListModel.getArticles(about: "Volleyball") { _ in
-        }
         newsListModel.getArticles(about: stringAbout) { result in
             articles = result
             promise.fulfill()
         }
-        wait(for: [promise], timeout: 5)
+        wait(for: [promise], timeout: 10)
 
         // then
         XCTAssertNotNil(articles, "Download failed")

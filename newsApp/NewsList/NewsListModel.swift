@@ -18,7 +18,7 @@ final class NewsListModel {
     // MARK: - Private properties
 
     private let decoder = NewsJSONDecoder()
-    private let internetManager: InternetManager
+    private let internetManager: InternetManagerProtocol
     private var actualTheme: String?
     private var partOfArticles: Int = 0
     private var pageSize = 10
@@ -28,7 +28,7 @@ final class NewsListModel {
 
     // MARK: - Init
 
-    init(internetManager: InternetManager = InternetManager()) {
+    init(_ internetManager: InternetManagerProtocol = InternetManager()) {
         self.internetManager = internetManager
     }
 
@@ -118,6 +118,7 @@ final class NewsListModel {
         isSpinnerAnimated?(false)
 
         if response.totalResults == 0 {
+            articles = []
             isNoResultLabelVisible?(true)
         }
 
