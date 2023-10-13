@@ -10,11 +10,18 @@ import UIKit
 
 class MockInternetManager: InternetManagerProtocol {
 
-    enum DataType {
+    enum ImageType {
         case valid
         case invalid
     }
 
+    enum DataType {
+        case successData
+        case errorData
+        case invalid
+    }
+
+    var imageType: ImageType?
     var dataType: DataType?
     let successData =
         """
@@ -29,7 +36,7 @@ class MockInternetManager: InternetManagerProtocol {
                     ]
             }
         """
-    let stringData =
+    let errorData =
         """
             {
                 "status":"error",
@@ -38,7 +45,7 @@ class MockInternetManager: InternetManagerProtocol {
             }
         """
     func downloadImage(with url: URL, completion: @escaping (UIImage?) -> Void) {
-        switch dataType {
+        switch imageType {
         case .valid:
             completion(UIImage())
         case .invalid:
@@ -50,11 +57,14 @@ class MockInternetManager: InternetManagerProtocol {
 
     func getData(with url: URL?, completion: @escaping (Data?) -> Void) {
         if url == nil {
-            dataType = .invalid
+            imageType = .invalid
         }
         switch dataType {
-        case .valid:
+        case .successData:
             let data = successData.data(using: .utf8)!
+            completion(data)
+        case .errorData:
+            let data = errorData.data(using: .utf8)!
             completion(data)
         case .invalid:
             completion(nil)
