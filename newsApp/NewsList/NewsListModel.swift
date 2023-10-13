@@ -118,7 +118,7 @@ final class NewsListModel {
         isSpinnerAnimated?(false)
 
         if response.totalResults == 0 {
-            articles = []
+            // articles = []
             isNoResultLabelVisible?(true)
         }
 
