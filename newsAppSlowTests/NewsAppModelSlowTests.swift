@@ -30,7 +30,7 @@ class NewsAppModelSlowTests: XCTestCase {
         let stringUrl = "https://kartinkof.club/uploads/posts/2022-05/1653010381_5-kartinkof-club-p-kartinka-zastavka-schaste-5.jpg"
         let url = URL(string: stringUrl)!
         var finalImage: UIImage?
-        internetManager.dataType = .valid
+        internetManager.dataType = .successData
         let promise = expectation(description: "Image downloaded")
 
         // when
@@ -49,7 +49,7 @@ class NewsAppModelSlowTests: XCTestCase {
         // given
         let stringAbout = "volleyball"
         var articles: [Article]?
-        internetManager.dataType = .valid
+        internetManager.dataType = .successData
         let promise = expectation(description: "Articles downloaded")
 
         // when
@@ -80,5 +80,23 @@ class NewsAppModelSlowTests: XCTestCase {
 
         // then
         XCTAssertNil(articles, "Download failed")
+    }
+
+    func testSuccessGetArticlesWithErrorData() {
+        // given
+        var articles: [Article] = []
+        internetManager.dataType = .errorData
+        let promise = expectation(description: "Articles downloaded")
+
+        // when
+        newsListModel.getArticles(about: nil) { result in
+            articles += result
+            promise.fulfill()
+        }
+
+        wait(for: [promise], timeout: 5)
+
+        // then
+        XCTAssertEqual(articles.count, [].count, "Error data not found")
     }
 }
