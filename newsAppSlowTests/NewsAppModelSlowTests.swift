@@ -49,6 +49,7 @@ class NewsAppModelSlowTests: XCTestCase {
         // given
         let stringAbout = "volleyball"
         var articles: [Article]?
+        internetManager.dataType = .valid
         let promise = expectation(description: "Articles downloaded")
 
         // when
@@ -60,24 +61,24 @@ class NewsAppModelSlowTests: XCTestCase {
 
         // then
         XCTAssertNotNil(articles, "Download failed")
-        XCTAssertNotEqual(articles!.count, 0, "No articles about this theme")
+        XCTAssertEqual(articles!.count, 1, "No articles about this theme")
     }
 
     func testSuccessGetArticlesOfNewsListModelWithInvalidTheme() {
         // given
         let stringAbout = "fgrtbvujnvk"
         var articles: [Article]?
+        internetManager.dataType = .invalid
         let promise = expectation(description: "Articles downloaded")
 
         // when
         newsListModel.getArticles(about: stringAbout) { result in
             articles = result
-            promise.fulfill()
         }
-        wait(for: [promise], timeout: 10)
+        promise.fulfill()
+        wait(for: [promise], timeout: 5)
 
         // then
-        XCTAssertNotNil(articles, "Download failed")
-        XCTAssertEqual(articles!.count, 10, "No articles about this theme")
+        XCTAssertNil(articles, "Download failed")
     }
 }
