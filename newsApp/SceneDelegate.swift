@@ -13,15 +13,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession,
                options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-        let navigationVC = UINavigationController()
-        let model = NewsListModel()
-        let firstScreenVC = NewsListViewController(model: model)
+        guard let scene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(windowScene: scene)
+        let tabBarVC = NewsListTabBarController()
 
-        window?.windowScene = windowScene
-        window?.rootViewController = navigationVC
-        navigationVC.pushViewController(firstScreenVC, animated: false)
+        window?.windowScene = scene
+        window?.rootViewController = tabBarVC
         window?.makeKeyAndVisible()
     }
 }

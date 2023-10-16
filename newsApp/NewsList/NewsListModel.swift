@@ -46,7 +46,7 @@ final class NewsListModel {
         } else {
             if let about {
                 // swiftlint:disable:next line_length
-                stringURL = String("https://newsapi.org/v2/everything?q=\(about)&pageSize=\(pageSize)&page=\(numberOfPage)&from=2023-06-01&apiKey=43a0ca0dfa144c40b500339ab44741ea")
+                stringURL = String("https://newsapi.org/v2/everything?q=\(about)&pageSize=\(pageSize)&page=\(numberOfPage)&from=\(conversionDateToString(date: Date()))&apiKey=43a0ca0dfa144c40b500339ab44741ea")
             }
         }
         guard let encodedUrl = stringURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
@@ -102,6 +102,14 @@ final class NewsListModel {
         decoder.decodeNewsJSON(from: jsonData) { result in
             completionHandler(result)
         }
+    }
+
+    private func conversionDateToString(date: Date) -> String {
+        guard let actualNewsDate = Calendar.current.date(byAdding: .month, value: -1, to: date) else { return ""}
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let stringDate = dateFormatter.string(from: actualNewsDate)
+        return stringDate
     }
 
     // MARK: - Internal Funtions
@@ -192,4 +200,10 @@ extension String {
                                                      comment: "Fetching error troubles")
     static let dataDecodingError = NSLocalizedString("data_decoding_error",
                                                      comment: "Decoding json-data to string troubles")
+    static let tableController = NSLocalizedString("table_controller",
+                                                   comment: "Name of table controller's tab bar item")
+    static let collectionController = NSLocalizedString("collection_controller",
+                                                        comment: "Name of collection controller's tab bar item")
+    static let stackController = NSLocalizedString("stack_controller",
+                                                   comment: "Name of stack controller's tab bar item")
 }
