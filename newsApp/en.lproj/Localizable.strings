@@ -14,3 +14,6 @@
 "unexpected_error" = "Unexpected Error";
 "data_fetching_error" = "Data Fetch Error";
 "data_decoding_error" = "Data Decode Error";
+"table_controller" = "TableVC";
+"collection_controller" = "CollectionVC";
+"stack_controller" = "StackVC";

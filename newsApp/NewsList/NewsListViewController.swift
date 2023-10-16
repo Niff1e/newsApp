@@ -1,25 +1,27 @@
 //
-//  ViewController.swift
+//  NewsListViewController.swift
 //  newsApp
 //
-//  Created by Niff1e on 27.02.23.
+//  Created by Niff1e on 18.06.23.
 //
 
 import Foundation
 import UIKit
 
-final class NewsListViewController: UITableViewController {
+final class NewsListViewController: UIViewController {
 
     // MARK: - Private Properties
 
     private let model: NewsListModel
-    private let newsListView = NewsListView()
+    private let newsListView: NewsListViewable
+
     private let searchController = UISearchController(searchResultsController: nil)
 
     // MARK: - Init
 
-    init(model: NewsListModel) {
+    init(model: NewsListModel, view: NewsListView) {
         self.model = model
+        self.newsListView = view
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -48,14 +50,13 @@ final class NewsListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigation()
-
         model.getArticles(about: nil) { [weak self] articles in
-            self?.newsListView.setNumberOfRows(number: articles.count)
+            self?.newsListView.mainView.setNumberOfRows(number: articles.count)
         }
     }
 
     override func loadView() {
-        view = newsListView
+        self.view = newsListView
         model.showAlert = { [weak self] (code, message) -> Void in
             self?.showAlert(with: code, and: message)
         }
@@ -68,7 +69,7 @@ final class NewsListViewController: UITableViewController {
             self?.newsListView.isSpinnerAnimated(isAnimated: isAnimated)
         }
 
-        newsListView.creationOfNewsVC = { [weak self] (number) -> Void in
+        newsListView.mainView.creationOfNewsVC = { [weak self] (number) -> Void in
             guard let strongSelf = self else { return }
             let articleForNumber = strongSelf.model.articles[number]
             let model = NewsModel(article: articleForNumber)
@@ -76,7 +77,7 @@ final class NewsListViewController: UITableViewController {
             strongSelf.navigationController?.pushViewController(newsVC, animated: true)
         }
 
-        newsListView.pictureToCell = { [weak self] (number, completion) in
+        newsListView.mainView.pictureToCell = { [weak self] (number, completion) in
             guard let strongSelf = self else { return }
             let articleForNumber = strongSelf.model.articles[number]
             guard let urlPicture = articleForNumber.urlToImage else {
@@ -88,22 +89,22 @@ final class NewsListViewController: UITableViewController {
             })
         }
 
-        newsListView.textForTitleLabel = { [weak self] (number) -> String? in
+        newsListView.mainView.textForTitleLabel = { [weak self] (number) -> String? in
             guard let strongSelf = self else { return nil }
             let articleForNumber = strongSelf.model.articles[number]
             return articleForNumber.title
         }
 
-        newsListView.textForDescriptionLabel = { [weak self] (number) -> String? in
+        newsListView.mainView.textForDescriptionLabel = { [weak self] (number) -> String? in
             guard let strongSelf = self else { return nil }
             let articleForNumber = strongSelf.model.articles[number]
             return articleForNumber.description
         }
 
-        newsListView.getMoreArticles = { [weak self] in
+        newsListView.mainView.getMoreArticles = { [weak self] in
             guard let strongSelf = self else { return }
-            strongSelf.model.getArticles(about: nil) { [weak self] article in
-                self?.newsListView.setNumberOfRows(number: article.count)
+            strongSelf.model.getArticles(about: nil) { [weak self] articles in
+                self?.newsListView.mainView.setNumberOfRows(number: articles.count)
             }
         }
     }
@@ -113,7 +114,7 @@ extension NewsListViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.model.setIsFirstScreen(to: false)
         model.getArticles(about: searchBar.text) { [weak self] articles in
-            self?.newsListView.setNumberOfRows(number: articles.count)
+            self?.newsListView.mainView.setNumberOfRows(number: articles.count)
         }
     }
 
@@ -121,7 +122,7 @@ extension NewsListViewController: UISearchBarDelegate {
         self.model.setIsFirstScreen(to: true)
         self.model.setFirstPartOfArticles()
         model.getArticles(about: "") { [weak self] articles in
-            self?.newsListView.setNumberOfRows(number: articles.count)
+            self?.newsListView.mainView.setNumberOfRows(number: articles.count)
         }
     }
 }
