@@ -146,10 +146,13 @@ final class NewsListModel {
                         case .failure(let errorResponse):
                             guard let strongSelf = self else { return }
                             DispatchQueue.main.async {
-                                strongSelf.articles = []
                                 completionHandler(strongSelf.articles)
+                                var statusOfNoResultLabel = true
+                                if strongSelf.articles.count != 0 {
+                                    statusOfNoResultLabel = false
+                                }
                                 self?.showAlertOnMain(title: errorResponse.code, description: errorResponse.message,
-                                                      isNoResultLabelVisible: true, isSpinnerAnimated: false)
+                                                      isNoResultLabelVisible: statusOfNoResultLabel, isSpinnerAnimated: false)
                             }
                         case .success(let successResponse):
                             guard let strongSelf = self else { return }

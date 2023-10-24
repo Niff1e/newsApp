@@ -27,7 +27,7 @@ class NewsAppModelSlowTests: XCTestCase {
 
         // given
         // swiftlint:disable:next line_length
-        let stringUrl = "https://kartinkof.club/uploads/posts/2022-05/1653010381_5-kartinkof-club-p-kartinka-zastavka-schaste-5.jpg"
+        let stringUrl = "https://newsapi.com"
         let url = URL(string: stringUrl)!
         var finalImage: UIImage?
         internetManager.dataType = .successData
@@ -90,13 +90,13 @@ class NewsAppModelSlowTests: XCTestCase {
 
         // when
         newsListModel.getArticles(about: nil) { result in
-            articles += result
+            articles = result
             promise.fulfill()
         }
 
         wait(for: [promise], timeout: 5)
 
         // then
-        XCTAssertEqual(articles.count, [].count, "Error data not found")
+        XCTAssertEqual(articles.count, 0, "Error data not found")
     }
 }

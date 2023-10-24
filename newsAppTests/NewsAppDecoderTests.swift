@@ -28,14 +28,13 @@ final class NewsAppDecoderTests: XCTestCase {
         let stringData =
             """
                 {
-                    "status":"ok",
-                    "totalResults":1,
-                    "articles":
-                        [
-                            {
-                                "content":"content"
-                            }
-                        ]
+                    "status": "ok",
+                    "totalResults": 1,
+                    "articles": [
+                        {
+                            "content": "content"
+                        }
+                    ]
                 }
             """
         let jsonData = stringData.data(using: .utf8)!
