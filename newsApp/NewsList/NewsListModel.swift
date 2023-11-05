@@ -18,13 +18,19 @@ final class NewsListModel {
     // MARK: - Private properties
 
     private let decoder = NewsJSONDecoder()
-    private let internetManager = InternetManager()
+    private let internetManager: InternetManagerProtocol
     private var actualTheme: String?
     private var partOfArticles: Int = 0
     private var pageSize = 10
     private let maxPageSize = 100
     private var isStartScreen = true
     private var isDownloadingAllowed = true
+
+    // MARK: - Init
+
+    init(_ internetManager: InternetManagerProtocol = InternetManager()) {
+        self.internetManager = internetManager
+    }
 
     // MARK: - Private(set) properties
 
@@ -58,9 +64,7 @@ final class NewsListModel {
         return url
     }
 
-    private func showAlertOnMain(title: String,
-                                 description: String,
-                                 isNoResultLabelVisible: Bool,
+    private func showAlertOnMain(title: String, description: String, isNoResultLabelVisible: Bool,
                                  isSpinnerAnimated: Bool) {
         DispatchQueue.main.async {
             self.isSpinnerAnimated?(isSpinnerAnimated)
@@ -92,9 +96,7 @@ final class NewsListModel {
     private func handlingRequest(data: Data?,
                                  completionHandler: @escaping (Result<SuccessResponse, ErrorResponse>) -> Void) {
         guard let jsonData = data else {
-            showAlertOnMain(title: .whoops,
-                            description: .dataFetchingError,
-                            isNoResultLabelVisible: true,
+            showAlertOnMain(title: .whoops, description: .dataFetchingError, isNoResultLabelVisible: true,
                             isSpinnerAnimated: false)
             return
         }
@@ -110,6 +112,18 @@ final class NewsListModel {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let stringDate = dateFormatter.string(from: actualNewsDate)
         return stringDate
+    }
+
+    private func successResponseHandling(response: SuccessResponse) {
+        isSpinnerAnimated?(false)
+
+        if response.totalResults == 0 {
+            // articles = []
+            isNoResultLabelVisible?(true)
+        }
+
+        articles += response.articles
+        checkingForTheExactNumberOfArticles(number: response.totalResults)
     }
 
     // MARK: - Internal Funtions
@@ -132,24 +146,18 @@ final class NewsListModel {
                         case .failure(let errorResponse):
                             guard let strongSelf = self else { return }
                             DispatchQueue.main.async {
-                                strongSelf.articles = []
                                 completionHandler(strongSelf.articles)
-                                self?.showAlertOnMain(title: (errorResponse.code),
-                                                                      description: errorResponse.message,
-                                                                      isNoResultLabelVisible: true,
-                                                                      isSpinnerAnimated: false)
+                                var statusOfNoResultLabel = true
+                                if strongSelf.articles.count != 0 {
+                                    statusOfNoResultLabel = false
+                                }
+                                self?.showAlertOnMain(title: errorResponse.code, description: errorResponse.message,
+                                                      isNoResultLabelVisible: statusOfNoResultLabel, isSpinnerAnimated: false)
                             }
                         case .success(let successResponse):
                             guard let strongSelf = self else { return }
                             DispatchQueue.main.async {
-                                strongSelf.isSpinnerAnimated?(false)
-
-                                if successResponse.totalResults == 0 {
-                                    strongSelf.isNoResultLabelVisible?(true)
-                                }
-
-                                strongSelf.articles += successResponse.articles
-                                strongSelf.checkingForTheExactNumberOfArticles(number: successResponse.totalResults)
+                                strongSelf.successResponseHandling(response: successResponse)
                                 completionHandler(strongSelf.articles)
                             }
                         }
@@ -157,19 +165,13 @@ final class NewsListModel {
                 }
             }
         } catch NewsListError.invalidURL {
-            showAlertOnMain(title: .whoops,
-                            description: .invalidUrl,
-                            isNoResultLabelVisible: true,
+            showAlertOnMain(title: .whoops, description: .invalidUrl, isNoResultLabelVisible: true,
                             isSpinnerAnimated: false)
         } catch NewsListError.badPercentEncoding {
-            showAlertOnMain(title: .whoops,
-                            description: .badEncodingUrl,
-                            isNoResultLabelVisible: true,
+            showAlertOnMain(title: .whoops, description: .badEncodingUrl, isNoResultLabelVisible: true,
                             isSpinnerAnimated: false)
         } catch {
-            showAlertOnMain(title: .whoops,
-                            description: .unexpectedError,
-                            isNoResultLabelVisible: true,
+            showAlertOnMain(title: .whoops, description: .unexpectedError, isNoResultLabelVisible: true,
                             isSpinnerAnimated: false)
         }
     }

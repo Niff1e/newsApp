@@ -94,15 +94,11 @@ final class MainScrollView: UIScrollView, UIScrollViewDelegate, NewsListMainView
     func setNumberOfRows(number: Int) {
         if number == 0 {
             deleteAllViewFromStackView()
-            // self.numberOfRows = 0
         } else if number > self.stackView.arrangedSubviews.count {
             addMultipleViews(quantity: number)
-            // self.numberOfRows = number
         } else if number <= self.stackView.arrangedSubviews.count {
             deleteAllViewFromStackView()
-            // self.numberOfRows = 0
             addMultipleViews(quantity: number)
-            // self.numberOfRows = number
         }
     }
 }
