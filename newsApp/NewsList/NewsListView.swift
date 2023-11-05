@@ -27,7 +27,6 @@ final class NewsListView: UIView, NewsListViewable {
     private var indicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.color = .black
-        indicator.backgroundColor = .white
         indicator.style = .large
         indicator.stopAnimating()
         indicator.translatesAutoresizingMaskIntoConstraints = false
@@ -41,7 +40,6 @@ final class NewsListView: UIView, NewsListViewable {
         self.mainView = view
         super.init(frame: .zero)
         self.backgroundColor = .white
-        self.mainView.backgroundColor = .white
         self.mainView.translatesAutoresizingMaskIntoConstraints = false
         setupView()
     }
