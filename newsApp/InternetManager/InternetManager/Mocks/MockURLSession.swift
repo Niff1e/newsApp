@@ -51,11 +51,10 @@ class MockURLSession: URLSessionProtocol {
 }
 
 extension URLSession: URLSessionProtocol {
-    func dataTask(with url: URL,
+    public func dataTask(with url: URL,
                   completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
         return (dataTask(with: url,
                          completionHandler: completionHandler) as URLSessionDataTask) as URLSessionDataTaskProtocol
     }
 }
 
-extension URLSessionDataTask: URLSessionDataTaskProtocol {}

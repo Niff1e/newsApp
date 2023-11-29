@@ -1,14 +1,14 @@
 //
-//  NewsAppInternetManagerTests.swift
-//  newsAppTests
+//  InternetManagerTests.swift
+//  InternetManagerTests
 //
-//  Created by Niff1e on 5.10.23.
+//  Created by Pavel Maal on 9.11.23.
 //
 
 import XCTest
-@testable import newsApp
+@testable import InternetManager
 
-final class NewsAppInternetManagerTests: XCTestCase {
+final class InternetManagerTests: XCTestCase {
 
     let session = MockURLSession()
     var sut: InternetManager!
