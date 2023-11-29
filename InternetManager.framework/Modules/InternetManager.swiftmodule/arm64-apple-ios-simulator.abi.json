@@ -1,0 +1,2492 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "TopLevel",
+    "printedName": "TopLevel",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "InternetManager",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "URLSessionProtocol",
+        "printedName": "URLSessionProtocol",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "dataTask",
+            "printedName": "dataTask(with:completionHandler:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "URLSessionDataTaskProtocol",
+                "printedName": "InternetManager.URLSessionDataTaskProtocol",
+                "usr": "s:15InternetManager26URLSessionDataTaskProtocolP"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "URL",
+                "printedName": "Foundation.URL",
+                "usr": "s:10Foundation3URLV"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Foundation.Data?, Foundation.URLResponse?, Swift.Error?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tuple",
+                    "printedName": "(Foundation.Data?, Foundation.URLResponse?, Swift.Error?)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Foundation.Data?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Data",
+                            "printedName": "Foundation.Data",
+                            "usr": "s:10Foundation4DataV"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Foundation.URLResponse?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "URLResponse",
+                            "printedName": "Foundation.URLResponse",
+                            "usr": "c:objc(cs)NSURLResponse"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.Error?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Error",
+                            "printedName": "Swift.Error",
+                            "usr": "s:s5ErrorP"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15InternetManager18URLSessionProtocolP8dataTask4with17completionHandlerAA0c4DatafD0_p10Foundation3URLV_yAH0J0VSg_So13NSURLResponseCSgs5Error_pSgtctF",
+            "mangledName": "$s15InternetManager18URLSessionProtocolP8dataTask4with17completionHandlerAA0c4DatafD0_p10Foundation3URLV_yAH0J0VSg_So13NSURLResponseCSgs5Error_pSgtctF",
+            "moduleName": "InternetManager",
+            "genericSig": "<τ_0_0 where τ_0_0 : InternetManager.URLSessionProtocol>",
+            "sugared_genericSig": "<Self where Self : InternetManager.URLSessionProtocol>",
+            "protocolReq": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "s:15InternetManager18URLSessionProtocolP",
+        "mangledName": "$s15InternetManager18URLSessionProtocolP",
+        "moduleName": "InternetManager",
+        "declAttributes": [
+          "AccessControl"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "InternetManager",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "InternetManager"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "InternetManager",
+        "printedName": "InternetManager",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "InternetManager",
+                "printedName": "InternetManager.InternetManager",
+                "usr": "s:15InternetManagerAAC"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "URLSessionProtocol",
+                "printedName": "InternetManager.URLSessionProtocol",
+                "hasDefaultArg": true,
+                "usr": "s:15InternetManager18URLSessionProtocolP"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15InternetManagerAACyAbA18URLSessionProtocol_pcfc",
+            "mangledName": "$s15InternetManagerAACyAbA18URLSessionProtocol_pcfc",
+            "moduleName": "InternetManager",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "downloadImage",
+            "printedName": "downloadImage(with:completion:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "URL",
+                "printedName": "Foundation.URL",
+                "usr": "s:10Foundation3URLV"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(UIKit.UIImage?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "UIKit.UIImage?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIImage",
+                        "printedName": "UIKit.UIImage",
+                        "usr": "c:objc(cs)UIImage"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15InternetManagerAAC13downloadImage4with10completiony10Foundation3URLV_ySo7UIImageCSgctF",
+            "mangledName": "$s15InternetManagerAAC13downloadImage4with10completiony10Foundation3URLV_ySo7UIImageCSgctF",
+            "moduleName": "InternetManager",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getData",
+            "printedName": "getData(with:completion:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Foundation.URL?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "URL",
+                    "printedName": "Foundation.URL",
+                    "usr": "s:10Foundation3URLV"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Foundation.Data?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Foundation.Data?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Data",
+                        "printedName": "Foundation.Data",
+                        "usr": "s:10Foundation4DataV"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15InternetManagerAAC7getData4with10completiony10Foundation3URLVSg_yAF0D0VSgctF",
+            "mangledName": "$s15InternetManagerAAC7getData4with10completiony10Foundation3URLVSg_yAF0D0VSgctF",
+            "moduleName": "InternetManager",
+            "declAttributes": [
+              "Final",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:15InternetManagerAAC",
+        "mangledName": "$s15InternetManagerAAC",
+        "moduleName": "InternetManager",
+        "declAttributes": [
+          "AccessControl",
+          "Final"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "InternetManagerProtocol",
+            "printedName": "InternetManagerProtocol",
+            "usr": "s:15InternetManager0aB8ProtocolP",
+            "mangledName": "$s15InternetManager0aB8ProtocolP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "InternetManager",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "InternetManager"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "MockInternetManager",
+        "printedName": "MockInternetManager",
+        "children": [
+          {
+            "kind": "TypeDecl",
+            "name": "ImageType",
+            "printedName": "ImageType",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "valid",
+                "printedName": "valid",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(InternetManager.MockInternetManager.ImageType.Type) -> InternetManager.MockInternetManager.ImageType",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ImageType",
+                        "printedName": "InternetManager.MockInternetManager.ImageType",
+                        "usr": "s:15InternetManager04MockaB0C9ImageTypeO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "InternetManager.MockInternetManager.ImageType.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "ImageType",
+                            "printedName": "InternetManager.MockInternetManager.ImageType",
+                            "usr": "s:15InternetManager04MockaB0C9ImageTypeO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:15InternetManager04MockaB0C9ImageTypeO5validyA2EmF",
+                "mangledName": "$s15InternetManager04MockaB0C9ImageTypeO5validyA2EmF",
+                "moduleName": "InternetManager",
+                "fixedbinaryorder": 0
+              },
+              {
+                "kind": "Var",
+                "name": "invalid",
+                "printedName": "invalid",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(InternetManager.MockInternetManager.ImageType.Type) -> InternetManager.MockInternetManager.ImageType",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ImageType",
+                        "printedName": "InternetManager.MockInternetManager.ImageType",
+                        "usr": "s:15InternetManager04MockaB0C9ImageTypeO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "InternetManager.MockInternetManager.ImageType.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "ImageType",
+                            "printedName": "InternetManager.MockInternetManager.ImageType",
+                            "usr": "s:15InternetManager04MockaB0C9ImageTypeO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:15InternetManager04MockaB0C9ImageTypeO7invalidyA2EmF",
+                "mangledName": "$s15InternetManager04MockaB0C9ImageTypeO7invalidyA2EmF",
+                "moduleName": "InternetManager",
+                "fixedbinaryorder": 1
+              },
+              {
+                "kind": "Function",
+                "name": "==",
+                "printedName": "==(_:_:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageType",
+                    "printedName": "InternetManager.MockInternetManager.ImageType",
+                    "usr": "s:15InternetManager04MockaB0C9ImageTypeO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageType",
+                    "printedName": "InternetManager.MockInternetManager.ImageType",
+                    "usr": "s:15InternetManager04MockaB0C9ImageTypeO"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:15InternetManager04MockaB0C9ImageTypeO2eeoiySbAE_AEtFZ",
+                "mangledName": "$s15InternetManager04MockaB0C9ImageTypeO2eeoiySbAE_AEtFZ",
+                "moduleName": "InternetManager",
+                "static": true,
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Var",
+                "name": "hashValue",
+                "printedName": "hashValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:15InternetManager04MockaB0C9ImageTypeO9hashValueSivp",
+                "mangledName": "$s15InternetManager04MockaB0C9ImageTypeO9hashValueSivp",
+                "moduleName": "InternetManager",
+                "implicit": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:15InternetManager04MockaB0C9ImageTypeO9hashValueSivg",
+                    "mangledName": "$s15InternetManager04MockaB0C9ImageTypeO9hashValueSivg",
+                    "moduleName": "InternetManager",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  }
+                ]
+              },
+              {
+                "kind": "Function",
+                "name": "hash",
+                "printedName": "hash(into:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Hasher",
+                    "printedName": "Swift.Hasher",
+                    "paramValueOwnership": "InOut",
+                    "usr": "s:s6HasherV"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:15InternetManager04MockaB0C9ImageTypeO4hash4intoys6HasherVz_tF",
+                "mangledName": "$s15InternetManager04MockaB0C9ImageTypeO4hash4intoys6HasherVz_tF",
+                "moduleName": "InternetManager",
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              }
+            ],
+            "declKind": "Enum",
+            "usr": "s:15InternetManager04MockaB0C9ImageTypeO",
+            "mangledName": "$s15InternetManager04MockaB0C9ImageTypeO",
+            "moduleName": "InternetManager",
+            "isEnumExhaustive": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Equatable",
+                "printedName": "Equatable",
+                "usr": "s:SQ",
+                "mangledName": "$sSQ"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Hashable",
+                "printedName": "Hashable",
+                "usr": "s:SH",
+                "mangledName": "$sSH"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Sendable",
+                "printedName": "Sendable",
+                "usr": "s:s8SendableP",
+                "mangledName": "$ss8SendableP"
+              }
+            ]
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "DataType",
+            "printedName": "DataType",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "successData",
+                "printedName": "successData",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(InternetManager.MockInternetManager.DataType.Type) -> InternetManager.MockInternetManager.DataType",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "DataType",
+                        "printedName": "InternetManager.MockInternetManager.DataType",
+                        "usr": "s:15InternetManager04MockaB0C8DataTypeO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "InternetManager.MockInternetManager.DataType.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "DataType",
+                            "printedName": "InternetManager.MockInternetManager.DataType",
+                            "usr": "s:15InternetManager04MockaB0C8DataTypeO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:15InternetManager04MockaB0C8DataTypeO07successD0yA2EmF",
+                "mangledName": "$s15InternetManager04MockaB0C8DataTypeO07successD0yA2EmF",
+                "moduleName": "InternetManager",
+                "fixedbinaryorder": 0
+              },
+              {
+                "kind": "Var",
+                "name": "errorData",
+                "printedName": "errorData",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(InternetManager.MockInternetManager.DataType.Type) -> InternetManager.MockInternetManager.DataType",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "DataType",
+                        "printedName": "InternetManager.MockInternetManager.DataType",
+                        "usr": "s:15InternetManager04MockaB0C8DataTypeO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "InternetManager.MockInternetManager.DataType.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "DataType",
+                            "printedName": "InternetManager.MockInternetManager.DataType",
+                            "usr": "s:15InternetManager04MockaB0C8DataTypeO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:15InternetManager04MockaB0C8DataTypeO05errorD0yA2EmF",
+                "mangledName": "$s15InternetManager04MockaB0C8DataTypeO05errorD0yA2EmF",
+                "moduleName": "InternetManager",
+                "fixedbinaryorder": 1
+              },
+              {
+                "kind": "Var",
+                "name": "invalid",
+                "printedName": "invalid",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(InternetManager.MockInternetManager.DataType.Type) -> InternetManager.MockInternetManager.DataType",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "DataType",
+                        "printedName": "InternetManager.MockInternetManager.DataType",
+                        "usr": "s:15InternetManager04MockaB0C8DataTypeO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "InternetManager.MockInternetManager.DataType.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "DataType",
+                            "printedName": "InternetManager.MockInternetManager.DataType",
+                            "usr": "s:15InternetManager04MockaB0C8DataTypeO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:15InternetManager04MockaB0C8DataTypeO7invalidyA2EmF",
+                "mangledName": "$s15InternetManager04MockaB0C8DataTypeO7invalidyA2EmF",
+                "moduleName": "InternetManager",
+                "fixedbinaryorder": 2
+              },
+              {
+                "kind": "Function",
+                "name": "==",
+                "printedName": "==(_:_:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "DataType",
+                    "printedName": "InternetManager.MockInternetManager.DataType",
+                    "usr": "s:15InternetManager04MockaB0C8DataTypeO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "DataType",
+                    "printedName": "InternetManager.MockInternetManager.DataType",
+                    "usr": "s:15InternetManager04MockaB0C8DataTypeO"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:15InternetManager04MockaB0C8DataTypeO2eeoiySbAE_AEtFZ",
+                "mangledName": "$s15InternetManager04MockaB0C8DataTypeO2eeoiySbAE_AEtFZ",
+                "moduleName": "InternetManager",
+                "static": true,
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Var",
+                "name": "hashValue",
+                "printedName": "hashValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:15InternetManager04MockaB0C8DataTypeO9hashValueSivp",
+                "mangledName": "$s15InternetManager04MockaB0C8DataTypeO9hashValueSivp",
+                "moduleName": "InternetManager",
+                "implicit": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:15InternetManager04MockaB0C8DataTypeO9hashValueSivg",
+                    "mangledName": "$s15InternetManager04MockaB0C8DataTypeO9hashValueSivg",
+                    "moduleName": "InternetManager",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  }
+                ]
+              },
+              {
+                "kind": "Function",
+                "name": "hash",
+                "printedName": "hash(into:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Hasher",
+                    "printedName": "Swift.Hasher",
+                    "paramValueOwnership": "InOut",
+                    "usr": "s:s6HasherV"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:15InternetManager04MockaB0C8DataTypeO4hash4intoys6HasherVz_tF",
+                "mangledName": "$s15InternetManager04MockaB0C8DataTypeO4hash4intoys6HasherVz_tF",
+                "moduleName": "InternetManager",
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              }
+            ],
+            "declKind": "Enum",
+            "usr": "s:15InternetManager04MockaB0C8DataTypeO",
+            "mangledName": "$s15InternetManager04MockaB0C8DataTypeO",
+            "moduleName": "InternetManager",
+            "isEnumExhaustive": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Equatable",
+                "printedName": "Equatable",
+                "usr": "s:SQ",
+                "mangledName": "$sSQ"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Hashable",
+                "printedName": "Hashable",
+                "usr": "s:SH",
+                "mangledName": "$sSH"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Sendable",
+                "printedName": "Sendable",
+                "usr": "s:s8SendableP",
+                "mangledName": "$ss8SendableP"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "imageType",
+            "printedName": "imageType",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "InternetManager.MockInternetManager.ImageType?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageType",
+                    "printedName": "InternetManager.MockInternetManager.ImageType",
+                    "usr": "s:15InternetManager04MockaB0C9ImageTypeO"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15InternetManager04MockaB0C9imageTypeAC05ImageE0OSgvp",
+            "mangledName": "$s15InternetManager04MockaB0C9imageTypeAC05ImageE0OSgvp",
+            "moduleName": "InternetManager",
+            "isOpen": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage"
+            ],
+            "fixedbinaryorder": 0,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "InternetManager.MockInternetManager.ImageType?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ImageType",
+                        "printedName": "InternetManager.MockInternetManager.ImageType",
+                        "usr": "s:15InternetManager04MockaB0C9ImageTypeO"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15InternetManager04MockaB0C9imageTypeAC05ImageE0OSgvg",
+                "mangledName": "$s15InternetManager04MockaB0C9imageTypeAC05ImageE0OSgvg",
+                "moduleName": "InternetManager",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "InternetManager.MockInternetManager.ImageType?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ImageType",
+                        "printedName": "InternetManager.MockInternetManager.ImageType",
+                        "usr": "s:15InternetManager04MockaB0C9ImageTypeO"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15InternetManager04MockaB0C9imageTypeAC05ImageE0OSgvs",
+                "mangledName": "$s15InternetManager04MockaB0C9imageTypeAC05ImageE0OSgvs",
+                "moduleName": "InternetManager",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15InternetManager04MockaB0C9imageTypeAC05ImageE0OSgvM",
+                "mangledName": "$s15InternetManager04MockaB0C9imageTypeAC05ImageE0OSgvM",
+                "moduleName": "InternetManager",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "dataType",
+            "printedName": "dataType",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "InternetManager.MockInternetManager.DataType?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "DataType",
+                    "printedName": "InternetManager.MockInternetManager.DataType",
+                    "usr": "s:15InternetManager04MockaB0C8DataTypeO"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15InternetManager04MockaB0C8dataTypeAC04DataE0OSgvp",
+            "mangledName": "$s15InternetManager04MockaB0C8dataTypeAC04DataE0OSgvp",
+            "moduleName": "InternetManager",
+            "isOpen": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage"
+            ],
+            "fixedbinaryorder": 1,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "InternetManager.MockInternetManager.DataType?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "DataType",
+                        "printedName": "InternetManager.MockInternetManager.DataType",
+                        "usr": "s:15InternetManager04MockaB0C8DataTypeO"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15InternetManager04MockaB0C8dataTypeAC04DataE0OSgvg",
+                "mangledName": "$s15InternetManager04MockaB0C8dataTypeAC04DataE0OSgvg",
+                "moduleName": "InternetManager",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "InternetManager.MockInternetManager.DataType?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "DataType",
+                        "printedName": "InternetManager.MockInternetManager.DataType",
+                        "usr": "s:15InternetManager04MockaB0C8DataTypeO"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15InternetManager04MockaB0C8dataTypeAC04DataE0OSgvs",
+                "mangledName": "$s15InternetManager04MockaB0C8dataTypeAC04DataE0OSgvs",
+                "moduleName": "InternetManager",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15InternetManager04MockaB0C8dataTypeAC04DataE0OSgvM",
+                "mangledName": "$s15InternetManager04MockaB0C8dataTypeAC04DataE0OSgvM",
+                "moduleName": "InternetManager",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "successData",
+            "printedName": "successData",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15InternetManager04MockaB0C11successDataSSvp",
+            "mangledName": "$s15InternetManager04MockaB0C11successDataSSvp",
+            "moduleName": "InternetManager",
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage"
+            ],
+            "fixedbinaryorder": 2,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15InternetManager04MockaB0C11successDataSSvg",
+                "mangledName": "$s15InternetManager04MockaB0C11successDataSSvg",
+                "moduleName": "InternetManager",
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent",
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "errorData",
+            "printedName": "errorData",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15InternetManager04MockaB0C9errorDataSSvp",
+            "mangledName": "$s15InternetManager04MockaB0C9errorDataSSvp",
+            "moduleName": "InternetManager",
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage"
+            ],
+            "fixedbinaryorder": 3,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15InternetManager04MockaB0C9errorDataSSvg",
+                "mangledName": "$s15InternetManager04MockaB0C9errorDataSSvg",
+                "moduleName": "InternetManager",
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent",
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "downloadImage",
+            "printedName": "downloadImage(with:completion:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "URL",
+                "printedName": "Foundation.URL",
+                "usr": "s:10Foundation3URLV"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(UIKit.UIImage?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "UIKit.UIImage?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIImage",
+                        "printedName": "UIKit.UIImage",
+                        "usr": "c:objc(cs)UIImage"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15InternetManager04MockaB0C13downloadImage4with10completiony10Foundation3URLV_ySo7UIImageCSgctF",
+            "mangledName": "$s15InternetManager04MockaB0C13downloadImage4with10completiony10Foundation3URLV_ySo7UIImageCSgctF",
+            "moduleName": "InternetManager",
+            "isOpen": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getData",
+            "printedName": "getData(with:completion:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Foundation.URL?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "URL",
+                    "printedName": "Foundation.URL",
+                    "usr": "s:10Foundation3URLV"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Foundation.Data?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Foundation.Data?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Data",
+                        "printedName": "Foundation.Data",
+                        "usr": "s:10Foundation4DataV"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15InternetManager04MockaB0C7getData4with10completiony10Foundation3URLVSg_yAG0E0VSgctF",
+            "mangledName": "$s15InternetManager04MockaB0C7getData4with10completiony10Foundation3URLVSg_yAG0E0VSgctF",
+            "moduleName": "InternetManager",
+            "isOpen": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MockInternetManager",
+                "printedName": "InternetManager.MockInternetManager",
+                "usr": "s:15InternetManager04MockaB0C"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15InternetManager04MockaB0CACycfc",
+            "mangledName": "$s15InternetManager04MockaB0CACycfc",
+            "moduleName": "InternetManager",
+            "implicit": true,
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:15InternetManager04MockaB0C",
+        "mangledName": "$s15InternetManager04MockaB0C",
+        "moduleName": "InternetManager",
+        "isOpen": true,
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "InternetManagerProtocol",
+            "printedName": "InternetManagerProtocol",
+            "usr": "s:15InternetManager0aB8ProtocolP",
+            "mangledName": "$s15InternetManager0aB8ProtocolP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "InternetManager",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "InternetManager"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "MockURLSession",
+        "printedName": "MockURLSession",
+        "children": [
+          {
+            "kind": "TypeDecl",
+            "name": "DataType",
+            "printedName": "DataType",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "validData",
+                "printedName": "validData",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(InternetManager.MockURLSession.DataType.Type) -> InternetManager.MockURLSession.DataType",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "DataType",
+                        "printedName": "InternetManager.MockURLSession.DataType",
+                        "usr": "s:15InternetManager14MockURLSessionC8DataTypeO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "InternetManager.MockURLSession.DataType.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "DataType",
+                            "printedName": "InternetManager.MockURLSession.DataType",
+                            "usr": "s:15InternetManager14MockURLSessionC8DataTypeO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:15InternetManager14MockURLSessionC8DataTypeO05validE0yA2EmF",
+                "mangledName": "$s15InternetManager14MockURLSessionC8DataTypeO05validE0yA2EmF",
+                "moduleName": "InternetManager",
+                "fixedbinaryorder": 0
+              },
+              {
+                "kind": "Var",
+                "name": "validImage",
+                "printedName": "validImage",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(InternetManager.MockURLSession.DataType.Type) -> InternetManager.MockURLSession.DataType",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "DataType",
+                        "printedName": "InternetManager.MockURLSession.DataType",
+                        "usr": "s:15InternetManager14MockURLSessionC8DataTypeO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "InternetManager.MockURLSession.DataType.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "DataType",
+                            "printedName": "InternetManager.MockURLSession.DataType",
+                            "usr": "s:15InternetManager14MockURLSessionC8DataTypeO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:15InternetManager14MockURLSessionC8DataTypeO10validImageyA2EmF",
+                "mangledName": "$s15InternetManager14MockURLSessionC8DataTypeO10validImageyA2EmF",
+                "moduleName": "InternetManager",
+                "fixedbinaryorder": 1
+              },
+              {
+                "kind": "Var",
+                "name": "invalid",
+                "printedName": "invalid",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(InternetManager.MockURLSession.DataType.Type) -> InternetManager.MockURLSession.DataType",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "DataType",
+                        "printedName": "InternetManager.MockURLSession.DataType",
+                        "usr": "s:15InternetManager14MockURLSessionC8DataTypeO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "InternetManager.MockURLSession.DataType.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "DataType",
+                            "printedName": "InternetManager.MockURLSession.DataType",
+                            "usr": "s:15InternetManager14MockURLSessionC8DataTypeO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:15InternetManager14MockURLSessionC8DataTypeO7invalidyA2EmF",
+                "mangledName": "$s15InternetManager14MockURLSessionC8DataTypeO7invalidyA2EmF",
+                "moduleName": "InternetManager",
+                "fixedbinaryorder": 2
+              },
+              {
+                "kind": "Function",
+                "name": "==",
+                "printedName": "==(_:_:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "DataType",
+                    "printedName": "InternetManager.MockURLSession.DataType",
+                    "usr": "s:15InternetManager14MockURLSessionC8DataTypeO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "DataType",
+                    "printedName": "InternetManager.MockURLSession.DataType",
+                    "usr": "s:15InternetManager14MockURLSessionC8DataTypeO"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:15InternetManager14MockURLSessionC8DataTypeO2eeoiySbAE_AEtFZ",
+                "mangledName": "$s15InternetManager14MockURLSessionC8DataTypeO2eeoiySbAE_AEtFZ",
+                "moduleName": "InternetManager",
+                "static": true,
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Var",
+                "name": "hashValue",
+                "printedName": "hashValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:15InternetManager14MockURLSessionC8DataTypeO9hashValueSivp",
+                "mangledName": "$s15InternetManager14MockURLSessionC8DataTypeO9hashValueSivp",
+                "moduleName": "InternetManager",
+                "implicit": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:15InternetManager14MockURLSessionC8DataTypeO9hashValueSivg",
+                    "mangledName": "$s15InternetManager14MockURLSessionC8DataTypeO9hashValueSivg",
+                    "moduleName": "InternetManager",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  }
+                ]
+              },
+              {
+                "kind": "Function",
+                "name": "hash",
+                "printedName": "hash(into:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Hasher",
+                    "printedName": "Swift.Hasher",
+                    "paramValueOwnership": "InOut",
+                    "usr": "s:s6HasherV"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:15InternetManager14MockURLSessionC8DataTypeO4hash4intoys6HasherVz_tF",
+                "mangledName": "$s15InternetManager14MockURLSessionC8DataTypeO4hash4intoys6HasherVz_tF",
+                "moduleName": "InternetManager",
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              }
+            ],
+            "declKind": "Enum",
+            "usr": "s:15InternetManager14MockURLSessionC8DataTypeO",
+            "mangledName": "$s15InternetManager14MockURLSessionC8DataTypeO",
+            "moduleName": "InternetManager",
+            "isEnumExhaustive": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Equatable",
+                "printedName": "Equatable",
+                "usr": "s:SQ",
+                "mangledName": "$sSQ"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Hashable",
+                "printedName": "Hashable",
+                "usr": "s:SH",
+                "mangledName": "$sSH"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Sendable",
+                "printedName": "Sendable",
+                "usr": "s:s8SendableP",
+                "mangledName": "$ss8SendableP"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "dataTask",
+            "printedName": "dataTask",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MockURLSessionDataTask",
+                "printedName": "InternetManager.MockURLSessionDataTask",
+                "usr": "s:15InternetManager22MockURLSessionDataTaskC"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15InternetManager14MockURLSessionC8dataTaskAA0cd4DataF0Cvp",
+            "mangledName": "$s15InternetManager14MockURLSessionC8dataTaskAA0cd4DataF0Cvp",
+            "moduleName": "InternetManager",
+            "isOpen": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage"
+            ],
+            "fixedbinaryorder": 0,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MockURLSessionDataTask",
+                    "printedName": "InternetManager.MockURLSessionDataTask",
+                    "usr": "s:15InternetManager22MockURLSessionDataTaskC"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15InternetManager14MockURLSessionC8dataTaskAA0cd4DataF0Cvg",
+                "mangledName": "$s15InternetManager14MockURLSessionC8dataTaskAA0cd4DataF0Cvg",
+                "moduleName": "InternetManager",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MockURLSessionDataTask",
+                    "printedName": "InternetManager.MockURLSessionDataTask",
+                    "usr": "s:15InternetManager22MockURLSessionDataTaskC"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15InternetManager14MockURLSessionC8dataTaskAA0cd4DataF0Cvs",
+                "mangledName": "$s15InternetManager14MockURLSessionC8dataTaskAA0cd4DataF0Cvs",
+                "moduleName": "InternetManager",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15InternetManager14MockURLSessionC8dataTaskAA0cd4DataF0CvM",
+                "mangledName": "$s15InternetManager14MockURLSessionC8dataTaskAA0cd4DataF0CvM",
+                "moduleName": "InternetManager",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "dataType",
+            "printedName": "dataType",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "InternetManager.MockURLSession.DataType?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "DataType",
+                    "printedName": "InternetManager.MockURLSession.DataType",
+                    "usr": "s:15InternetManager14MockURLSessionC8DataTypeO"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15InternetManager14MockURLSessionC8dataTypeAC04DataF0OSgvp",
+            "mangledName": "$s15InternetManager14MockURLSessionC8dataTypeAC04DataF0OSgvp",
+            "moduleName": "InternetManager",
+            "isOpen": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage"
+            ],
+            "fixedbinaryorder": 1,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "InternetManager.MockURLSession.DataType?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "DataType",
+                        "printedName": "InternetManager.MockURLSession.DataType",
+                        "usr": "s:15InternetManager14MockURLSessionC8DataTypeO"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15InternetManager14MockURLSessionC8dataTypeAC04DataF0OSgvg",
+                "mangledName": "$s15InternetManager14MockURLSessionC8dataTypeAC04DataF0OSgvg",
+                "moduleName": "InternetManager",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "InternetManager.MockURLSession.DataType?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "DataType",
+                        "printedName": "InternetManager.MockURLSession.DataType",
+                        "usr": "s:15InternetManager14MockURLSessionC8DataTypeO"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15InternetManager14MockURLSessionC8dataTypeAC04DataF0OSgvs",
+                "mangledName": "$s15InternetManager14MockURLSessionC8dataTypeAC04DataF0OSgvs",
+                "moduleName": "InternetManager",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15InternetManager14MockURLSessionC8dataTypeAC04DataF0OSgvM",
+                "mangledName": "$s15InternetManager14MockURLSessionC8dataTypeAC04DataF0OSgvM",
+                "moduleName": "InternetManager",
+                "implicit": true,
+                "isOpen": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "stringData",
+            "printedName": "stringData",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15InternetManager14MockURLSessionC10stringDataSSvp",
+            "mangledName": "$s15InternetManager14MockURLSessionC10stringDataSSvp",
+            "moduleName": "InternetManager",
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage"
+            ],
+            "fixedbinaryorder": 2,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15InternetManager14MockURLSessionC10stringDataSSvg",
+                "mangledName": "$s15InternetManager14MockURLSessionC10stringDataSSvg",
+                "moduleName": "InternetManager",
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent",
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "dataTask",
+            "printedName": "dataTask(with:completionHandler:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "URLSessionDataTaskProtocol",
+                "printedName": "InternetManager.URLSessionDataTaskProtocol",
+                "usr": "s:15InternetManager26URLSessionDataTaskProtocolP"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "URL",
+                "printedName": "Foundation.URL",
+                "usr": "s:10Foundation3URLV"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Foundation.Data?, Foundation.URLResponse?, Swift.Error?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tuple",
+                    "printedName": "(Foundation.Data?, Foundation.URLResponse?, Swift.Error?)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Foundation.Data?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Data",
+                            "printedName": "Foundation.Data",
+                            "usr": "s:10Foundation4DataV"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Foundation.URLResponse?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "URLResponse",
+                            "printedName": "Foundation.URLResponse",
+                            "usr": "c:objc(cs)NSURLResponse"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.Error?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Error",
+                            "printedName": "Swift.Error",
+                            "usr": "s:s5ErrorP"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15InternetManager14MockURLSessionC8dataTask4with17completionHandlerAA0d4DataF8Protocol_p10Foundation3URLV_yAH0J0VSg_So13NSURLResponseCSgs5Error_pSgtctF",
+            "mangledName": "$s15InternetManager14MockURLSessionC8dataTask4with17completionHandlerAA0d4DataF8Protocol_p10Foundation3URLV_yAH0J0VSg_So13NSURLResponseCSgs5Error_pSgtctF",
+            "moduleName": "InternetManager",
+            "isOpen": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MockURLSession",
+                "printedName": "InternetManager.MockURLSession",
+                "usr": "s:15InternetManager14MockURLSessionC"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15InternetManager14MockURLSessionCACycfc",
+            "mangledName": "$s15InternetManager14MockURLSessionCACycfc",
+            "moduleName": "InternetManager",
+            "implicit": true,
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:15InternetManager14MockURLSessionC",
+        "mangledName": "$s15InternetManager14MockURLSessionC",
+        "moduleName": "InternetManager",
+        "isOpen": true,
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "URLSessionProtocol",
+            "printedName": "URLSessionProtocol",
+            "usr": "s:15InternetManager18URLSessionProtocolP",
+            "mangledName": "$s15InternetManager18URLSessionProtocolP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "InternetManager",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "InternetManager"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "MockURLSessionDataTask",
+        "printedName": "MockURLSessionDataTask",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "resume",
+            "printedName": "resume()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15InternetManager22MockURLSessionDataTaskC6resumeyyF",
+            "mangledName": "$s15InternetManager22MockURLSessionDataTaskC6resumeyyF",
+            "moduleName": "InternetManager",
+            "isOpen": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MockURLSessionDataTask",
+                "printedName": "InternetManager.MockURLSessionDataTask",
+                "usr": "s:15InternetManager22MockURLSessionDataTaskC"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15InternetManager22MockURLSessionDataTaskCACycfc",
+            "mangledName": "$s15InternetManager22MockURLSessionDataTaskCACycfc",
+            "moduleName": "InternetManager",
+            "implicit": true,
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:15InternetManager22MockURLSessionDataTaskC",
+        "mangledName": "$s15InternetManager22MockURLSessionDataTaskC",
+        "moduleName": "InternetManager",
+        "isOpen": true,
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "URLSessionDataTaskProtocol",
+            "printedName": "URLSessionDataTaskProtocol",
+            "usr": "s:15InternetManager26URLSessionDataTaskProtocolP",
+            "mangledName": "$s15InternetManager26URLSessionDataTaskProtocolP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "InternetManager",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "URLSessionDataTaskProtocol",
+        "printedName": "URLSessionDataTaskProtocol",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "resume",
+            "printedName": "resume()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15InternetManager26URLSessionDataTaskProtocolP6resumeyyF",
+            "mangledName": "$s15InternetManager26URLSessionDataTaskProtocolP6resumeyyF",
+            "moduleName": "InternetManager",
+            "genericSig": "<τ_0_0 where τ_0_0 : InternetManager.URLSessionDataTaskProtocol>",
+            "sugared_genericSig": "<Self where Self : InternetManager.URLSessionDataTaskProtocol>",
+            "protocolReq": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "s:15InternetManager26URLSessionDataTaskProtocolP",
+        "mangledName": "$s15InternetManager26URLSessionDataTaskProtocolP",
+        "moduleName": "InternetManager",
+        "declAttributes": [
+          "AccessControl"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "InternetManager",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "InternetManager"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "InternetManagerProtocol",
+        "printedName": "InternetManagerProtocol",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "downloadImage",
+            "printedName": "downloadImage(with:completion:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "URL",
+                "printedName": "Foundation.URL",
+                "usr": "s:10Foundation3URLV"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(UIKit.UIImage?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "UIKit.UIImage?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIImage",
+                        "printedName": "UIKit.UIImage",
+                        "usr": "c:objc(cs)UIImage"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15InternetManager0aB8ProtocolP13downloadImage4with10completiony10Foundation3URLV_ySo7UIImageCSgctF",
+            "mangledName": "$s15InternetManager0aB8ProtocolP13downloadImage4with10completiony10Foundation3URLV_ySo7UIImageCSgctF",
+            "moduleName": "InternetManager",
+            "genericSig": "<τ_0_0 where τ_0_0 : InternetManager.InternetManagerProtocol>",
+            "sugared_genericSig": "<Self where Self : InternetManager.InternetManagerProtocol>",
+            "protocolReq": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getData",
+            "printedName": "getData(with:completion:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Foundation.URL?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "URL",
+                    "printedName": "Foundation.URL",
+                    "usr": "s:10Foundation3URLV"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Foundation.Data?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Foundation.Data?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Data",
+                        "printedName": "Foundation.Data",
+                        "usr": "s:10Foundation4DataV"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15InternetManager0aB8ProtocolP7getData4with10completiony10Foundation3URLVSg_yAG0E0VSgctF",
+            "mangledName": "$s15InternetManager0aB8ProtocolP7getData4with10completiony10Foundation3URLVSg_yAG0E0VSgctF",
+            "moduleName": "InternetManager",
+            "genericSig": "<τ_0_0 where τ_0_0 : InternetManager.InternetManagerProtocol>",
+            "sugared_genericSig": "<Self where Self : InternetManager.InternetManagerProtocol>",
+            "protocolReq": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "s:15InternetManager0aB8ProtocolP",
+        "mangledName": "$s15InternetManager0aB8ProtocolP",
+        "moduleName": "InternetManager",
+        "declAttributes": [
+          "AccessControl"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "URLSession",
+        "printedName": "URLSession",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "dataTask",
+            "printedName": "dataTask(with:completionHandler:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "URLSessionDataTaskProtocol",
+                "printedName": "InternetManager.URLSessionDataTaskProtocol",
+                "usr": "s:15InternetManager26URLSessionDataTaskProtocolP"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "URL",
+                "printedName": "Foundation.URL",
+                "usr": "s:10Foundation3URLV"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Foundation.Data?, Foundation.URLResponse?, Swift.Error?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tuple",
+                    "printedName": "(Foundation.Data?, Foundation.URLResponse?, Swift.Error?)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Foundation.Data?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Data",
+                            "printedName": "Foundation.Data",
+                            "usr": "s:10Foundation4DataV"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Foundation.URLResponse?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "URLResponse",
+                            "printedName": "Foundation.URLResponse",
+                            "usr": "c:objc(cs)NSURLResponse"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.Error?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Error",
+                            "printedName": "Swift.Error",
+                            "usr": "s:s5ErrorP"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:So12NSURLSessionC15InternetManagerE8dataTask4with17completionHandlerAC014URLSessionDataE8Protocol_p10Foundation3URLV_yAH0J0VSg_So13NSURLResponseCSgs5Error_pSgtctF",
+            "mangledName": "$sSo12NSURLSessionC15InternetManagerE8dataTask4with17completionHandlerAC014URLSessionDataE8Protocol_p10Foundation3URLV_yAH0J0VSg_So13NSURLResponseCSgs5Error_pSgtctF",
+            "moduleName": "InternetManager",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:objc(cs)NSURLSession",
+        "moduleName": "Foundation",
+        "isOpen": true,
+        "intro_iOS": "7.0",
+        "objc_name": "NSURLSession",
+        "declAttributes": [
+          "Available",
+          "ObjC",
+          "SynthesizedProtocol",
+          "NonSendable",
+          "Sendable",
+          "Dynamic"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "isExternal": true,
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "URLSessionProtocol",
+            "printedName": "URLSessionProtocol",
+            "usr": "s:15InternetManager18URLSessionProtocolP",
+            "mangledName": "$s15InternetManager18URLSessionProtocolP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "URLSessionDataTask",
+        "printedName": "URLSessionDataTask",
+        "declKind": "Class",
+        "usr": "c:objc(cs)NSURLSessionDataTask",
+        "moduleName": "Foundation",
+        "isOpen": true,
+        "intro_iOS": "7.0",
+        "objc_name": "NSURLSessionDataTask",
+        "declAttributes": [
+          "Available",
+          "ObjC",
+          "SynthesizedProtocol",
+          "NonSendable",
+          "Sendable",
+          "Dynamic"
+        ],
+        "superclassUsr": "c:objc(cs)NSURLSessionTask",
+        "isExternal": true,
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "Foundation.URLSessionTask",
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "URLSessionDataTaskProtocol",
+            "printedName": "URLSessionDataTaskProtocol",
+            "usr": "s:15InternetManager26URLSessionDataTaskProtocolP",
+            "mangledName": "$s15InternetManager26URLSessionDataTaskProtocolP"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/niff1e\/Documents\/XCProjects\/InternetManager\/InternetManager\/Mocks\/MockInternetManager.swift",
+      "kind": "StringLiteral",
+      "offset": 430,
+      "length": 280,
+      "value": "\"    {\n        \"status\":\"ok\",\n        \"totalResults\":1,\n        \"articles\":\n            [\n                {\n                    \"content\":\"content\"\n                }\n            ]\n    }\""
+    },
+    {
+      "filePath": "\/Users\/niff1e\/Documents\/XCProjects\/InternetManager\/InternetManager\/Mocks\/MockInternetManager.swift",
+      "kind": "StringLiteral",
+      "offset": 739,
+      "length": 152,
+      "value": "\"    {\n        \"status\":\"error\",\n        \"code\":\"1\",\n        \"message\":\"Test error message\"\n    }\""
+    },
+    {
+      "filePath": "\/Users\/niff1e\/Documents\/XCProjects\/InternetManager\/InternetManager\/Mocks\/MockURLSession.swift",
+      "kind": "StringLiteral",
+      "offset": 358,
+      "length": 280,
+      "value": "\"    {\n        \"status\":\"ok\",\n        \"totalResults\":1,\n        \"articles\":\n            [\n                {\n                    \"content\":\"content\"\n                }\n            ]\n    }\""
+    }
+  ]
+}
