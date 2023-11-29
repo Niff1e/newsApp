@@ -79,7 +79,7 @@
 		232F41BA2ABFABDC00D831A0 /* newsAppSlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = newsAppSlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		232F41BC2ABFABDC00D831A0 /* NewsAppModelSlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAppModelSlowTests.swift; sourceTree = "<group>"; };
 		238F570A29AD491B00CDE9AB /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
-		2393D6E52B17ADE4001FDFFE /* InternetManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InternetManager.framework; path = /Users/niff1e/Documents/XCProjects/newsApp/InternetManager.framework; sourceTree = "<absolute>"; };
+		2393D6E52B17ADE4001FDFFE /* InternetManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = InternetManager.framework; sourceTree = "<group>"; };
 		23940B972A425A7B00738FF1 /* NewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCollectionViewCell.swift; sourceTree = "<group>"; };
 		23942CC029AC16D200FA851E /* newsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = newsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23942CC329AC16D200FA851E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
