@@ -11,3 +11,5 @@ import UIKit
 class MockURLSessionDataTask: URLSessionDataTaskProtocol {
     func resume() {}
 }
+
+extension URLSessionDataTask: URLSessionDataTaskProtocol {}

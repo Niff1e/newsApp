@@ -1,0 +1,11 @@
+framework module InternetManager {
+  umbrella header "InternetManager.h"
+  export *
+
+  module * { export * }
+}
+
+module InternetManager.Swift {
+  header "InternetManager-Swift.h"
+  requires objc
+}

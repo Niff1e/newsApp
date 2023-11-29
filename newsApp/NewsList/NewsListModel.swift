@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import InternetManager
 
 enum NewsListError: Error {
     case invalidURL

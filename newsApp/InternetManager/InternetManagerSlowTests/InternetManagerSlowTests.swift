@@ -1,14 +1,14 @@
 //
-//  NewsAppInternetManagerSlowTests.swift
-//  newsAppSlowTests
+//  InternetManagerSlowTests.swift
+//  InternetManagerTests
 //
-//  Created by Niff1e on 10.10.23.
+//  Created by Pavel Maal on 17.11.23.
 //
 
 import XCTest
-@testable import newsApp
+@testable import InternetManager
 
-final class NewsAppInternetManagerSlowTests: XCTestCase {
+final class InternetManagerSlowTests: XCTestCase {
 
     var internetManager: InternetManager!
     let session = MockURLSession()
@@ -68,5 +68,6 @@ final class NewsAppInternetManagerSlowTests: XCTestCase {
         // then
         XCTAssertNotNil(finalData, "Data receiving failed")
     }
+
 
 }
